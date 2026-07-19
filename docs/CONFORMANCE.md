@@ -29,7 +29,7 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 | Lifecycle and environments | Conforms locally | Locked restore, `dotnet format`, Release build, MTP tests, coverage, and CourseVerifier commands are documented and mirrored by `.github/workflows/validate.yml`. CI builds and tests on Ubuntu, Windows, and macOS; format, link, and coverage gates run once on Ubuntu against the same configuration. |
 | Projects and capstones | Conforms | `capstone/reading-log/{README.md,SPEC.md,ARCHITECTURE.md}`; matching Starter/Solution project graphs; 65 normal, boundary, failure, timeout, cancellation, disposal, integration, and end-to-end tests; 87.1% branch coverage. |
 | Refinement and validation | Conforms locally | Independent refinement challenged prerequisites, command parity, starter automation, and exception guidance. Findings were resolved in Unit 5, Unit 6, the root feedback loop, CourseVerifier starter checks, and this final matrix. |
-| Git and delivery | Blocked | A focused local commit can be created, but `https://github.com/mbrndiar/learning-csharp` does not exist and the configured GitHub CLI credential is invalid. Push and remote-branch verification remain required. |
+| Git and delivery | Blocked | Local commit `e45639560ec2623ec0160dfb1e2927eea5175126` contains the course. `https://github.com/mbrndiar/learning-csharp` does not exist and the configured GitHub CLI credential is invalid, so push and remote-branch verification remain required. |
 | Evidence transfer | Conforms | All durable rationale is expressed in .NET/C# terms and cites official target sources. No sibling repository path, code, or runtime dependency is required to understand or validate this repository. |
 
 ## Validation baseline
@@ -78,8 +78,9 @@ introduced.
 
 ## Delivery state
 
-The course content and local quality gates are complete. Overall delivery is
-not complete until:
+The course content, local quality gates, and focused local commit are complete.
+The configured `origin` is `git@github_ms:mbrndiar/learning-csharp`; its push
+fails with `Repository not found`. Overall delivery is not complete until:
 
 1. the GitHub repository is created;
 2. the external clone link returns success;
