@@ -1,0 +1,329 @@
+{
+  "modules": [
+    {
+      "order": 1,
+      "slug": "first-program",
+      "guide": "course/01-first-program/README.md",
+      "starterProjects": [
+        "course/01-first-program/Practice/Starter/FirstProgram.csproj"
+      ],
+      "solutionProjects": [
+        "course/01-first-program/Practice/Solution/FirstProgram.csproj"
+      ],
+      "testProjects": [
+        "course/01-first-program/Practice/Tests/FirstProgram.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/01-first-program/Samples/hello-first-program.cs",
+          "arguments": [],
+          "expectedOutputContains": ["Hello from C#!"]
+        },
+        {
+          "path": "course/01-first-program/Samples/predict-run-modify.cs",
+          "arguments": [],
+          "expectedOutputContains": ["dotnet builds the file and runs it"]
+        }
+      ]
+    },
+    {
+      "order": 2,
+      "slug": "values-types-and-null",
+      "guide": "course/02-values-types-and-null/README.md",
+      "starterProjects": [
+        "course/02-values-types-and-null/Practice/Starter/ValuesTypesAndNull.csproj"
+      ],
+      "solutionProjects": [
+        "course/02-values-types-and-null/Practice/Solution/ValuesTypesAndNull.csproj"
+      ],
+      "testProjects": [
+        "course/02-values-types-and-null/Practice/Tests/ValuesTypesAndNull.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/02-values-types-and-null/Samples/values-and-types.cs",
+          "arguments": [],
+          "expectedOutputContains": ["Café ☕", "Percent: 40.0%"]
+        },
+        {
+          "path": "course/02-values-types-and-null/Samples/nullable-values.cs",
+          "arguments": [],
+          "expectedOutputContains": ["(untitled): unrated", "Unicode 漢字"]
+        }
+      ]
+    },
+    {
+      "order": 3,
+      "slug": "decisions-and-repetition",
+      "guide": "course/03-decisions-and-repetition/README.md",
+      "starterProjects": [
+        "course/03-decisions-and-repetition/Practice/Starter/DecisionsAndRepetition.csproj"
+      ],
+      "solutionProjects": [
+        "course/03-decisions-and-repetition/Practice/Solution/DecisionsAndRepetition.csproj"
+      ],
+      "testProjects": [
+        "course/03-decisions-and-repetition/Practice/Tests/DecisionsAndRepetition.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/03-decisions-and-repetition/Samples/decisions.cs",
+          "arguments": [],
+          "expectedOutputContains": ["95: excellent", "44: needs work"]
+        },
+        {
+          "path": "course/03-decisions-and-repetition/Samples/repetition.cs",
+          "arguments": [],
+          "expectedOutputContains": ["Lift off!"]
+        }
+      ]
+    },
+    {
+      "order": 4,
+      "slug": "collections-and-iteration",
+      "guide": "course/04-collections-and-iteration/README.md",
+      "starterProjects": [
+        "course/04-collections-and-iteration/Practice/Starter/CollectionsAndIteration.csproj"
+      ],
+      "solutionProjects": [
+        "course/04-collections-and-iteration/Practice/Solution/CollectionsAndIteration.csproj"
+      ],
+      "testProjects": [
+        "course/04-collections-and-iteration/Practice/Tests/CollectionsAndIteration.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/04-collections-and-iteration/Samples/collections-overview.cs",
+          "arguments": [],
+          "expectedOutputContains": ["Array index 1:", "HashSet count after duplicates:"]
+        },
+        {
+          "path": "course/04-collections-and-iteration/Samples/mutation-vs-copying.cs",
+          "arguments": [],
+          "expectedOutputContains": ["Original array first item:", "Copied list first item:"]
+        }
+      ]
+    },
+    {
+      "order": 5,
+      "slug": "methods-errors-and-debugging",
+      "guide": "course/05-methods-errors-and-debugging/README.md",
+      "starterProjects": [
+        "course/05-methods-errors-and-debugging/Practice/Starter/MethodsErrorsAndDebugging.csproj"
+      ],
+      "solutionProjects": [
+        "course/05-methods-errors-and-debugging/Practice/Solution/MethodsErrorsAndDebugging.csproj"
+      ],
+      "testProjects": [
+        "course/05-methods-errors-and-debugging/Practice/Tests/MethodsErrorsAndDebugging.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/05-methods-errors-and-debugging/Samples/methods-and-overloads.cs",
+          "arguments": [],
+          "expectedOutputContains": ["Average of two scores:", "Average of three scores:"]
+        },
+        {
+          "path": "course/05-methods-errors-and-debugging/Samples/exceptions-and-debugging.cs",
+          "arguments": [],
+          "expectedOutputContains": ["ArgumentException"]
+        }
+      ]
+    },
+    {
+      "order": 6,
+      "slug": "projects-solutions-and-builds",
+      "guide": "course/06-projects-solutions-and-builds/README.md",
+      "starterProjects": [
+        "course/06-projects-solutions-and-builds/Practice/Starter/ProjectsSolutionsBuildsPractice.csproj"
+      ],
+      "solutionProjects": [
+        "course/06-projects-solutions-and-builds/Practice/Solution/ProjectsSolutionsBuildsPractice.csproj"
+      ],
+      "testProjects": [
+        "course/06-projects-solutions-and-builds/Practice/Tests/ProjectsSolutionsBuildsPractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/06-projects-solutions-and-builds/Samples/ProjectWorkbench/ProjectWorkbench.App/ProjectWorkbench.App.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["Project: ProjectWorkbench.App", "Referenced assembly: ProjectWorkbench.Text"]
+        }
+      ]
+    },
+    {
+      "order": 7,
+      "slug": "modeling-data-and-behavior",
+      "guide": "course/07-modeling-data-and-behavior/README.md",
+      "starterProjects": [
+        "course/07-modeling-data-and-behavior/Practice/Starter/ModelingDataBehaviorPractice.csproj"
+      ],
+      "solutionProjects": [
+        "course/07-modeling-data-and-behavior/Practice/Solution/ModelingDataBehaviorPractice.csproj"
+      ],
+      "testProjects": [
+        "course/07-modeling-data-and-behavior/Practice/Tests/ModelingDataBehaviorPractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/07-modeling-data-and-behavior/Samples/ReservationTracker/ReservationTracker.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["Party sizes equal by value: True", "Reservation status: Confirmed"]
+        }
+      ]
+    },
+    {
+      "order": 8,
+      "slug": "abstractions-generics-and-delegates",
+      "guide": "course/08-abstractions-generics-and-delegates/README.md",
+      "starterProjects": [
+        "course/08-abstractions-generics-and-delegates/Practice/Starter/AbstractionsGenericsDelegatesPractice.csproj"
+      ],
+      "solutionProjects": [
+        "course/08-abstractions-generics-and-delegates/Practice/Solution/AbstractionsGenericsDelegatesPractice.csproj"
+      ],
+      "testProjects": [
+        "course/08-abstractions-generics-and-delegates/Practice/Tests/AbstractionsGenericsDelegatesPractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/08-abstractions-generics-and-delegates/Samples/CurationConsole/CurationConsole.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["Approved count: 2", "Keys: cs-basics, linq-lab"]
+        }
+      ]
+    },
+    {
+      "order": 9,
+      "slug": "linq-and-transformations",
+      "guide": "course/09-linq-and-transformations/README.md",
+      "starterProjects": [
+        "course/09-linq-and-transformations/Practice/Starter/LinqTransformationsPractice.csproj"
+      ],
+      "solutionProjects": [
+        "course/09-linq-and-transformations/Practice/Solution/LinqTransformationsPractice.csproj"
+      ],
+      "testProjects": [
+        "course/09-linq-and-transformations/Practice/Tests/LinqTransformationsPractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/09-linq-and-transformations/Samples/ReadingProgressReport/ReadingProgressReport.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["Completed learners: Ada, Grace, Linus", "Total completed minutes: 165"]
+        }
+      ]
+    },
+    {
+      "order": 10,
+      "slug": "testing-and-dependency-boundaries",
+      "guide": "course/10-testing-and-dependency-boundaries/README.md",
+      "starterProjects": [
+        "course/10-testing-and-dependency-boundaries/Practice/Starter/TestingDependencyBoundariesPractice.csproj"
+      ],
+      "solutionProjects": [
+        "course/10-testing-and-dependency-boundaries/Practice/Solution/TestingDependencyBoundariesPractice.csproj"
+      ],
+      "testProjects": [
+        "course/10-testing-and-dependency-boundaries/Practice/Tests/TestingDependencyBoundariesPractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/10-testing-and-dependency-boundaries/Samples/ReminderBoundaryDemo.Tests/ReminderBoundaryDemo.Tests.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["total: 5"]
+        }
+      ]
+    },
+    {
+      "order": 11,
+      "slug": "files-streams-and-json",
+      "guide": "course/11-files-streams-and-json/README.md",
+      "starterProjects": [
+        "course/11-files-streams-and-json/Practice/Starter/RecipeStoragePractice/RecipeStoragePractice.csproj"
+      ],
+      "solutionProjects": [
+        "course/11-files-streams-and-json/Practice/Solution/RecipeStoragePractice/RecipeStoragePractice.csproj"
+      ],
+      "testProjects": [
+        "course/11-files-streams-and-json/Practice/Tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/11-files-streams-and-json/Samples/RecipeJournalSample/RecipeJournalSample.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["Object -> JSON text", "Loaded 2 recipes"]
+        }
+      ]
+    },
+    {
+      "order": 12,
+      "slug": "async-cancellation-and-concurrency",
+      "guide": "course/12-async-cancellation-and-concurrency/README.md",
+      "starterProjects": [
+        "course/12-async-cancellation-and-concurrency/Practice/Starter/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj"
+      ],
+      "solutionProjects": [
+        "course/12-async-cancellation-and-concurrency/Practice/Solution/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj"
+      ],
+      "testProjects": [
+        "course/12-async-cancellation-and-concurrency/Practice/Tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/12-async-cancellation-and-concurrency/Samples/AsyncWorkSchedulerSample/AsyncWorkSchedulerSample.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["Completed: 3/3", "Total value: 15"]
+        }
+      ]
+    },
+    {
+      "order": 13,
+      "slug": "http-clients-and-minimal-apis",
+      "guide": "course/13-http-clients-and-minimal-apis/README.md",
+      "starterProjects": [
+        "course/13-http-clients-and-minimal-apis/Practice/Starter/ReadingListApi/ReadingListApi.csproj",
+        "course/13-http-clients-and-minimal-apis/Practice/Starter/ReadingListClient/ReadingListClient.csproj"
+      ],
+      "solutionProjects": [
+        "course/13-http-clients-and-minimal-apis/Practice/Solution/ReadingListApi/ReadingListApi.csproj",
+        "course/13-http-clients-and-minimal-apis/Practice/Solution/ReadingListClient/ReadingListClient.csproj"
+      ],
+      "testProjects": [
+        "course/13-http-clients-and-minimal-apis/Practice/Tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/13-http-clients-and-minimal-apis/Samples/ReadingListApiSample/ReadingListApiSample.csproj",
+          "arguments": ["--", "--smoke"],
+          "expectedOutputContains": ["SMOKE TEST PASSED books=2 seeded=Clean Code missing=404 invalidPost=400"]
+        }
+      ]
+    },
+    {
+      "order": 14,
+      "slug": "application-composition",
+      "guide": "course/14-application-composition/README.md",
+      "starterProjects": [
+        "course/14-application-composition/Practice/Starter/ReadingLog.Domain/ReadingLog.Domain.csproj",
+        "course/14-application-composition/Practice/Starter/ReadingLog.Application/ReadingLog.Application.csproj",
+        "course/14-application-composition/Practice/Starter/ReadingLog.Cli/ReadingLog.Cli.csproj"
+      ],
+      "solutionProjects": [
+        "course/14-application-composition/Practice/Solution/ReadingLog.Domain/ReadingLog.Domain.csproj",
+        "course/14-application-composition/Practice/Solution/ReadingLog.Application/ReadingLog.Application.csproj",
+        "course/14-application-composition/Practice/Solution/ReadingLog.Cli/ReadingLog.Cli.csproj"
+      ],
+      "testProjects": [
+        "course/14-application-composition/Practice/Tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj"
+      ],
+      "samples": [
+        {
+          "path": "course/14-application-composition/Samples/ReadingLogCliSample/ReadingLogCliSample.csproj",
+          "arguments": [],
+          "expectedOutputContains": ["Total books: 3", "Exit code: 0"]
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ReadingLog.Core</AssemblyName>
+    <RootNamespace>ReadingLog.Core</RootNamespace>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+  <PropertyGroup>
+    <AssemblyName>ReadingLog.Api</AssemblyName>
+    <RootNamespace>ReadingLog.Api</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReadingLog.Core/ReadingLog.Core.csproj" />
+    <ProjectReference Include="../ReadingLog.Storage.Json/ReadingLog.Storage.Json.csproj" />
+  </ItemGroup>
+</Project>

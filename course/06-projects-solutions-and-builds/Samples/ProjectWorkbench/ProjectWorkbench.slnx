@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="ProjectWorkbench.Text/ProjectWorkbench.Text.csproj" />
+  <Project Path="ProjectWorkbench.App/ProjectWorkbench.App.csproj" />
+</Solution>

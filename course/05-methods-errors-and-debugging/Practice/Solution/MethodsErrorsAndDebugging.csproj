@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>LearningCSharp.MethodsErrorsAndDebugging</RootNamespace>
+    <AssemblyName>LearningCSharp.MethodsErrorsAndDebugging</AssemblyName>
+  </PropertyGroup>
+</Project>

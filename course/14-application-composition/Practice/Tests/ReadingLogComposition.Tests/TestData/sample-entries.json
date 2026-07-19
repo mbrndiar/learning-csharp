@@ -1,0 +1,17 @@
+[
+  {
+    "title": "Deep Work",
+    "pages": 304,
+    "rating": 5
+  },
+  {
+    "title": "Refactoring",
+    "pages": 448,
+    "rating": 5
+  },
+  {
+    "title": "Clean Architecture",
+    "pages": 432,
+    "rating": 3
+  }
+]

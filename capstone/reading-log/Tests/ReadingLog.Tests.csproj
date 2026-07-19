@@ -1,0 +1,31 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
+
+  <Target Name="ValidateCapstoneImplementation" BeforeTargets="CollectPackageReferences;AssignProjectConfiguration;ResolveProjectReferences;PrepareForBuild">
+    <Error
+      Condition="'$(CapstoneImplementation)' != 'Starter' and '$(CapstoneImplementation)' != 'Solution'"
+      Text="CapstoneImplementation must be exactly 'Starter' or 'Solution'. Current value: '$(CapstoneImplementation)'." />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CapstoneImplementation)' == 'Starter' or '$(CapstoneImplementation)' == 'Solution'">
+    <ProjectReference Include="../$(CapstoneImplementation)/ReadingLog.Core/ReadingLog.Core.csproj" />
+    <ProjectReference Include="../$(CapstoneImplementation)/ReadingLog.Storage.Json/ReadingLog.Storage.Json.csproj" />
+    <ProjectReference Include="../$(CapstoneImplementation)/ReadingLog.Api/ReadingLog.Api.csproj" />
+    <ProjectReference Include="../$(CapstoneImplementation)/ReadingLog.Cli/ReadingLog.Cli.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+</Project>

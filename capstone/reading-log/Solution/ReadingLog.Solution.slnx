@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ReadingLog.Api/ReadingLog.Api.csproj" />
+  <Project Path="ReadingLog.Cli/ReadingLog.Cli.csproj" />
+  <Project Path="ReadingLog.Core/ReadingLog.Core.csproj" />
+  <Project Path="ReadingLog.Storage.Json/ReadingLog.Storage.Json.csproj" />
+</Solution>

@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>LearningCSharp.FirstProgram</RootNamespace>
+    <AssemblyName>LearningCSharp.FirstProgram</AssemblyName>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,10 @@
+global using System.Net;
+global using System.Net.Http;
+global using System.Net.Http.Json;
+global using System.Text;
+global using System.Text.Json;
+global using ReadingLog.Api;
+global using ReadingLog.Cli;
+global using ReadingLog.Core;
+global using ReadingLog.Storage.Json;
+global using ReadingLog.Tests.TestInfrastructure;

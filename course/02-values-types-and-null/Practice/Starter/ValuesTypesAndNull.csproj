@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>LearningCSharp.ValuesTypesAndNull</RootNamespace>
+    <AssemblyName>LearningCSharp.ValuesTypesAndNull</AssemblyName>
+  </PropertyGroup>
+</Project>

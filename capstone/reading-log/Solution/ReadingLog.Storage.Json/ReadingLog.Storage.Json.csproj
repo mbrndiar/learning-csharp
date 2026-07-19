@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ReadingLog.Storage.Json</AssemblyName>
+    <RootNamespace>ReadingLog.Storage.Json</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReadingLog.Core/ReadingLog.Core.csproj" />
+  </ItemGroup>
+</Project>

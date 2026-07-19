@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <IsPackable>false</IsPackable>
+    <OutputType>Exe</OutputType>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Solution</CourseImplementation>
+  </PropertyGroup>
+
+  <Target Name="ValidateCourseImplementation" BeforeTargets="CollectPackageReferences;ResolveReferences">
+    <Error Condition="'$(CourseImplementation)' != 'Starter' and '$(CourseImplementation)' != 'Solution'" Text="CourseImplementation must be Starter or Solution." />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../$(CourseImplementation)/AbstractionsGenericsDelegatesPractice.csproj" />
+  </ItemGroup>
+</Project>

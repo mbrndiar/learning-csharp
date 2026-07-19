@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>LearningCSharp.DecisionsAndRepetition</RootNamespace>
+    <AssemblyName>LearningCSharp.DecisionsAndRepetition</AssemblyName>
+  </PropertyGroup>
+</Project>

@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ReadingLog.Cli</AssemblyName>
+    <RootNamespace>ReadingLog.Cli</RootNamespace>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ReadingLog.Core/ReadingLog.Core.csproj" />
+  </ItemGroup>
+</Project>

@@ -1,0 +1,33 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Solution</CourseImplementation>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Starter'">
+    <ProjectReference Include="../../Starter/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Solution'">
+    <ProjectReference Include="../../Solution/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj" />
+  </ItemGroup>
+
+  <Target Name="ValidateCourseImplementation" BeforeTargets="ResolveReferences">
+    <Error
+      Condition="'$(CourseImplementation)' != 'Starter' and '$(CourseImplementation)' != 'Solution'"
+      Text="CourseImplementation must be exactly 'Starter' or 'Solution'. Received '$(CourseImplementation)'." />
+  </Target>
+</Project>
