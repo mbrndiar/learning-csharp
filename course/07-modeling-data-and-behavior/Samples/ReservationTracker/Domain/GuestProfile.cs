@@ -11,7 +11,7 @@ public sealed record GuestProfile
         Email = email.Trim();
     }
 
-    public string Name { get; init; }
+    public string Name { get; }
 
-    public string Email { get; init; }
+    public string Email { get; }
 }

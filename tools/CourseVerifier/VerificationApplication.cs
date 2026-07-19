@@ -1,6 +1,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Net;
+using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
 using System.Xml.Linq;
@@ -23,7 +24,7 @@ internal static partial class VerificationApplication
             {
                 "verify" => await VerifyAsync(root),
                 "starters" => await VerifyStartersAsync(root),
-                "links" => VerifyMarkdownLinks(root),
+                "links" => RunMarkdownLinkVerification(root),
                 "external-links" => await VerifyExternalLinksAsync(root),
                 "coverage" => VerifyCoverage(root, args),
                 _ => ShowUsage(command),
@@ -90,10 +91,12 @@ internal static partial class VerificationApplication
             }
         }
 
+        int readmeCount = VerifyReadmePresentation(root);
         int linkCount = VerifyMarkdownLinks(root);
         Console.WriteLine(
             $"Verified {manifest.Modules.Count} modules, "
             + $"{manifest.Modules.Sum(module => module.Samples.Count)} samples, "
+            + $"{readmeCount} formatted READMEs, "
             + $"and {linkCount} local Markdown links.");
         return 0;
     }
@@ -178,16 +181,20 @@ internal static partial class VerificationApplication
             foreach (Match match in MarkdownLinkPattern().Matches(content))
             {
                 string target = match.Groups["target"].Value;
-                if (target.StartsWith('#')
-                    || Uri.TryCreate(target, UriKind.Absolute, out _)
+                if (Uri.TryCreate(target, UriKind.Absolute, out _)
                     || target.StartsWith("mailto:", StringComparison.OrdinalIgnoreCase))
                 {
                     continue;
                 }
 
-                string pathPart = Uri.UnescapeDataString(target.Split('#', 2)[0]);
-                string resolved = Path.GetFullPath(
-                    Path.Combine(Path.GetDirectoryName(markdownPath)!, pathPart));
+                string[] targetParts = target.Split('#', 2);
+                string pathPart = Uri.UnescapeDataString(targetParts[0]);
+                string fragment = targetParts.Length == 2
+                    ? Uri.UnescapeDataString(targetParts[1])
+                    : string.Empty;
+                string resolved = pathPart.Length == 0
+                    ? markdownPath
+                    : Path.GetFullPath(Path.Combine(Path.GetDirectoryName(markdownPath)!, pathPart));
                 if (!File.Exists(resolved) && !Directory.Exists(resolved))
                 {
                     string relativeSource = Path.GetRelativePath(root, markdownPath);
@@ -195,11 +202,168 @@ internal static partial class VerificationApplication
                         $"{relativeSource} links to missing path '{target}'.");
                 }
 
+                if (fragment.Length > 0)
+                {
+                    string markdownTarget = Directory.Exists(resolved)
+                        ? Path.Combine(resolved, "README.md")
+                        : resolved;
+                    if (!File.Exists(markdownTarget)
+                        || !string.Equals(Path.GetExtension(markdownTarget), ".md", StringComparison.OrdinalIgnoreCase)
+                        || !ExtractMarkdownAnchors(File.ReadAllText(markdownTarget)).Contains(fragment))
+                    {
+                        string relativeSource = Path.GetRelativePath(root, markdownPath);
+                        throw new InvalidDataException(
+                            $"{relativeSource} links to missing Markdown anchor '{target}'.");
+                    }
+                }
+
                 checkedLinks++;
             }
         }
 
         return checkedLinks;
+    }
+
+    private static int RunMarkdownLinkVerification(string root)
+    {
+        int linkCount = VerifyMarkdownLinks(root);
+        Console.WriteLine($"Verified {linkCount} local Markdown links and anchors.");
+        return 0;
+    }
+
+    private static int VerifyReadmePresentation(string root)
+    {
+        string[] readmePaths = Directory
+            .EnumerateFiles(root, "README.md", SearchOption.AllDirectories)
+            .Where(path => !IsGeneratedPath(path))
+            .ToArray();
+
+        foreach (string readmePath in readmePaths)
+        {
+            string visibleMarkdown = RemoveFencedCodeBlocks(File.ReadAllText(readmePath));
+            MatchCollection headings = ReadmeHeadingPattern().Matches(visibleMarkdown);
+            if (headings.Count == 0 || headings.Count(match => match.Groups["level"].Value == "#") != 1)
+            {
+                throw new InvalidDataException(
+                    $"{Path.GetRelativePath(root, readmePath)} must contain exactly one level-one heading.");
+            }
+
+            foreach (Match heading in headings)
+            {
+                string text = heading.Groups["heading"].Value.TrimStart();
+                if (text.Length == 0 || !StartsWithEmoji(text))
+                {
+                    throw new InvalidDataException(
+                        $"{Path.GetRelativePath(root, readmePath)} heading must start with a meaningful emoji: "
+                        + $"'{heading.Value.Trim()}'.");
+                }
+            }
+        }
+
+        return readmePaths.Length;
+    }
+
+    private static bool StartsWithEmoji(string value)
+    {
+        int codePoint = char.ConvertToUtf32(value, 0);
+        return codePoint is >= 0x2100 and <= 0x27ff
+            or >= 0x2b00 and <= 0x2bff
+            or >= 0x1f000 and <= 0x1faff;
+    }
+
+    private static HashSet<string> ExtractMarkdownAnchors(string markdown)
+    {
+        string visibleMarkdown = RemoveFencedCodeBlocks(markdown);
+        var anchors = new HashSet<string>(StringComparer.Ordinal);
+        var slugCounts = new Dictionary<string, int>(StringComparer.Ordinal);
+
+        foreach (Match match in MarkdownHeadingPattern().Matches(visibleMarkdown))
+        {
+            string slug = CreateHeadingSlug(match.Groups["heading"].Value);
+            if (slug.Length == 0)
+            {
+                continue;
+            }
+
+            int duplicateCount = slugCounts.GetValueOrDefault(slug);
+            slugCounts[slug] = duplicateCount + 1;
+            anchors.Add(duplicateCount == 0 ? slug : $"{slug}-{duplicateCount}");
+        }
+
+        foreach (Match match in HtmlAnchorPattern().Matches(visibleMarkdown))
+        {
+            anchors.Add(match.Groups["id"].Value);
+        }
+
+        return anchors;
+    }
+
+    private static string CreateHeadingSlug(string heading)
+    {
+        string withoutMarkup = ClosingHeadingMarkerPattern()
+            .Replace(InlineHtmlPattern().Replace(heading, string.Empty), string.Empty)
+            .Replace("`", string.Empty, StringComparison.Ordinal)
+            .Trim();
+        var slug = new StringBuilder(withoutMarkup.Length);
+
+        foreach (char character in withoutMarkup.ToLowerInvariant())
+        {
+            if (char.IsLetterOrDigit(character) || character is '-' or '_')
+            {
+                slug.Append(character);
+            }
+            else if (char.IsWhiteSpace(character))
+            {
+                slug.Append('-');
+            }
+        }
+
+        return slug.ToString();
+    }
+
+    private static string RemoveFencedCodeBlocks(string markdown)
+    {
+        var visible = new StringBuilder(markdown.Length);
+        using var reader = new StringReader(markdown);
+        bool insideFence = false;
+        char fenceCharacter = '\0';
+        int fenceLength = 0;
+        string? line;
+
+        while ((line = reader.ReadLine()) is not null)
+        {
+            string trimmed = line.TrimStart();
+            if (!insideFence && TryReadFence(trimmed, out fenceCharacter, out fenceLength))
+            {
+                insideFence = true;
+                continue;
+            }
+
+            if (insideFence)
+            {
+                int closingLength = trimmed.TakeWhile(character => character == fenceCharacter).Count();
+                if (closingLength >= fenceLength)
+                {
+                    insideFence = false;
+                }
+
+                continue;
+            }
+
+            visible.AppendLine(line);
+        }
+
+        return visible.ToString();
+    }
+
+    private static bool TryReadFence(string line, out char fenceCharacter, out int fenceLength)
+    {
+        char marker = line.Length > 0 ? line[0] : '\0';
+        fenceCharacter = marker;
+        fenceLength = marker is '`' or '~'
+            ? line.TakeWhile(character => character == marker).Count()
+            : 0;
+        return fenceLength >= 3;
     }
 
     private static async Task<int> VerifyExternalLinksAsync(string root)
@@ -449,6 +613,21 @@ internal static partial class VerificationApplication
 
     [GeneratedRegex(@"(?<!!)\[[^\]]+\]\((?<target>[^)\s]+)(?:\s+""[^""]*"")?\)")]
     private static partial Regex MarkdownLinkPattern();
+
+    [GeneratedRegex(@"^#{1,6}\s+(?<heading>.+)$", RegexOptions.Multiline)]
+    private static partial Regex MarkdownHeadingPattern();
+
+    [GeneratedRegex(@"^(?<level>#{1,2})\s+(?<heading>.+)$", RegexOptions.Multiline)]
+    private static partial Regex ReadmeHeadingPattern();
+
+    [GeneratedRegex(@"<a\s+(?:[^>]*?\s)?id=[""'](?<id>[^""']+)[""'][^>]*>", RegexOptions.IgnoreCase)]
+    private static partial Regex HtmlAnchorPattern();
+
+    [GeneratedRegex(@"<[^>]+>")]
+    private static partial Regex InlineHtmlPattern();
+
+    [GeneratedRegex(@"\s+#+\s*$")]
+    private static partial Regex ClosingHeadingMarkerPattern();
 
     [GeneratedRegex(@"(?<!\()https?://[^\s)>]+")]
     private static partial Regex PlainUrlPattern();

@@ -15,7 +15,13 @@ public sealed class InMemoryBookRepository : IBookRepository
     public Task<IReadOnlyList<BookDto>> ListAsync(string? author, int maxResults, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        IEnumerable<BookDto> query = _books;
+        BookDto[] snapshot;
+        lock (_gate)
+        {
+            snapshot = _books.ToArray();
+        }
+
+        IEnumerable<BookDto> query = snapshot;
 
         if (!string.IsNullOrWhiteSpace(author))
         {
@@ -29,7 +35,12 @@ public sealed class InMemoryBookRepository : IBookRepository
     public Task<BookDto?> GetAsync(Guid id, CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
-        BookDto? book = _books.SingleOrDefault(candidate => candidate.Id == id);
+        BookDto? book;
+        lock (_gate)
+        {
+            book = _books.SingleOrDefault(candidate => candidate.Id == id);
+        }
+
         return Task.FromResult(book);
     }
 

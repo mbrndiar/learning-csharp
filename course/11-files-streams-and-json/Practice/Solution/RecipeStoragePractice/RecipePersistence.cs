@@ -76,6 +76,11 @@ public static class RecipePersistence
             return RecipeCatalog.Empty;
         }
 
+        if (new FileInfo(path).Length == 0)
+        {
+            return RecipeCatalog.Empty;
+        }
+
         using FileStream stream = new(path, FileMode.Open, FileAccess.Read, FileShare.Read);
         using StreamReader reader = new(stream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
         string jsonText = reader.ReadToEnd();

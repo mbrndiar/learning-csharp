@@ -1,6 +1,6 @@
-# Unit 13 - HTTP Clients and Minimal APIs
+# 🧭 Unit 13 · HTTP clients and Minimal APIs
 
-## Objectives
+## 🎯 Objectives
 
 By the end of this unit you will be able to:
 
@@ -12,12 +12,12 @@ By the end of this unit you will be able to:
 - wire configuration, logging, and services through dependency injection;
 - run deterministic in-process integration tests with no external services.
 
-## Prerequisites
+## ✅ Prerequisites
 
 You should understand async/await, JSON, records, exceptions, and the difference between text, bytes, and objects.
 This unit assumes Unit 12-level comfort with tasks and cancellation.
 
-## Causal mental model
+## 🧠 Causal mental model
 
 An HTTP exchange has two separate truths:
 
@@ -33,7 +33,15 @@ That means the configured `HttpClient.Timeout` covers the whole response downloa
 A safe `HttpClient` lifetime means **reuse the client infrastructure**, not `new HttpClient()` per request.
 Minimal APIs are composition points: routes call application services that come from DI.
 
-## Authentic fragments
+The practice API's `InMemoryBookRepository` is a singleton for the process, so
+every request shares the same in-memory `List<BookDto>`. Multiple concurrent
+requests reading and writing that shared list at once is exactly the kind of
+shared-state boundary you protected with `lock` in Unit 12 - it is worth
+naming explicitly here because a Minimal API can genuinely receive concurrent
+requests, and tests for this repository should cover concurrent reads and
+writes rather than only sequential calls.
+
+## 🔤 Authentic fragments
 
 Status-first client code with buffered completion:
 
@@ -71,7 +79,7 @@ return errors.Count > 0
     : TypedResults.Created($"/books/{created.Id:D}", created);
 ```
 
-## Sample project
+## ▶️ Sample project
 
 Run the deterministic offline smoke mode from the repository root:
 
@@ -105,7 +113,7 @@ Expected behavior:
 - POSTing invalid JSON contracts returns validation feedback;
 - everything runs locally with no external dependency.
 
-## Practice contract
+## 🧪 Practice contract
 
 Default solution tests:
 
@@ -128,6 +136,7 @@ Your implementation must make these statements true:
 5. `ReadingListApiClient` checks status codes before deserializing.
 6. `AddReadingListApiClient` configures a finite timeout and reuses `HttpClient` through DI.
 7. Integration tests stay in-process and offline.
+8. The in-memory book repository synchronizes its reads and writes so concurrent requests do not corrupt shared state.
 
 Deterministic feedback:
 
@@ -136,14 +145,14 @@ Deterministic feedback:
 - unsafe client setup fails the timeout test, including a slow-body download case;
 - wrong JSON contracts fail round-trip tests.
 
-## Experiment
+## 🧩 Experiment
 
 1. Change `Catalog:MaxResults` to `1` and query `/books` again.
 2. Post a request with an empty title and inspect the validation payload.
 3. Temporarily remove the 404 branch from the client and see why status-first handling matters.
 4. Increase the client timeout and discuss why "infinite" is a dangerous default.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 
 - **Mistake:** deserializing before checking the status code.
   **Diagnosis:** 404 or 400 responses cause confusing JSON errors.
@@ -157,20 +166,24 @@ Deterministic feedback:
 - **Mistake:** validating nothing at the API boundary.
   **Diagnosis:** bad data enters deeper layers and failures move farther from the cause.
 
-## Summary
+- **Mistake:** assuming an in-memory repository is automatically safe under concurrent requests.
+  **Diagnosis:** a singleton repository backed by a mutable `List<T>` needs explicit synchronization (such as a `lock`) around its reads and writes, and tests should exercise concurrent access, not just one request at a time.
+
+## 📝 Summary
 
 HTTP code becomes calmer when you separate transport handling, JSON contracts, and application behavior.
 Minimal APIs and typed clients work well together when DI owns lifetimes and tests stay local.
 
-## Review questions
+## ❓ Review questions
 
 1. Why should clients check status codes before JSON deserialization?
 2. What does this unit's timeout actually cover?
 3. Which rules belong at the API boundary instead of deeper inside the app?
 4. Why are in-process integration tests valuable here?
 5. What does DI own in your HTTP application?
+6. Why does a singleton in-memory repository need synchronized reads and writes, and what should its tests cover beyond a single sequential request?
 
-## Official Microsoft Learn links
+## 📚 Official Microsoft Learn links
 
 - [Make HTTP requests with `HttpClient`](https://learn.microsoft.com/dotnet/fundamentals/networking/http/httpclient)
 - [Use `IHttpClientFactory` to implement resilient HTTP requests](https://learn.microsoft.com/dotnet/core/extensions/httpclient-factory)

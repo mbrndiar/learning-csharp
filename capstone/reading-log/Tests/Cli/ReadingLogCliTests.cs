@@ -165,6 +165,23 @@ public sealed class ReadingLogCliTests
     }
 
     [Fact]
+    public async Task RunAsyncRejectsNonIsoCalendarDate()
+    {
+        using var httpClient = CreateHttpClient((_, _) =>
+            throw new InvalidOperationException("Validation failures should not make HTTP requests."));
+        using var standardOutput = new StringWriter();
+        using var standardError = new StringWriter();
+        var app = new CliApplication(new ReadingLogApiClient(httpClient), standardOutput, standardError);
+
+        var exitCode = await app.RunAsync(
+            ["add-entry", "--book-id", Guid.NewGuid().ToString(), "--started-on", "07/19/2026", "--pages-read", "45"],
+            CancellationToken.None);
+
+        Assert.Equal((int)CliExitCode.InvalidArguments, exitCode);
+        Assert.Contains("--started-on <yyyy-MM-dd>", standardError.ToString(), StringComparison.Ordinal);
+    }
+
+    [Fact]
     public async Task RunAsyncReturnsRequestFailedWhenApiReturnsProblemStatus()
     {
         using var httpClient = CreateHttpClient((_, _) =>
@@ -323,6 +340,17 @@ public sealed class ReadingLogCliTests
 
         Assert.Equal(0, result.ExitCode);
         Assert.Contains("ReadingLog CLI", result.StandardOutput, StringComparison.Ordinal);
+    }
+
+    [Theory]
+    [InlineData("not-a-url")]
+    [InlineData("file:///tmp/reading-log")]
+    public async Task CliProgramReturnsFailureForInvalidBaseUrl(string baseUrl)
+    {
+        var result = await RunCliProcessAsync("--base-url", baseUrl, "help");
+
+        Assert.Equal(1, result.ExitCode);
+        Assert.Contains("--base-url must be an absolute HTTP or HTTPS URL.", result.StandardError, StringComparison.Ordinal);
     }
 
     [Fact]

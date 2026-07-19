@@ -8,5 +8,5 @@ public readonly record struct PartySize
 
     public int Children { get; }
 
-    public int Total => throw new NotImplementedException("Return Adults + Children.");
+    public int Total { get; }
 }

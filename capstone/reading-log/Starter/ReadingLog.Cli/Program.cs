@@ -22,9 +22,16 @@ for (var index = 0; index < remainingArgs.Count; index++)
     break;
 }
 
+if (!Uri.TryCreate(baseUrl, UriKind.Absolute, out Uri? baseUri)
+    || (baseUri.Scheme != Uri.UriSchemeHttp && baseUri.Scheme != Uri.UriSchemeHttps))
+{
+    await Console.Error.WriteLineAsync("--base-url must be an absolute HTTP or HTTPS URL.");
+    return 1;
+}
+
 using var httpClient = new HttpClient
 {
-    BaseAddress = new Uri(baseUrl, UriKind.Absolute),
+    BaseAddress = baseUri,
 };
 var apiClient = new ReadingLogApiClient(httpClient);
 var app = new CliApplication(apiClient, Console.Out, Console.Error);

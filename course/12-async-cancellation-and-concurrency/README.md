@@ -1,6 +1,6 @@
-# Unit 12 - Async, Cancellation, and Concurrency
+# 🧭 Unit 12 · Async, cancellation, and concurrency
 
-## Objectives
+## 🎯 Objectives
 
 By the end of this unit you will be able to:
 
@@ -13,12 +13,12 @@ By the end of this unit you will be able to:
 - run bounded parallel work safely;
 - protect shared state while several operations finish out of order.
 
-## Prerequisites
+## ✅ Prerequisites
 
 You should already be comfortable with methods, loops, exceptions, collections, and the file/JSON pipeline from Unit 11.
 If `Task` still feels magical, read this unit slowly and run the sample several times.
 
-## Causal mental model
+## 🧠 Causal mental model
 
 A `Task` is a promise for a future result.
 `await` says: **pause this method here, let other work happen, then continue when the promise completes**.
@@ -32,7 +32,7 @@ Concurrency is not the same as speed.
 Cancellation is a contract, not an interruption spell.
 You must pass the token into the operations you own.
 
-## Authentic fragments
+## 🔤 Authentic fragments
 
 Async file read:
 
@@ -74,7 +74,7 @@ lock (gate)
 }
 ```
 
-## Sample project
+## ▶️ Sample project
 
 Run the sample from the repository root:
 
@@ -89,7 +89,7 @@ Expected behavior:
 - processes several items with a concurrency limit of 2;
 - prints the completion order and total value.
 
-## Practice contract
+## 🧪 Practice contract
 
 Default solution tests:
 
@@ -120,14 +120,14 @@ Deterministic feedback:
 - lost exceptions fail the exception-flow test;
 - missing semaphore logic fails the concurrency-limit test.
 
-## Experiment
+## 🧩 Experiment
 
 1. Change `maxConcurrency` from `2` to `1` and compare completion order.
 2. Cancel the sample after 150 ms and watch the exception flow.
 3. Remove the `lock` around shared state and see why race conditions are hard to reason about.
 4. Replace `Task.WhenAll` with forgotten tasks and observe how results become incomplete.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 
 - **Mistake:** calling an async method without awaiting its returned task.
   **Diagnosis:** work continues after the method already reported success.
@@ -144,12 +144,12 @@ Deterministic feedback:
 - **Mistake:** mutating shared lists and counters without coordination.
   **Diagnosis:** counts and order become flaky across runs.
 
-## Summary
+## 📝 Summary
 
 Async code is about honest ownership of future work.
 Start only the work you can finish, pass cancellation through it, and await it before returning.
 
-## Review questions
+## ❓ Review questions
 
 1. What does a `Task` represent?
 2. Why does `await` preserve exception flow better than manual callbacks?
@@ -157,7 +157,7 @@ Start only the work you can finish, pass cancellation through it, and await it b
 4. Why is bounded parallelism safer than starting one task per item without limits?
 5. What shared state in your code needs protection?
 
-## Official Microsoft Learn links
+## 📚 Official Microsoft Learn links
 
 - [Asynchronous programming with async and await](https://learn.microsoft.com/dotnet/csharp/asynchronous-programming/)
 - [Cancel async tasks after a period of time](https://learn.microsoft.com/dotnet/csharp/asynchronous-programming/cancel-async-tasks-after-a-period-of-time)

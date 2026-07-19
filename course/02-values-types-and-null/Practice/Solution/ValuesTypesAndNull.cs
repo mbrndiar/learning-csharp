@@ -21,7 +21,8 @@ public static class ReadingProgressFormatter
             throw new ArgumentOutOfRangeException(nameof(pagesRead), pagesRead, "pagesRead cannot be greater than totalPages.");
         }
 
-        if (rating is < 0.0 or > 5.0)
+        if (rating is double numericRating
+            && (double.IsNaN(numericRating) || numericRating is < 0.0 or > 5.0))
         {
             throw new ArgumentOutOfRangeException(nameof(rating), rating, "rating must be between 0.0 and 5.0 when provided.");
         }

@@ -1,6 +1,6 @@
-# Unit 11 - Files, Streams, and JSON
+# 🧭 Unit 11 · Files, streams, and JSON
 
-## Objectives
+## 🎯 Objectives
 
 By the end of this unit you will be able to:
 
@@ -12,12 +12,12 @@ By the end of this unit you will be able to:
 - detect malformed JSON and report it clearly;
 - persist data atomically so a half-written file does not become the new truth.
 
-## Prerequisites
+## ✅ Prerequisites
 
 Complete earlier C# basics first: variables, methods, collections, records/classes, exceptions, and arrays.
 If `string`, arrays, or records still feel new, slow down before this unit.
 
-## Causal mental model
+## 🧠 Causal mental model
 
 Think about persistence as a pipeline:
 
@@ -38,7 +38,7 @@ If you are confused while debugging, ask: **Which layer is wrong right now?**
 - Wrong JSON shape? Text/object boundary.
 - File left half-written? Persistence strategy.
 
-## Authentic fragments
+## 🔤 Authentic fragments
 
 Safe path building:
 
@@ -73,13 +73,28 @@ Atomic save in the same directory:
 
 ```csharp
 string tempPath = destinationPath + ".tmp";
-using FileStream stream = new(tempPath, FileMode.Create, FileAccess.Write, FileShare.None);
-stream.Write(utf8Bytes);
-stream.Flush();
+using (FileStream stream = new(tempPath, FileMode.Create, FileAccess.Write, FileShare.None))
+{
+    stream.Write(utf8Bytes);
+    stream.Flush();
+}
+
 File.Move(tempPath, destinationPath, overwrite: true);
 ```
 
-## Sample project
+The braces matter here: the stream must be disposed - which releases its file
+handle and flushes any buffered bytes - before `File.Move` runs. A `using`
+*declaration* without braces would not be disposed until the end of the
+enclosing method, so `File.Move` could otherwise run while the temporary
+file is still open.
+
+`FileStream` also reads and writes through an internal buffer, 4096 bytes by
+default. That buffer size is a transfer/performance detail about how many
+bytes move between the operating system and your program per underlying I/O
+call; it has nothing to do with the file's total size or the shape of the
+JSON text or object it is carrying.
+
+## ▶️ Sample project
 
 Run the sample from the repository root:
 
@@ -95,7 +110,7 @@ Expected behavior:
 - loads the file back into objects;
 - shows a clear message for intentionally malformed JSON.
 
-## Practice contract
+## 🧪 Practice contract
 
 Project:
 
@@ -115,7 +130,7 @@ Your job in `RecipeStoragePractice` is to make these behaviors true:
 2. `SerializeToJsonText` produces readable JSON for a `RecipeCatalog`.
 3. `SerializeToUtf8` returns UTF-8 bytes for that JSON text.
 4. `DeserializeFromJsonText` and `DeserializeFromUtf8` rebuild the original object graph.
-5. `Load` returns `RecipeCatalog.Empty` when the file does not exist.
+5. `Load` returns `RecipeCatalog.Empty` when the file does not exist or is zero bytes long.
 6. `Load` throws `InvalidDataException` for malformed JSON.
 7. `SaveAtomically` writes to a temporary file and then replaces the destination without leaving `.tmp` files behind.
 
@@ -126,7 +141,7 @@ Deterministic feedback:
 - If file I/O is wrong, the load/save tests fail.
 - If malformed input is swallowed, the invalid-data test fails.
 
-## Experiment
+## 🧩 Experiment
 
 After the sample works, change one thing at a time:
 
@@ -135,13 +150,16 @@ After the sample works, change one thing at a time:
 3. Remove `File.Move(... overwrite: true)` and observe why replacement behavior matters.
 4. Save the JSON text directly with a `StreamWriter` and compare that mental model to writing UTF-8 bytes yourself.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 
 - **Mistake:** treating a file path as trustworthy user input.
   **Diagnosis:** paths like `../secrets.json` or `/etc/passwd` should be rejected by `GetSafePath`.
 
 - **Mistake:** forgetting disposal.
   **Diagnosis:** files stay locked or buffered data does not flush when expected.
+
+- **Mistake:** calling `File.Move` in the same scope as an unbraced `using` declaration for the source stream.
+  **Diagnosis:** disposal timing becomes unclear; wrap the write in a braced `using (...) { }` block so the stream is closed and flushed before the move runs.
 
 - **Mistake:** mixing text and bytes mentally.
   **Diagnosis:** you cannot explain whether you currently hold `string`, `byte[]`, or a `Stream`.
@@ -152,20 +170,22 @@ After the sample works, change one thing at a time:
 - **Mistake:** writing directly into the final file.
   **Diagnosis:** a crash in the middle can leave corrupted JSON as the only copy.
 
-## Summary
+## 📝 Summary
 
 Files are durable, streams move bytes, UTF-8 turns text into bytes, and JSON turns objects into text.
 Safe persistence is about respecting every boundary deliberately.
 
-## Review questions
+## ❓ Review questions
 
 1. What problem does `using` solve?
 2. Why is UTF-8 a separate idea from JSON?
 3. When would you choose bytes over text APIs?
 4. Why should a malformed JSON file not silently become an empty object?
 5. Why is writing a temp file and moving it safer than overwriting directly?
+6. Why must the temporary stream be disposed before `File.Move` runs, and how does a braced `using` block guarantee that ordering?
+7. What does `FileStream`'s default 4096-byte buffer actually describe, and what does it not describe?
 
-## Official Microsoft Learn links
+## 📚 Official Microsoft Learn links
 
 - [Use `using` and `IDisposable`](https://learn.microsoft.com/dotnet/csharp/language-reference/statements/using)
 - [Work with file and stream I/O](https://learn.microsoft.com/dotnet/standard/io/)

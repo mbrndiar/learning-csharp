@@ -1,18 +1,18 @@
-# Unit 09 - LINQ and transformations
+# 🧭 Unit 09 · LINQ and transformations
 
-## Objectives
+## 🎯 Objectives
 - Build readable `IEnumerable<T>` pipelines with filtering, projection, ordering, grouping, and aggregation.
 - Explain deferred execution versus materialization.
 - Recognize when side effects make a query harder to reason about.
 - Prefer small named query steps when a single long pipeline becomes hard to read.
 
-## Prerequisites
+## ✅ Prerequisites
 Before this unit, you should be comfortable with:
 - classes and records from Unit 07
 - generic collections and delegates from Unit 08
 - reading methods that return `IEnumerable<T>`
 
-## Causal mental model
+## 🧠 Causal mental model
 LINQ treats a sequence like a stream of values moving through stages.
 
 - `Where` filters values out.
@@ -23,7 +23,7 @@ LINQ treats a sequence like a stream of values moving through stages.
 
 Most LINQ operators are **deferred**: building the query does not run it yet. The work happens when you enumerate it with `foreach`, `ToArray()`, `ToList()`, `Count()`, and similar operations. Materialization is when you intentionally take a snapshot.
 
-## Authentic minimal fragments
+## 🔤 Authentic minimal fragments
 A small readable query:
 
 ```csharp
@@ -42,7 +42,7 @@ var summaries = runs
     .Select(group => new { Track = group.Key, Count = group.Count() });
 ```
 
-## Sample project
+## ▶️ Sample project
 The sample lives here:
 - `course/09-linq-and-transformations/Samples/ReadingProgressReport/ReadingProgressReport.csproj`
 
@@ -72,23 +72,47 @@ Track summaries:
 Total completed minutes: 165
 ```
 
-## What to notice
+## 👀 What to notice
 - The pipeline that returns learner names is deferred until it is enumerated.
 - The grouped summary materializes into an array because the report is meant to be a stable snapshot.
 - The code does not mutate the source list inside the query.
 - Breaking the report into separate methods keeps each transformation readable.
 
-## Side-effect avoidance
+## 🧠 Side-effect avoidance
 LINQ is easiest to trust when each step is a pure transformation. If your `Select` writes to a file, mutates outside state, or depends on timing, it becomes much harder to debug. A simple rule: use LINQ for describing data flow, and keep side effects at the edges before or after the query.
 
-## Experiment
+## 🧠 A beginner cost model for sequences
+Correctness is not the only question worth asking about a pipeline; a small,
+practical cost model helps you notice expensive habits early:
+
+- **Repeated enumeration repeats work.** A deferred query re-runs its
+  filtering and projection steps every time you enumerate it, so enumerating
+  the same `IEnumerable<T>` in a loop redoes the work each time instead of
+  reusing a previous result.
+- **Materializing allocates a snapshot.** `ToArray()`, `ToList()`, and similar
+  calls copy every matching element into new memory. That is the right choice
+  when you need a stable snapshot, but it is not free.
+- **A list scan is linear.** Finding an item in a `List<T>` by value or
+  predicate looks at up to every element - the time grows with the list size.
+- **Dictionaries and sets exist for lookup.** When you repeatedly ask "does
+  this key exist?" or "give me the value for this key," a `Dictionary<TKey,
+  TValue>` or `HashSet<T>` is the usual choice specifically because it avoids
+  a linear scan for that question.
+
+This unit intentionally does not teach formal algorithm analysis (Big O
+notation, amortized cost proofs, or complexity classes). The goal here is
+just to ask "how many times will this run, and does it allocate a new
+collection?" at the decision points where you write a pipeline.
+
+## 🧩 Experiment
 Try one change at a time:
 1. Add another completed backend run and predict which outputs change.
 2. Add an incomplete run and see which queries ignore it.
 3. Replace `ToArray()` in a materialized result with a deferred return and observe the difference after mutating the source list.
 4. Split a long pipeline into two named variables and compare readability.
+5. Enumerate the same deferred query twice inside a loop and count how many times a `Where` predicate with a `Console.WriteLine` side effect actually runs. Then materialize it once with `ToArray()` and count again.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 - **Mistake:** assuming a query runs as soon as you assign it to a variable.
   - **Diagnosis:** source changes still affect the result later because the query is deferred.
 - **Mistake:** calling `ToList()` everywhere by habit.
@@ -99,8 +123,10 @@ Try one change at a time:
   - **Diagnosis:** the query becomes hard to explain out loud.
 - **Mistake:** forgetting null argument checks in public query helpers.
   - **Diagnosis:** failures show up later and farther away from the real cause.
+- **Mistake:** scanning a `List<T>` repeatedly for lookups that happen often.
+  - **Diagnosis:** each scan costs time proportional to the list size; a `Dictionary<TKey, TValue>` or `HashSet<T>` answers the same question without rescanning everything.
 
-## Practice contract
+## 🧪 Practice contract
 Implement `CourseRunReports` in `LinqTransformationsPractice`.
 
 ### Required types
@@ -151,19 +177,22 @@ Run the tests against the finished solution:
 dotnet test --project course/09-linq-and-transformations/Practice/Tests/LinqTransformationsPractice.Tests.csproj
 ```
 
-## Summary
+## 📝 Summary
 LINQ lets you describe sequence transformations as a pipeline. The key habits are knowing which operators are deferred, materializing only when you need a snapshot, and keeping side effects outside the query so the pipeline stays readable and predictable.
 
-## Review questions
+## ❓ Review questions
 1. What is deferred execution, and when does a deferred query actually run?
 2. Why might you intentionally materialize a query result?
 3. What is the difference between filtering and projection?
 4. How can side effects make a LINQ query misleading?
 5. When should you split a long pipeline into named steps?
+6. Why does enumerating the same deferred query twice repeat its work, and what does materializing it once change?
+7. Why would you reach for a `Dictionary<TKey, TValue>` instead of scanning a `List<T>` for repeated lookups?
 
-## Microsoft Learn links
+## 📚 Microsoft Learn links
 - https://learn.microsoft.com/dotnet/csharp/linq/
 - https://learn.microsoft.com/dotnet/csharp/linq/get-started/introduction-to-linq-queries
 - https://learn.microsoft.com/dotnet/csharp/linq/standard-query-operators/filtering-data
 - https://learn.microsoft.com/dotnet/csharp/linq/standard-query-operators/projection-operations
 - https://learn.microsoft.com/dotnet/csharp/linq/standard-query-operators/grouping-data
+- https://learn.microsoft.com/dotnet/api/system.collections.generic.dictionary-2

@@ -1,19 +1,19 @@
-# Unit 08 - Abstractions, generics, and delegates
+# 🧭 Unit 08 · Abstractions, generics, and delegates
 
-## Objectives
+## 🎯 Objectives
 - Use interfaces to depend on capabilities instead of concrete implementations.
 - Use generic types and constraints to reuse behavior safely.
 - Compose behavior with injected abstractions instead of hard-coded details.
 - Use `Func`, `Action`, lambdas, and closures for small custom behavior.
 - Explain when to substitute a dependency versus when to reuse a generic component.
 
-## Prerequisites
+## ✅ Prerequisites
 Before this unit, you should be comfortable with:
 - classes, records, and constructors from Unit 07
 - collection basics
 - reading a method signature that returns a generic type like `List<T>`
 
-## Causal mental model
+## 🧠 Causal mental model
 An **abstraction** is a smaller promise than a concrete class.
 
 - An **interface** says what a collaborator can do.
@@ -23,7 +23,7 @@ An **abstraction** is a smaller promise than a concrete class.
 
 Use an interface when you want to swap collaborators. Use a generic type when the same structure should work for many data types. Use a delegate when the variation is tiny and local.
 
-## Authentic minimal fragments
+## 🔤 Authentic minimal fragments
 An interface describes a capability:
 
 ```csharp
@@ -47,7 +47,7 @@ A delegate injects a small custom step:
 Action<string> audit = message => Console.WriteLine(message);
 ```
 
-## Sample project
+## ▶️ Sample project
 The sample lives here:
 - `course/08-abstractions-generics-and-delegates/Samples/CurationConsole/CurationConsole.csproj`
 
@@ -79,27 +79,49 @@ Titles: C# Basics | LINQ Lab
 Audit entries: Added cs-basics; Added linq-lab
 ```
 
-## What to notice
+## 👀 What to notice
 - The collection depends on `IRule<T>`, not on a specific rule class.
 - The generic constraint guarantees every stored item has a `Key`.
 - `Map` uses a `Func<T, TResult>` so callers choose the projection.
 - The audit callback uses a closure: it captures a list defined outside the collection.
 
-## When to substitute and when to reuse
+## 🧠 When to substitute and when to reuse
 - **Substitute with an interface** when you need a different collaborator with the same job.
 - **Reuse with generics** when the container or algorithm is the same but the data type changes.
 - **Use a delegate** when variation is one tiny behavior and creating a whole type would be overkill.
 
 A common mistake is using inheritance first. In this unit, composition is usually simpler: the collection owns a rule and delegates small custom behaviors outward.
 
-## Experiment
+## 🔤 Documenting a public contract with XML comments
+A public interface or class is a promise to every future caller, so it is worth
+documenting directly in the source with an XML `/// <summary>` comment:
+
+```csharp
+/// <summary>
+/// Decides whether an item is allowed into the catalog.
+/// </summary>
+public interface IRule<in T>
+{
+    bool Accepts(T item);
+}
+```
+
+Your editor and IDE read these comments to show hover tooltips, parameter
+help, and IntelliSense as soon as you type a member name - that tooling value
+is the main beginner-relevant payoff. Generating a published, shareable API
+reference document from these comments (for example with a documentation
+generator) is out of scope for this course: nothing here builds or ships a
+reusable package, so there is no external audience for generated reference
+docs yet.
+
+## 🧩 Experiment
 Try one change at a time:
 1. Write a stricter rule and see which items stop being accepted.
 2. Change the `Map` projection from keys to title lengths.
 3. Capture a local counter in the audit lambda and observe the closure.
 4. Remove the `where T : IKeyedItem` constraint and notice what code breaks.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 - **Mistake:** depending directly on a concrete helper class.
   - **Diagnosis:** swapping behavior becomes harder than it needs to be.
 - **Mistake:** using generics without a constraint when the algorithm needs a member such as `Key`.
@@ -111,7 +133,7 @@ Try one change at a time:
 - **Mistake:** hard-coding selection logic inside the reusable component.
   - **Diagnosis:** callers must edit the class instead of supplying behavior.
 
-## Practice contract
+## 🧪 Practice contract
 Implement `CuratedCatalog<T>` and its supporting abstractions in `AbstractionsGenericsDelegatesPractice`.
 
 ### Required types
@@ -165,19 +187,21 @@ Run the tests against the finished solution:
 dotnet test --project course/08-abstractions-generics-and-delegates/Practice/Tests/AbstractionsGenericsDelegatesPractice.Tests.csproj
 ```
 
-## Summary
+## 📝 Summary
 Interfaces let you swap collaborators, generic constraints let you reuse code safely, and delegates let callers provide tiny pieces of behavior. Together they make code more flexible without forcing you into inheritance-heavy designs.
 
-## Review questions
+## ❓ Review questions
 1. What problem does an interface solve that a concrete class does not?
 2. Why is a generic constraint useful in a reusable component?
 3. When is a lambda simpler than creating a whole new class?
 4. What is a closure, and what should you be careful about when using one?
 5. How does composition help testing and substitution?
+6. What does an XML `/// <summary>` comment give you immediately in the editor, and why is generating a published API reference out of scope here?
 
-## Microsoft Learn links
+## 📚 Microsoft Learn links
 - https://learn.microsoft.com/dotnet/csharp/programming-guide/interfaces/
 - https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/
 - https://learn.microsoft.com/dotnet/csharp/programming-guide/generics/constraints-on-type-parameters
 - https://learn.microsoft.com/dotnet/csharp/programming-guide/delegates/
 - https://learn.microsoft.com/dotnet/csharp/language-reference/operators/lambda-expressions
+- https://learn.microsoft.com/dotnet/csharp/language-reference/xmldoc/

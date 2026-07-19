@@ -26,6 +26,20 @@ public sealed class ReservationModelTests
     }
 
     [Fact]
+    public void GuestProfilePropertiesCannotBypassConstructorValidation()
+    {
+        Assert.Null(typeof(GuestProfile).GetProperty(nameof(GuestProfile.Name))!.SetMethod);
+        Assert.Null(typeof(GuestProfile).GetProperty(nameof(GuestProfile.Email))!.SetMethod);
+    }
+
+    [Fact]
+    public void ReservationDateParsesOnlyIsoCalendarDates()
+    {
+        Assert.Equal(new DateOnly(2026, 7, 24), ReservationDate.ParseIso("2026-07-24"));
+        Assert.Throws<FormatException>(() => ReservationDate.ParseIso("07/24/2026"));
+    }
+
+    [Fact]
     public void ReservationConfirmsAndCreatesSummary()
     {
         var reservation = new Reservation(
@@ -113,6 +127,22 @@ public sealed class ReservationModelTests
     public void PartySizeRejectsInvalidCounts(int adults, int children)
     {
         Assert.ThrowsAny<ArgumentException>(() => new PartySize(adults, children));
+    }
+
+    [Fact]
+    public void PartySizeRejectsOverflow()
+    {
+        Assert.Throws<OverflowException>(() => new PartySize(int.MaxValue, 1));
+    }
+
+    [Fact]
+    public void ReservationRejectsDefaultPartySize()
+    {
+        Assert.Throws<ArgumentException>(() => new Reservation(
+            new GuestProfile("Ada", "ada@example.com"),
+            new DateOnly(2026, 7, 24),
+            default,
+            new Table(1, 2)));
     }
 
     [Fact]

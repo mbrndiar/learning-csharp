@@ -1,3 +1,4 @@
+using System.Globalization;
 using ReadingLog.Core;
 
 namespace ReadingLog.Cli;
@@ -142,7 +143,7 @@ public sealed class CliApplication
         int? publicationYear = null;
         if (TryGetOption(args, "--year", out var rawYear))
         {
-            if (!int.TryParse(rawYear, out var parsedYear))
+            if (!int.TryParse(rawYear, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsedYear))
             {
                 return await FailAsync("--year must be a whole number.", CliExitCode.InvalidArguments);
             }
@@ -163,12 +164,14 @@ public sealed class CliApplication
             return await FailAsync("add-entry requires --book-id <guid>.", CliExitCode.InvalidArguments);
         }
 
-        if (!TryGetOption(args, "--started-on", out var rawStartedOn) || !DateOnly.TryParse(rawStartedOn, out var startedOn))
+        if (!TryGetOption(args, "--started-on", out var rawStartedOn)
+            || !TryParseIsoDate(rawStartedOn, out var startedOn))
         {
             return await FailAsync("add-entry requires --started-on <yyyy-MM-dd>.", CliExitCode.InvalidArguments);
         }
 
-        if (!TryGetOption(args, "--pages-read", out var rawPagesRead) || !int.TryParse(rawPagesRead, out var pagesRead))
+        if (!TryGetOption(args, "--pages-read", out var rawPagesRead)
+            || !int.TryParse(rawPagesRead, NumberStyles.Integer, CultureInfo.InvariantCulture, out var pagesRead))
         {
             return await FailAsync("add-entry requires --pages-read <int>.", CliExitCode.InvalidArguments);
         }
@@ -176,7 +179,7 @@ public sealed class CliApplication
         DateOnly? finishedOn = null;
         if (TryGetOption(args, "--finished-on", out var rawFinishedOn))
         {
-            if (!DateOnly.TryParse(rawFinishedOn, out var parsedFinishedOn))
+            if (!TryParseIsoDate(rawFinishedOn, out var parsedFinishedOn))
             {
                 return await FailAsync("--finished-on must use yyyy-MM-dd.", CliExitCode.InvalidArguments);
             }
@@ -187,7 +190,7 @@ public sealed class CliApplication
         int? rating = null;
         if (TryGetOption(args, "--rating", out var rawRating))
         {
-            if (!int.TryParse(rawRating, out var parsedRating))
+            if (!int.TryParse(rawRating, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsedRating))
             {
                 return await FailAsync("--rating must be a whole number between 1 and 5.", CliExitCode.InvalidArguments);
             }
@@ -229,6 +232,14 @@ public sealed class CliApplication
             || string.Equals(command, "--help", StringComparison.OrdinalIgnoreCase)
             || string.Equals(command, "-h", StringComparison.OrdinalIgnoreCase);
     }
+
+    private static bool TryParseIsoDate(string value, out DateOnly date) =>
+        DateOnly.TryParseExact(
+            value,
+            "yyyy-MM-dd",
+            CultureInfo.InvariantCulture,
+            DateTimeStyles.None,
+            out date);
 
     private static bool TryGetOption(string[] args, string optionName, out string value)
     {

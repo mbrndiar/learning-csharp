@@ -68,7 +68,13 @@ public static class ReadingLogValidation
 
         for (var index = 0; index < snapshot.Books.Count; index++)
         {
-            var book = snapshot.Books[index];
+            Book? book = snapshot.Books[index];
+            if (book is null)
+            {
+                AddError(errors, $"books[{index}]", "Book must not be null.");
+                continue;
+            }
+
             ValidateBook(book, index, errors);
             if (!bookIds.Add(book.Id))
             {
@@ -78,7 +84,13 @@ public static class ReadingLogValidation
 
         for (var index = 0; index < snapshot.Entries.Count; index++)
         {
-            var entry = snapshot.Entries[index];
+            ReadingEntry? entry = snapshot.Entries[index];
+            if (entry is null)
+            {
+                AddError(errors, $"entries[{index}]", "Entry must not be null.");
+                continue;
+            }
+
             ValidateEntry(entry, index, errors);
             if (!entryIds.Add(entry.Id))
             {

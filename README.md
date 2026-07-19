@@ -1,11 +1,14 @@
-# learning-csharp
+# 🚀 learning-csharp
 
 A hands-on introduction to modern C# on .NET for people who have never
 programmed before. You will predict and run small programs, change them,
 complete focused practice, and finish by building a tested book catalog and
 reading journal with a command-line client and a local HTTP API.
 
-## Who this course is for
+Jump to the [course map](#-course-map), or start with the audience and setup
+requirements below.
+
+## 🧭 Who this course is for
 
 You need basic file and terminal skills, but no programming experience. The
 course explains concepts before it relies on them. Follow the modules in order
@@ -21,7 +24,7 @@ CI verifies all three operating-system families. Newer SDKs, older .NET
 versions, .NET Framework, and preview language features are outside the tested
 support boundary.
 
-## What you will learn
+## 🎯 What you will learn
 
 By the end of the course, you will be able to:
 
@@ -34,12 +37,15 @@ By the end of the course, you will be able to:
 - test behavior with xUnit v3 and Microsoft Testing Platform;
 - cross the object/JSON/UTF-8/stream/file boundary without confusing the
   representation with the I/O mechanism;
+- distinguish calendar dates, UTC instants, and durations with `DateOnly`,
+  `DateTimeOffset`, and `TimeSpan`, and recognize `TimeProvider` as the
+  testable clock boundary;
 - write asynchronous, cancellable I/O and reason about concurrency ownership;
 - build and test an ASP.NET Core Minimal API and a safe `HttpClient` client;
 - compose a multi-project application and run its complete quality workflow;
 - independently build the reading-log capstone from its staged starter.
 
-## Set up and run your first program
+## ▶️ Set up and run your first program
 
 Install the supported SDK and verify it:
 
@@ -57,7 +63,7 @@ dotnet course/01-first-program/Samples/hello-first-program.cs
 See [the setup guide](docs/SETUP.md) if the command is unavailable or selects
 another SDK.
 
-## How to study
+## 🧠 How to study
 
 For every module:
 
@@ -73,7 +79,13 @@ Do not memorize punctuation in isolation. Explain what value or object exists,
 who owns it, which operation transforms it, and where an error can cross a
 boundary.
 
-## Course map
+Every module and the capstone guide use the same emoji section markers
+(🎯 objectives, ✅ prerequisites, 🧠 mental model, 🔤 fragments, ▶️
+samples/commands, 👀 expected output, 🧩 experiments, ⚠️ mistakes, 🧪
+practice, 🔁 feedback, 📝 summary, ❓ review questions, 📚 references) so you
+can scan any of the 17 guides in this repository the same way.
+
+## 🗺️ Course map
 
 | Module | Main outcome |
 | --- | --- |
@@ -83,7 +95,7 @@ boundary.
 | [04 - Collections and iteration](course/04-collections-and-iteration/) | Store, find, and iterate values with safe boundary handling. |
 | [05 - Methods, errors, and debugging](course/05-methods-errors-and-debugging/) | Decompose behavior and diagnose or report failures precisely. |
 | [06 - Projects, solutions, and builds](course/06-projects-solutions-and-builds/) | Move from one file to the SDK project, dependency, and build model. |
-| [07 - Modeling data and behavior](course/07-modeling-data-and-behavior/) | Design small types with clear invariants and ownership. |
+| [07 - Modeling data and behavior](course/07-modeling-data-and-behavior/) | Design small types with clear invariants and ownership, including calendar dates, UTC instants, and durations. |
 | [08 - Abstractions, generics, and delegates](course/08-abstractions-generics-and-delegates/) | Reuse and substitute behavior through explicit contracts. |
 | [09 - LINQ and transformations](course/09-linq-and-transformations/) | Build readable, deliberate data transformation pipelines. |
 | [10 - Testing and dependency boundaries](course/10-testing-and-dependency-boundaries/) | Test normal, boundary, and failure behavior with controlled dependencies. |
@@ -95,7 +107,7 @@ boundary.
 After all modules, complete the
 [personal reading-log capstone](capstone/reading-log/).
 
-## Practice convention
+## 🧪 Practice convention
 
 Every module uses the same discoverable roles:
 
@@ -129,12 +141,12 @@ behavior, but it must restore and compile. A solution is an example, not a
 requirement to use identical syntax. Compare contracts, edge cases, clarity,
 and diagnostics.
 
-## Developer feedback loop
+## 🔁 Developer feedback loop
 
 Start with the smallest sample or test connected to your change. Then widen the
 feedback from the repository root:
 
-```console
+```bash
 dotnet restore LearningCSharp.slnx --locked-mode
 dotnet format LearningCSharp.slnx --verify-no-changes --no-restore
 dotnet build LearningCSharp.slnx --configuration Release --no-restore
@@ -151,11 +163,12 @@ The commands have separate jobs:
 - CourseVerifier checks the course map, declared artifacts, samples, and links.
 
 The capstone has an independent 85% branch-coverage gate so unrelated course
-tests cannot hide its gaps:
+tests cannot hide its gaps. Build once in `Release`, then reuse that build for
+both the coverage run and CourseVerifier:
 
-```console
-dotnet test --project capstone/reading-log/Tests/ReadingLog.Tests.csproj --results-directory capstone/reading-log/Tests/TestResults -- --coverage --coverage-output solution-coverage.cobertura.xml --coverage-output-format cobertura --coverage-settings capstone/reading-log/Tests/coverage.runsettings
-dotnet run --project tools/CourseVerifier -- coverage capstone/reading-log/Tests 0.85
+```bash
+dotnet test --project capstone/reading-log/Tests/ReadingLog.Tests.csproj --configuration Release --no-build --results-directory capstone/reading-log/Tests/TestResults -- --coverage --coverage-output solution-coverage.cobertura.xml --coverage-output-format cobertura --coverage-settings capstone/reading-log/Tests/coverage.runsettings
+dotnet run --project tools/CourseVerifier --configuration Release --no-build -- coverage capstone/reading-log/Tests 0.85
 ```
 
 GitHub Actions runs the same underlying configuration in a clean environment.
@@ -164,7 +177,7 @@ See [setup and daily use](docs/SETUP.md) for the first restore and
 [quality-contract evidence](docs/CONFORMANCE.md) records the verified course
 surfaces and current delivery state.
 
-## Capstone
+## 🏁 Capstone
 
 The capstone is a local personal book catalog and reading journal. Its staged
 starter grows into:
@@ -178,9 +191,11 @@ starter grows into:
 Start with the [capstone guide](capstone/reading-log/README.md). It introduces
 no required architecture that has not appeared in the modules.
 
-## Course conventions
+## 📝 Course conventions
 
-- Terminal examples use `console`; C# examples use `csharp`.
+- Shell commands throughout the modules use `bash`, including multi-command
+  quality-loop sequences; this file's short one-off verification and test
+  commands use `console`; C# examples use `csharp`.
 - `...` means omitted context only when the text says so. It is not invented
   runnable syntax.
 - Examples use English identifiers and official C# naming conventions.
@@ -192,7 +207,7 @@ no required architecture that has not appeared in the modules.
 - Educational comments explain a boundary, trade-off, or surprising behavior;
   they do not narrate obvious syntax.
 
-## Scope and next steps
+## 🔭 Scope and next steps
 
 This course builds a strong C# and general .NET application foundation. It does
 not teach desktop or mobile UI, Blazor, MVC controllers, Entity Framework,

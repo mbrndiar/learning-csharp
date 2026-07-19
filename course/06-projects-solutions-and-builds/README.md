@@ -1,19 +1,19 @@
-# Unit 06 - Projects, solutions, and builds
+# 🧭 Unit 06 · Projects, solutions, and builds
 
-## Objectives
+## 🎯 Objectives
 - Explain what an SDK-style project, assembly, namespace, and solution file each do.
 - Restore, build, and run a multi-project .NET application from the repository root.
 - Read the difference between source code, generated output, and package restore artifacts.
 - Add a project reference so one project can use code from another.
 - Convert a tiny file-based program idea into a normal multi-file project layout.
 
-## Prerequisites
+## ✅ Prerequisites
 Before this unit, you should already be comfortable with:
 - running `dotnet --version`
 - variables, methods, conditionals, and collections in C#
 - using the terminal from the repository root
 
-## Causal mental model
+## 🧠 Causal mental model
 A **project** (`.csproj`) is the build recipe for one compiled output.
 
 1. The .NET SDK reads the project file.
@@ -26,7 +26,7 @@ A **project** (`.csproj`) is the build recipe for one compiled output.
 
 Think of a solution as a playlist, a project as a recipe card, source files as ingredients, and the assembly in `bin/` as the finished dish.
 
-## Authentic minimal fragments
+## 🔤 Authentic minimal fragments
 A project file can be tiny:
 
 ```xml
@@ -51,7 +51,7 @@ namespace ProjectWorkbench.App;
 Console.WriteLine(GreetingComposer.Create("Ada"));
 ```
 
-## Sample project
+## ▶️ Sample project
 The sample lives here:
 - `course/06-projects-solutions-and-builds/Samples/ProjectWorkbench/ProjectWorkbench.slnx`
 
@@ -94,13 +94,13 @@ Output folder pattern: bin/Debug/net10.0/
 - The app project can call `GreetingComposer` only because the project reference exists.
 - If you remove the reference, the namespace import still compiles in the file editor, but the build fails because the assembly dependency is gone.
 
-## Restore, build, run, and generated output
+## 🧠 Restore, build, run, and generated output
 - `dotnet restore` creates or updates `packages.lock.json` for projects that need packages.
 - `dotnet build` produces assemblies in `bin/<Configuration>/<TargetFramework>/`.
 - `dotnet run` is convenient while learning, but it still depends on a valid project.
 - `Debug` and `Release` are build **configurations**. They are separate output folders.
 
-## NuGet in this unit
+## 🔤 NuGet in this unit
 NuGet is the package manager for .NET. In this unit's offline sample, we intentionally avoid external packages so the behavior stays deterministic. The command you will use later looks like this:
 
 The general command form is shown below. `<PACKAGE_ID>` is a placeholder, not a
@@ -112,7 +112,7 @@ dotnet add course/06-projects-solutions-and-builds/Samples/ProjectWorkbench/Proj
 
 The important idea is: package references come from NuGet, while project references point at code you own in this repository.
 
-## Converting a file-based app into a multi-file project
+## 🧠 Converting a file-based app into a multi-file project
 If you started with one experimental file, the usual upgrade path is:
 1. create a project folder
 2. add a `.csproj`
@@ -138,14 +138,14 @@ Console.WriteLine(GreetingComposer.Create("Ada"));
 
 The second version is easier to test, reuse, and extend because the logic has a home outside the entry file.
 
-## Experiment
+## 🧩 Experiment
 Try one change at a time:
 1. Run the sample in `Release` instead of `Debug`.
 2. Add another method to `GreetingComposer` and call it from `Program.cs`.
 3. Open `bin/` and `obj/` after a build and compare what changed.
 4. Remove the project reference temporarily and observe the compiler error, then put it back.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 - **Mistake:** editing files inside `bin/` or `obj/`.
   - **Diagnosis:** your changes disappear after the next build because those folders are generated output.
 - **Mistake:** forgetting a project reference.
@@ -157,7 +157,7 @@ Try one change at a time:
 - **Mistake:** assuming restore and build are the same step.
   - **Diagnosis:** package-related errors usually happen during restore, while C# syntax/type errors happen during build.
 
-## Practice contract
+## 🧪 Practice contract
 Implement `BuildLayout` in the practice library.
 
 ### Required inputs and outputs
@@ -216,17 +216,17 @@ Run the shared tests against the finished solution:
 dotnet test --project course/06-projects-solutions-and-builds/Practice/Tests/ProjectsSolutionsBuildsPractice.Tests.csproj
 ```
 
-## Summary
+## 📝 Summary
 A solution groups projects. A project tells the SDK how to build one assembly. Project references connect your own assemblies, package references connect NuGet packages, and `bin/` plus `obj/` are generated output rather than source. Once you understand that flow, multi-project C# code stops feeling magical and starts feeling mechanical.
 
-## Review questions
+## ❓ Review questions
 1. What is the difference between a solution file and a project file?
 2. Why does a project reference matter even if a `using` statement already exists in the code?
 3. What belongs in `bin/` versus `obj/`?
 4. When would you choose a project reference instead of a NuGet package?
 5. What changes when you switch from `Debug` to `Release`?
 
-## Microsoft Learn links
+## 📚 Microsoft Learn links
 - https://learn.microsoft.com/dotnet/core/tools/
 - https://learn.microsoft.com/dotnet/core/tools/dotnet-build
 - https://learn.microsoft.com/dotnet/core/tools/dotnet-run

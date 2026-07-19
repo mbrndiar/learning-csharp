@@ -44,6 +44,7 @@ Minimum domain rules:
 - `ReadingEntry.BookId` must not be empty.
 - `StartedOn` is required.
 - `FinishedOn`, when present, cannot be earlier than `StartedOn`.
+- CLI date text must use the invariant ISO calendar format `yyyy-MM-dd`.
 - `PagesRead` must be positive.
 - `Rating`, when present, must be between 1 and 5.
 - `Notes`, when present, must stay within a reasonable maximum length.
@@ -56,6 +57,7 @@ Minimum domain rules:
 - a controlled storage path rooted in configured directory + file name
 - cancellation token support on load and save
 - explicit malformed data errors for invalid JSON or invalid stored objects
+- explicit malformed data errors for `null` books or entries inside stored arrays
 - atomic replacement when saving
 
 ### 3. API
@@ -86,6 +88,7 @@ Required endpoints:
 - call the API with `HttpClient`
 - use a finite timeout
 - support cancellation
+- accept only an absolute HTTP or HTTPS API base URL
 - handle JSON responses explicitly
 - print user-facing output to `stdout`
 - print errors to `stderr`
@@ -132,11 +135,14 @@ Required commands:
 | Core | Invalid year, pages, rating, or reversed dates | Throws `DomainValidationException`. |
 | Storage | JSON text is malformed | Throws explicit malformed data error. |
 | Storage | JSON shape is valid but stored objects fail validation | Throws explicit malformed data error. |
+| Storage | A `books` or `entries` array contains `null` | Throws explicit malformed data error. |
 | API | `GET /books/{id}` for missing book | Returns `404` problem response. |
 | API | `POST /books` or `POST /entries` with invalid DTO values | Returns `400` validation problem response. |
 | CLI | API returns non-success status | Writes error to `stderr` and exits with non-zero status. |
 | CLI | API returns malformed JSON | Writes error to `stderr` and exits with non-zero status. |
 | CLI | Request times out or is cancelled | Exits with dedicated timeout/cancel code. |
+| CLI | Base URL is malformed or uses a non-HTTP scheme | Writes a clear error to `stderr` and exits non-zero. |
+| CLI | Date input is not exact `yyyy-MM-dd` text | Rejects it before making an HTTP request. |
 
 ## Milestone breakdown
 

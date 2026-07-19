@@ -58,7 +58,8 @@ public sealed class JsonReadingLogRepository : IReadingLogRepository
             _storageFilePath,
             FileMode.Open,
             FileAccess.Read,
-            FileShare.Read,
+            // Atomic replacement can rename the path while this reader owns the old file.
+            FileShare.Read | FileShare.Delete,
             4096,
             FileOptions.Asynchronous | FileOptions.SequentialScan);
 

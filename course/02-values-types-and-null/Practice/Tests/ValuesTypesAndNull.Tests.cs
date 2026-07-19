@@ -26,6 +26,7 @@ public sealed class ReadingProgressFormatterTests
     [InlineData(11, 10, null)]
     [InlineData(1, 10, -0.1)]
     [InlineData(1, 10, 5.1)]
+    [InlineData(1, 10, double.NaN)]
     public void DescribeProgressThrowsArgumentOutOfRangeExceptionForInvalidValues(
         int pagesRead,
         int totalPages,

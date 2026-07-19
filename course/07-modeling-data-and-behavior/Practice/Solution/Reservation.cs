@@ -7,6 +7,11 @@ public sealed class Reservation
         ArgumentNullException.ThrowIfNull(guest);
         ArgumentNullException.ThrowIfNull(table);
 
+        if (partySize.Total <= 0)
+        {
+            throw new ArgumentException("A reservation requires at least one guest.", nameof(partySize));
+        }
+
         if (!table.CanSeat(partySize))
         {
             throw new InvalidOperationException("The table is too small for the party.");

@@ -124,6 +124,41 @@ public sealed class ReadingListApiTests
         await Assert.ThrowsAnyAsync<OperationCanceledException>(() => apiClient.GetBooksAsync(null, cancellationToken));
     }
 
+    [Fact]
+    public async Task InMemoryRepositorySupportsConcurrentReadsAndWrites()
+    {
+        CancellationToken cancellationToken = TestContext.Current.CancellationToken;
+        var repository = new InMemoryBookRepository();
+        using var start = new ManualResetEventSlim();
+
+        Task writer = Task.Run(async () =>
+        {
+            start.Wait(cancellationToken);
+            for (var index = 0; index < 2_000; index++)
+            {
+                await repository.AddAsync(
+                    new CreateBookRequest($"Book {index}", "Author", 2026),
+                    cancellationToken);
+            }
+        }, cancellationToken);
+
+        Task reader = Task.Run(async () =>
+        {
+            start.Wait(cancellationToken);
+            for (var index = 0; index < 2_000; index++)
+            {
+                _ = await repository.ListAsync(null, int.MaxValue, cancellationToken);
+                _ = await repository.GetAsync(SeedBookIds.CleanCode, cancellationToken);
+            }
+        }, cancellationToken);
+
+        start.Set();
+        await Task.WhenAll(writer, reader);
+
+        IReadOnlyList<BookDto> books = await repository.ListAsync(null, int.MaxValue, cancellationToken);
+        Assert.Equal(2_002, books.Count);
+    }
+
     private sealed class SlowBodyHandler(byte[] jsonBytes, TimeSpan delay) : HttpMessageHandler
     {
         protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)

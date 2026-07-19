@@ -15,5 +15,6 @@ public sealed class Table
 
     public int Seats { get; }
 
-    public bool CanSeat(PartySize partySize) => Seats >= partySize.Total;
+    public bool CanSeat(PartySize partySize) =>
+        partySize.Total > 0 && Seats >= partySize.Total;
 }

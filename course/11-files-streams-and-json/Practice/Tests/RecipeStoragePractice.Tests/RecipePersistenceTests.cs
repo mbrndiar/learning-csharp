@@ -55,6 +55,17 @@ public sealed class RecipePersistenceTests
     }
 
     [Fact]
+    public void LoadReturnsEmptyWhenFileIsZeroBytes()
+    {
+        string rootDirectory = CreateWorkspace();
+        File.WriteAllBytes(Path.Combine(rootDirectory, "recipes.json"), []);
+
+        RecipeCatalog loaded = RecipePersistence.Load(rootDirectory, "recipes.json");
+
+        Assert.Equal(RecipeCatalog.Empty, loaded);
+    }
+
+    [Fact]
     public void SaveAtomicallyPersistsAndReloadsCatalogWithoutTempFiles()
     {
         string rootDirectory = CreateWorkspace();

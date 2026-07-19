@@ -123,6 +123,22 @@ public sealed class JsonReadingLogRepositoryTests
         Assert.Contains("invalid", exception.Message, StringComparison.OrdinalIgnoreCase);
     }
 
+    [Theory]
+    [InlineData("""{"books":[null],"entries":[]}""")]
+    [InlineData("""{"books":[],"entries":[null]}""")]
+    public async Task LoadAsyncThrowsForNullSnapshotElements(string json)
+    {
+        var cancellationToken = TestContext.Current.CancellationToken;
+        using var directory = new TestDirectory("storage-null-element");
+        var repository = CreateRepository(directory.Path);
+        await File.WriteAllTextAsync(repository.StorageFilePath, json, Encoding.UTF8, cancellationToken);
+
+        var exception = await Assert.ThrowsAsync<InvalidDataException>(
+            () => repository.LoadAsync(cancellationToken));
+
+        Assert.Contains("invalid", exception.Message, StringComparison.OrdinalIgnoreCase);
+    }
+
     [Fact]
     public async Task LoadAsyncHonorsCancellation()
     {
@@ -180,6 +196,31 @@ public sealed class JsonReadingLogRepositoryTests
 
         var loaded = await repository.LoadAsync(cancellationToken);
         Assert.Equivalent(secondSnapshot, loaded);
+    }
+
+    [Fact]
+    public async Task LoadAndSaveCanOverlapWithoutBreakingAtomicReplacement()
+    {
+        var cancellationToken = TestContext.Current.CancellationToken;
+        using var directory = new TestDirectory("storage-overlap");
+        var repository = CreateRepository(directory.Path);
+        Book[] books = Enumerable.Range(1, 20_000)
+            .Select(index => SampleData.Book(
+                id: Guid.NewGuid(),
+                title: $"Book {index}"))
+            .ToArray();
+        var original = new ReadingLogSnapshot(books, []);
+        var replacement = new ReadingLogSnapshot([SampleData.Book(title: "Replacement")], []);
+        await repository.SaveAsync(original, cancellationToken);
+
+        Task<ReadingLogSnapshot> loadTask = repository.LoadAsync(cancellationToken);
+        await repository.SaveAsync(replacement, cancellationToken);
+        ReadingLogSnapshot loadedDuringReplacement = await loadTask;
+
+        Assert.Equal(original.Books.Count, loadedDuringReplacement.Books.Count);
+        ReadingLogSnapshot finalSnapshot = await repository.LoadAsync(cancellationToken);
+        Assert.Single(finalSnapshot.Books);
+        Assert.Equal("Replacement", finalSnapshot.Books[0].Title);
     }
 
     private static JsonReadingLogRepository CreateRepository(string directory) =>

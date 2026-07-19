@@ -1,19 +1,19 @@
-# Unit 10 - Testing and dependency boundaries
+# 🧭 Unit 10 · Testing and dependency boundaries
 
-## Objectives
+## 🎯 Objectives
 - Write xUnit v3 facts and theories using the arrange-act-assert pattern.
 - Test normal, boundary, and failure behavior.
 - Use hand-written fakes instead of a mocking framework for simple boundaries.
 - Explain why dependency injection makes code easier to test and replace.
 - Interpret test failures and understand what coverage can and cannot tell you.
 
-## Prerequisites
+## ✅ Prerequisites
 Before this unit, you should be comfortable with:
 - projects and builds from Unit 06
 - modeling and abstractions from Units 07 and 08
 - reading LINQ-based business logic from Unit 09
 
-## Causal mental model
+## 🧠 Causal mental model
 A unit test isolates one behavior, gives it controlled inputs, and checks the observable outcome.
 
 - **Facts** are single scenario tests.
@@ -23,7 +23,7 @@ A unit test isolates one behavior, gives it controlled inputs, and checks the ob
 
 Coverage is a flashlight, not a proof. High coverage can still miss important assertions, and lower coverage can still protect the critical boundaries if the tests are well chosen.
 
-## Authentic minimal fragments
+## 🔤 Authentic minimal fragments
 A fact:
 
 ```csharp
@@ -50,7 +50,7 @@ public void DoesNotSendOutsideTheWindow(int daysUntilDue)
 }
 ```
 
-## Sample project
+## ▶️ Sample project
 The sample lives here:
 - `course/10-testing-and-dependency-boundaries/Samples/ReminderBoundaryDemo/ReminderBoundaryDemo.csproj`
 - `course/10-testing-and-dependency-boundaries/Samples/ReminderBoundaryDemo.Tests/ReminderBoundaryDemo.Tests.csproj`
@@ -80,13 +80,13 @@ Test run summary: Passed!
   succeeded: 5
 ```
 
-## What to notice
+## 👀 What to notice
 - The production code depends on `IReminderSink`, not on email, HTTP, or a database.
 - The tests use a tiny fake object that records calls in memory.
 - One theory covers multiple outside-the-window cases with almost no duplication.
 - The tests assert outcomes, not implementation trivia.
 
-## Debugging failures
+## ⚠️ Debugging failures
 When a test fails, read it in this order:
 1. the test name
 2. the assertion message
@@ -96,17 +96,17 @@ When a test fails, read it in this order:
 
 Do not start by changing the assertion blindly. First decide whether the code is wrong, the test is wrong, or the scenario setup is wrong.
 
-## Coverage meaning
+## 🧠 Coverage meaning
 Coverage answers "what lines were executed?" It does **not** answer "were the right assertions made?" Use coverage to find untested regions, then add meaningful tests for risky behavior such as boundaries, failure paths, and important branching logic.
 
-## Experiment
+## 🧩 Experiment
 Try one change at a time:
 1. Break the reminder message text and watch the assertion fail.
 2. Add another theory row and confirm the same test logic still works.
 3. Remove dependency injection and feel how much harder the service is to test.
 4. Run the practice tests with coverage and inspect which code was exercised.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 - **Mistake:** testing several unrelated behaviors in one test.
   - **Diagnosis:** a failure gives you poor signal about what actually broke.
 - **Mistake:** skipping failure-path tests.
@@ -118,7 +118,7 @@ Try one change at a time:
 - **Mistake:** treating coverage as a quality score by itself.
   - **Diagnosis:** the percentage goes up while important cases remain untested.
 
-## Practice contract
+## 🧪 Practice contract
 Implement `OrderService` in `TestingDependencyBoundariesPractice`.
 
 ### Required types
@@ -178,17 +178,17 @@ Run the tests with coverage enabled:
 dotnet test --project course/10-testing-and-dependency-boundaries/Practice/Tests/TestingDependencyBoundariesPractice.Tests.csproj --coverage
 ```
 
-## Summary
+## 📝 Summary
 Testing gets easier when behavior is small, deterministic, and separated from external work. Facts and theories help you express scenarios clearly, hand-written fakes keep the boundary visible, and dependency injection lets you replace volatile collaborators with simple test doubles.
 
-## Review questions
+## ❓ Review questions
 1. What is the difference between a fact and a theory?
 2. Why does dependency injection make a service easier to test?
 3. What kinds of cases belong in boundary and failure tests?
 4. Why is a simple fake often enough for a unit test?
 5. What can coverage tell you, and what can it not tell you?
 
-## Microsoft Learn links
+## 📚 Microsoft Learn links
 - https://learn.microsoft.com/dotnet/core/testing/unit-testing-csharp-with-xunit
 - https://learn.microsoft.com/dotnet/core/extensions/dependency-injection
 - https://learn.microsoft.com/dotnet/core/testing/unit-testing-best-practices

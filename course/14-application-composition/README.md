@@ -1,6 +1,6 @@
-# Unit 14 - Application Composition
+# 🧭 Unit 14 · Application composition
 
-## Objectives
+## 🎯 Objectives
 
 By the end of this unit you will be able to:
 
@@ -12,12 +12,12 @@ By the end of this unit you will be able to:
 - explain the difference between `dotnet build`, `dotnet test`, and `dotnet publish` artifacts;
 - run a full quality loop before capstone work.
 
-## Prerequisites
+## ✅ Prerequisites
 
 Finish Units 11-13 first.
 You should already be comfortable with files, JSON, async code, tests, and dependency injection ideas.
 
-## Causal mental model
+## 🧠 Causal mental model
 
 A real application is easier to change when responsibilities stay separate:
 
@@ -29,7 +29,7 @@ A real application is easier to change when responsibilities stay separate:
 If the domain knows about file paths or `Console.WriteLine`, the boundaries are leaking.
 If the composition root is tiny, the rest of the code stays easier to test.
 
-## Authentic fragments
+## 🔤 Authentic fragments
 
 A domain-only calculation:
 
@@ -58,7 +58,7 @@ var command = new SummaryCommand(new SummaryApplication(new JsonReadingLogSource
 return await command.RunAsync(args, Console.Out, Console.Error);
 ```
 
-## Sample project
+## ▶️ Sample project
 
 Run the sample from the repository root:
 
@@ -73,7 +73,7 @@ Expected behavior:
 - prints a reading summary to stdout;
 - returns exit code `0` for success.
 
-## Practice contract
+## 🧪 Practice contract
 
 Default solution tests:
 
@@ -96,8 +96,11 @@ dotnet run --project course/14-application-composition/Practice/Solution/Reading
 Publish the CLI from the repository root:
 
 ```bash
-dotnet publish course/14-application-composition/Practice/Solution/ReadingLog.Cli/ReadingLog.Cli.csproj -c Release -o course/14-application-composition/Practice/Solution/publish
+dotnet publish course/14-application-composition/Practice/Solution/ReadingLog.Cli/ReadingLog.Cli.csproj -c Release -o artifacts/unit14-publish
 ```
+
+`artifacts/` is listed in `.gitignore`, so publish output never lands inside
+tracked source folders no matter which unit or capstone project you publish.
 
 Your implementation must make these statements true:
 
@@ -115,14 +118,14 @@ Deterministic feedback:
 - if exit-code behavior is wrong, the CLI tests fail;
 - if malformed JSON is swallowed, the invalid-data test fails.
 
-## Experiment
+## 🧩 Experiment
 
 1. Change `minimumRating` in the config file and re-run the CLI.
 2. Break the JSON data file and observe stderr plus exit code `3`.
 3. Move the data file beside a different config file and confirm relative path resolution still works.
 4. Run `dotnet publish` and compare the publish folder with a normal build output.
 
-## Common mistakes and diagnosis
+## ⚠️ Common mistakes and diagnosis
 
 - **Mistake:** putting file I/O inside the domain layer.
   **Diagnosis:** pure calculations become hard to test without the filesystem.
@@ -136,32 +139,56 @@ Deterministic feedback:
 - **Mistake:** letting configuration objects spread everywhere.
   **Diagnosis:** low-level settings leak into places that only need business concepts.
 
-## Full quality loop and capstone preparation
+## 🔁 Full quality loop and capstone preparation
 
-Before you start the capstone, repeat this loop intentionally:
+Before you start the capstone, repeat the same quality loop the repository's
+workflow under `.github/workflows/` runs, from the repository root:
 
 ```bash
-dotnet build course/14-application-composition/Practice/Solution/ReadingLog.Cli/ReadingLog.Cli.csproj
-dotnet test --project course/14-application-composition/Practice/Tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj
-dotnet publish course/14-application-composition/Practice/Solution/ReadingLog.Cli/ReadingLog.Cli.csproj -c Release -o course/14-application-composition/Practice/Solution/publish
+dotnet restore LearningCSharp.slnx --locked-mode
+dotnet format LearningCSharp.slnx --verify-no-changes --no-restore
+dotnet build LearningCSharp.slnx --configuration Release --no-restore
+dotnet test --solution LearningCSharp.slnx --configuration Release --no-build
+dotnet run --project tools/CourseVerifier --configuration Release --no-build -- verify
+dotnet run --project tools/CourseVerifier --configuration Release --no-build -- starters
+dotnet test --project capstone/reading-log/Tests/ReadingLog.Tests.csproj --configuration Release -p:CapstoneImplementation=Starter -- --filter-class ReadingLog.Tests.Smoke.StarterSmokeTests
+dotnet test --project capstone/reading-log/Tests/ReadingLog.Tests.csproj --configuration Release --no-build --results-directory capstone/reading-log/Tests/TestResults -- --coverage --coverage-output solution-coverage.cobertura.xml --coverage-output-format cobertura --coverage-settings capstone/reading-log/Tests/coverage.runsettings
+dotnet run --project tools/CourseVerifier --configuration Release --no-build -- coverage capstone/reading-log/Tests 0.85
+dotnet run --project tools/CourseVerifier --configuration Release --no-build -- external-links
 ```
 
-That loop proves your code compiles, behaves correctly, and produces deployable artifacts.
+Each step has a distinct job: locked restore reproduces the exact recorded
+dependency graph; `dotnet format` and the Release build catch style and
+analyzer regressions; the solution test run checks every module's behavior at
+once; `CourseVerifier verify` checks the course map, declared artifacts,
+samples, and local links; `CourseVerifier starters` plus the capstone starter
+smoke test confirm every untouched starter still compiles with the expected
+focused failures; the coverage pair enforces the capstone's independent 85%
+branch-coverage gate; and `external-links` checks that documentation URLs
+still resolve. On PowerShell, either keep each command on its own line as
+shown or use PowerShell's backtick continuation character instead of a
+trailing `\` if you split a command across lines.
 
-## Summary
+That loop proves your code compiles, is formatted, behaves correctly,
+satisfies the course's own verification tooling, and meets the capstone's
+coverage bar before you rely on any of it while building the capstone.
+
+## 📝 Summary
 
 Composition is the act of wiring pure logic to messy reality at the edge.
 A clean composition root keeps the domain pure, the application focused, and the CLI predictable.
 
-## Review questions
+## ❓ Review questions
 
 1. What belongs in the domain layer versus the application layer?
 2. Why should the composition root be small?
 3. Why do stderr and exit codes matter for automation?
 4. What makes configuration a boundary concern?
 5. What extra confidence does `dotnet publish` give compared with only `dotnet build`?
+6. Why does `CourseVerifier starters` plus the capstone starter smoke test matter in the full quality loop, separate from the main solution test run?
+7. Why does publish output belong under `artifacts/` instead of inside a project folder like `Practice/Solution/`?
 
-## Official Microsoft Learn links
+## 📚 Official Microsoft Learn links
 
 - [Dependency injection in .NET](https://learn.microsoft.com/dotnet/core/extensions/dependency-injection)
 - [Standard input, output, and error streams](https://learn.microsoft.com/dotnet/api/system.console.error)

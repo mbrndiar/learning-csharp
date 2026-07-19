@@ -67,6 +67,23 @@ That keeps persistence simple for beginners:
 - no external database
 - easy round-trip tests
 
+Readers allow delete sharing while they hold the existing file open. That lets
+an atomic same-directory move replace the path without invalidating a reader
+that already owns the previous file handle, including on Windows.
+
+## Date and clock boundaries
+
+- `DateOnly` represents a calendar date such as the day reading started. CLI
+  input accepts only invariant `yyyy-MM-dd` text.
+- `DateTimeOffset` represents a timeline instant such as when a record was
+  created; created timestamps use UTC.
+- `TimeSpan` represents a duration such as the CLI request timeout.
+
+`DateTimeOffset.UtcNow` is a system-clock read, so it is environment input.
+This capstone does not make exact current-time behavior part of an acceptance
+test. A system that did would inject `TimeProvider` so tests could control the
+clock.
+
 ## Configuration
 
 The API reads:

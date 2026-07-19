@@ -22,6 +22,7 @@ int pages = 205;
 decimal price = 9.95m;
 bool finished = false;
 string? optionalNote = null;
+int safeTotal = checked(pages + 10);
 
 if (pages > 200)
 {
@@ -53,6 +54,10 @@ foreach (string item in titles)
 }
 ```
 
+`checked` turns integral overflow into `OverflowException` instead of allowing a
+wrapped result. Floating-point `NaN` is a value, so validate it explicitly when
+a contract requires a finite number.
+
 ## Types
 
 ```csharp
@@ -64,8 +69,30 @@ public interface IBookStore
 }
 ```
 
+Arguments are passed by value by default. For a reference type such as
+`List<string>`, the copied value still points at the same object: mutating that
+object is visible to the caller, while assigning the parameter to a different
+list is not.
+
 Prefer immutable data when mutation has no clear owner. Validate at the
 boundary where invalid state enters.
+
+## Dates, instants, and durations
+
+```csharp
+using System.Globalization;
+
+DateOnly readingDay = DateOnly.ParseExact(
+    "2026-07-19",
+    "yyyy-MM-dd",
+    CultureInfo.InvariantCulture);
+DateTimeOffset createdAtUtc = DateTimeOffset.UtcNow;
+TimeSpan timeout = TimeSpan.FromSeconds(5);
+```
+
+Use `DateOnly` for a calendar date, `DateTimeOffset` for a timeline instant, and
+`TimeSpan` for elapsed or allowed duration. A clock read such as `UtcNow` is
+environment input; use `TimeProvider` when tests must control it.
 
 ## LINQ
 
