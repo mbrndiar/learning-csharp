@@ -100,6 +100,13 @@ Output folder pattern: bin/Debug/net10.0/
 - `dotnet run` is convenient while learning, but it still depends on a valid project.
 - `Debug` and `Release` are build **configurations**. They are separate output folders.
 
+The file-based samples in Units 01-05 deliberately do **not** commit
+`packages.lock.json`. They declare no external packages, while their virtual
+projects contain SDK-injected runtime packs whose exact patch and runtime
+identifier vary by installed SDK and operating system. Normal SDK projects
+remain locked; locking those generated file-app details would make an otherwise
+portable sample restore only on the machine that produced the lock.
+
 ## 🔤 NuGet in this unit
 NuGet is the package manager for .NET. In this unit's offline sample, we intentionally avoid external packages so the behavior stays deterministic. The command you will use later looks like this:
 

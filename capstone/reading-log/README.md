@@ -86,6 +86,8 @@ practiced the async I/O and HTTP boundaries that this CLI and API reuse.
 - The API is meant for **loopback use** (`127.0.0.1`), not public internet exposure.
 - Storage is a **single JSON file** in a configured application data folder.
 - File paths are **controlled by configuration**, not arbitrary user input.
+- One repository instance serializes file loads and saves; cross-process
+  multi-writer coordination remains out of scope.
 - The CLI uses a **finite timeout** and supports **cancellation**.
 - Request bodies and domain objects are **validated before saving**.
 - Malformed JSON storage data causes an **explicit error** instead of a silent fallback.

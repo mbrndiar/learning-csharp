@@ -87,6 +87,18 @@ internal static partial class VerificationApplication
             foreach (CourseSample sample in module.Samples)
             {
                 RequireFile(root, sample.Path);
+                if (sample.Path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
+                {
+                    string sampleDirectory = Path.GetDirectoryName(sample.Path)!;
+                    string lockFile = Path.Combine(root, sampleDirectory, "packages.lock.json");
+                    if (File.Exists(lockFile))
+                    {
+                        throw new InvalidDataException(
+                            $"File-based samples must not commit SDK- and OS-specific lock files: "
+                            + $"{Path.GetRelativePath(root, lockFile)}.");
+                    }
+                }
+
                 await RunSampleAsync(root, sample);
             }
         }

@@ -3,7 +3,7 @@ using ReadingLog.Core;
 
 namespace ReadingLog.Storage.Json;
 
-public sealed class JsonReadingLogRepository : IReadingLogRepository
+public sealed class JsonReadingLogRepository : IReadingLogRepository, IDisposable
 {
     private static readonly JsonSerializerOptions SerializerOptions = new(JsonSerializerDefaults.Web)
     {
@@ -12,6 +12,7 @@ public sealed class JsonReadingLogRepository : IReadingLogRepository
 
     private readonly string _storageDirectory;
     private readonly string _storageFilePath;
+    private readonly SemaphoreSlim _gate = new(1, 1);
 
     public JsonReadingLogRepository(JsonReadingLogRepositoryOptions options)
     {
@@ -39,7 +40,22 @@ public sealed class JsonReadingLogRepository : IReadingLogRepository
 
     public string StorageFilePath => _storageFilePath;
 
+    public void Dispose() => _gate.Dispose();
+
     public async Task<ReadingLogSnapshot> LoadAsync(CancellationToken cancellationToken)
+    {
+        await _gate.WaitAsync(cancellationToken);
+        try
+        {
+            return await LoadCoreAsync(cancellationToken);
+        }
+        finally
+        {
+            _gate.Release();
+        }
+    }
+
+    private async Task<ReadingLogSnapshot> LoadCoreAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
 
@@ -94,6 +110,20 @@ public sealed class JsonReadingLogRepository : IReadingLogRepository
     public async Task SaveAsync(ReadingLogSnapshot snapshot, CancellationToken cancellationToken)
     {
         ArgumentNullException.ThrowIfNull(snapshot);
+
+        await _gate.WaitAsync(cancellationToken);
+        try
+        {
+            await SaveCoreAsync(snapshot, cancellationToken);
+        }
+        finally
+        {
+            _gate.Release();
+        }
+    }
+
+    private async Task SaveCoreAsync(ReadingLogSnapshot snapshot, CancellationToken cancellationToken)
+    {
         ReadingLogValidation.ValidateSnapshot(snapshot);
         cancellationToken.ThrowIfCancellationRequested();
         Directory.CreateDirectory(_storageDirectory);

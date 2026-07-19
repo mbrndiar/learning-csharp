@@ -71,6 +71,11 @@ Readers allow delete sharing while they hold the existing file open. That lets
 an atomic same-directory move replace the path without invalidating a reader
 that already owns the previous file handle, including on Windows.
 
+One repository instance also serializes its load and save operations. That
+keeps an in-process API request from replacing the file while another request is
+still reading it. This is not multi-writer coordination across processes or
+machines; that production concern remains outside the capstone.
+
 ## Date and clock boundaries
 
 - `DateOnly` represents a calendar date such as the day reading started. CLI
