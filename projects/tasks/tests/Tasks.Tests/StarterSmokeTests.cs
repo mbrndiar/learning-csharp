@@ -1,9 +1,9 @@
-using Tasks.Api;
 using Tasks.Client;
 using Tasks.Core;
-using Tasks.Core.Hosting;
-using Tasks.Server;
-using Tasks.Storage;
+using Tasks.Server.Configuration;
+using Tasks.Server.Middleware;
+using Tasks.Server.MinimalApi;
+using Tasks.Server.Persistence;
 using Tasks.Tests.Support;
 
 namespace Tasks.Tests;

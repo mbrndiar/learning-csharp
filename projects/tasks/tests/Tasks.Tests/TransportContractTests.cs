@@ -1,6 +1,6 @@
 using Tasks.Client;
-using Tasks.Core.Hosting;
-using Tasks.Storage;
+using Tasks.Server.Configuration;
+using Tasks.Server.Persistence;
 
 namespace Tasks.Tests;
 

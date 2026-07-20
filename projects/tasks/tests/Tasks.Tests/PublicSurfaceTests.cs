@@ -1,11 +1,11 @@
 using System.Reflection;
-using Tasks.Api;
 using Tasks.Client;
 using Tasks.Core;
-using Tasks.Core.Hosting;
-using Tasks.Core.Http;
-using Tasks.Server;
-using Tasks.Storage;
+using Tasks.Http;
+using Tasks.Server.Configuration;
+using Tasks.Server.Middleware;
+using Tasks.Server.MinimalApi;
+using Tasks.Server.Persistence;
 
 namespace Tasks.Tests;
 

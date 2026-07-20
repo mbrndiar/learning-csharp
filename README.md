@@ -189,7 +189,10 @@ surfaces and current delivery state.
 
 The required [Tasks project](projects/tasks/) first combines the Task domain,
 SQLite and versioned Markdown repositories, low-level middleware and Minimal API
-servers, raw and typed HttpClient transports, and one CLI contract.
+servers, raw and typed HttpClient transports, and one CLI contract. Its
+seven-project topology separates domain Core, shared HTTP protocol,
+server-side infrastructure, leaf server adapters, reusable client logic, and
+the CLI process host.
 
 Then complete both [capstones](capstones/):
 
@@ -215,6 +218,10 @@ the lessons and Tasks bridge.
   operations, and no credentials.
 - Educational comments explain a boundary, trade-off, or surprising behavior;
   they do not narrate obvious syntax.
+- Applied project and capstone starter/solution code uses one top-level type per
+  matching `.cs` file (apart from entry points, deliberate partial files, and
+  private nested implementation details). Lessons may co-locate tiny related
+  types when that materially improves the teaching narrative.
 
 ## 🔭 Scope and next steps
 

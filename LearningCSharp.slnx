@@ -244,21 +244,33 @@
   </Folder>
   <Folder Name="/projects/" />
   <Folder Name="/projects/tasks/" />
-  <Folder Name="/projects/tasks/solution/">
-    <Project Path="projects/tasks/solution/Tasks.Api/Tasks.Api.csproj" />
-    <Project Path="projects/tasks/solution/Tasks.Cli/Tasks.Cli.csproj" />
-    <Project Path="projects/tasks/solution/Tasks.Client/Tasks.Client.csproj" />
-    <Project Path="projects/tasks/solution/Tasks.Core/Tasks.Core.csproj" />
-    <Project Path="projects/tasks/solution/Tasks.Server/Tasks.Server.csproj" />
-    <Project Path="projects/tasks/solution/Tasks.Storage/Tasks.Storage.csproj" />
+  <Folder Name="/projects/tasks/solution/" />
+  <Folder Name="/projects/tasks/solution/client/">
+    <Project Path="projects/tasks/solution/client/Tasks.Cli/Tasks.Cli.csproj" />
+    <Project Path="projects/tasks/solution/client/Tasks.Client/Tasks.Client.csproj" />
   </Folder>
-  <Folder Name="/projects/tasks/starter/">
-    <Project Path="projects/tasks/starter/Tasks.Api/Tasks.Api.csproj" />
-    <Project Path="projects/tasks/starter/Tasks.Cli/Tasks.Cli.csproj" />
-    <Project Path="projects/tasks/starter/Tasks.Client/Tasks.Client.csproj" />
-    <Project Path="projects/tasks/starter/Tasks.Core/Tasks.Core.csproj" />
-    <Project Path="projects/tasks/starter/Tasks.Server/Tasks.Server.csproj" />
-    <Project Path="projects/tasks/starter/Tasks.Storage/Tasks.Storage.csproj" />
+  <Folder Name="/projects/tasks/solution/server/">
+    <Project Path="projects/tasks/solution/server/Tasks.Server.Middleware/Tasks.Server.Middleware.csproj" />
+    <Project Path="projects/tasks/solution/server/Tasks.Server.MinimalApi/Tasks.Server.MinimalApi.csproj" />
+    <Project Path="projects/tasks/solution/server/Tasks.Server/Tasks.Server.csproj" />
+  </Folder>
+  <Folder Name="/projects/tasks/solution/shared/">
+    <Project Path="projects/tasks/solution/shared/Tasks.Core/Tasks.Core.csproj" />
+    <Project Path="projects/tasks/solution/shared/Tasks.Http/Tasks.Http.csproj" />
+  </Folder>
+  <Folder Name="/projects/tasks/starter/" />
+  <Folder Name="/projects/tasks/starter/client/">
+    <Project Path="projects/tasks/starter/client/Tasks.Cli/Tasks.Cli.csproj" />
+    <Project Path="projects/tasks/starter/client/Tasks.Client/Tasks.Client.csproj" />
+  </Folder>
+  <Folder Name="/projects/tasks/starter/server/">
+    <Project Path="projects/tasks/starter/server/Tasks.Server.Middleware/Tasks.Server.Middleware.csproj" />
+    <Project Path="projects/tasks/starter/server/Tasks.Server.MinimalApi/Tasks.Server.MinimalApi.csproj" />
+    <Project Path="projects/tasks/starter/server/Tasks.Server/Tasks.Server.csproj" />
+  </Folder>
+  <Folder Name="/projects/tasks/starter/shared/">
+    <Project Path="projects/tasks/starter/shared/Tasks.Core/Tasks.Core.csproj" />
+    <Project Path="projects/tasks/starter/shared/Tasks.Http/Tasks.Http.csproj" />
   </Folder>
   <Folder Name="/projects/tasks/tests/">
     <Project Path="projects/tasks/tests/Tasks.Tests/Tasks.Tests.csproj" />

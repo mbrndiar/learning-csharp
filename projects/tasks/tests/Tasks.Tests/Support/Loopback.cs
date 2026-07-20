@@ -5,10 +5,10 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
-using Tasks.Api;
 using Tasks.Client;
 using Tasks.Core;
-using Tasks.Server;
+using Tasks.Server.Middleware;
+using Tasks.Server.MinimalApi;
 
 namespace Tasks.Tests.Support;
 

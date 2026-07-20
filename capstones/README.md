@@ -5,6 +5,11 @@ project](../projects/tasks/README.md). Each track has a compileable guided
 starter, a complete reference solution, shared milestone tests, and an
 independent coverage gate.
 
+Both starter/solution trees use one top-level public or internal type per
+matching `.cs` file, apart from entry points, deliberate partial files, and
+private nested implementation details. Capstones model reference-application
+discoverability; lessons retain a pedagogical exception for tiny related types.
+
 ## 🔁 Comparative track
 
 [`comparative/`](comparative/README.md) implements the frozen cross-language

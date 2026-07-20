@@ -3,9 +3,9 @@ using Microsoft.OpenApi;
 using Microsoft.OpenApi.Reader;
 using Tasks.Client;
 using Tasks.Core;
-using Tasks.Core.Hosting;
-using Tasks.Core.Http;
-using Tasks.Storage;
+using Tasks.Http;
+using Tasks.Server.Configuration;
+using Tasks.Server.Persistence;
 using Tasks.Tests.Support;
 
 namespace Tasks.Tests;

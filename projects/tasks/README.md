@@ -35,18 +35,23 @@ but do not replace the written contract.
 
 ## 🏗️ Architecture and data flow
 
-Both source roots expose the same six projects; dependencies point inward toward
+Both source roots expose the same seven projects; dependencies point inward toward
 the framework-neutral core.
 
 ```text
 projects/tasks/{starter,solution}/
-├── Tasks.Core      # Task value, validation, service, ITaskRepository,
-│                   # shared HTTP boundary policy, launcher settings
-├── Tasks.Storage   # SqliteTaskRepository + MarkdownTaskRepository + factory
-├── Tasks.Server    # low-level RequestDelegate/middleware server (host)
-├── Tasks.Api       # Minimal API server (host)
-├── Tasks.Client    # transport contract + raw & typed transports + CLI app
-└── Tasks.Cli       # command-line host (selects a transport)
+├── shared/
+│   ├── Tasks.Core              # Task value, validation, service, ITaskRepository,
+│   │                           # Maybe<T> sentinel, and domain errors
+│   └── Tasks.Http              # shared, framework-neutral HTTP boundary policy
+│                               # (routing, decoding, error → envelope, serialization)
+├── server/
+│   ├── Tasks.Server            # launcher settings + SQLite & Markdown repositories + factory
+│   ├── Tasks.Server.Middleware # low-level RequestDelegate/middleware server (host)
+│   └── Tasks.Server.MinimalApi # Minimal API server (host)
+└── client/
+    ├── Tasks.Client            # transport contract + raw & typed transports + CLI app
+    └── Tasks.Cli               # command-line host (selects a transport)
 ```
 
 ```text
@@ -58,10 +63,13 @@ CLI args ─▶ ClientApplication ─▶ ITaskTransport ═══ HTTP/JSON ═�
                                                        ITaskRepository (SQLite | Markdown)
 ```
 
-- `Tasks.Core` owns the `TaskItem` value, validation, the application service,
-  the repository interface, the shared HTTP contract helpers (routing, strict
-  request decoding, error → envelope mapping, serialization), and launcher
-  settings. It never references an HTTP server or client library.
+- `Tasks.Core` owns the `TaskItem` value, validation, the application service, the
+  repository interface, the `Maybe<T>` sentinel, and the domain errors. `Tasks.Http`
+  owns the shared HTTP contract helpers (routing, strict request decoding,
+  error → envelope mapping, serialization). `Tasks.Server` owns the launcher
+  settings and both repositories. The `Tasks.Core` and `Tasks.Http` libraries never
+  reference an HTTP server or client library, and the servers and clients depend
+  inward on these shared projects rather than on each other.
 - `ITaskRepository` is asynchronous because the Markdown adapter performs real
   async file I/O and the HTTP hosts compose asynchronous request pipelines. The
   SQLite adapter keeps that common async-shaped interface and calls
@@ -74,6 +82,11 @@ CLI args ─▶ ClientApplication ─▶ ITaskTransport ═══ HTTP/JSON ═�
   never used to mean "omitted".
 - Every client works with every server. The two transports and two servers are
   **comparisons, not pairings**.
+- Starter and solution source use one top-level public/internal type per matching
+  `.cs` file. Entry-point `Program.cs`, deliberate partial files, and short
+  private nested implementation details are the only exceptions. This keeps the
+  reference application searchable without forcing the same file-hopping rule
+  onto small pedagogical lesson fragments.
 
 ## 🚀 Exact commands
 
@@ -108,7 +121,7 @@ dotnet test projects/tasks/tests/Tasks.Tests \
 ```
 
 Measure and gate solution branch coverage. The collector is scoped by
-`coverage.runsettings` to the five behavior assemblies; CourseVerifier enforces
+`coverage.runsettings` to the six behavior assemblies; CourseVerifier enforces
 the **≥ 85 %** threshold independently:
 
 ```bash
@@ -125,11 +138,11 @@ Start either server with either persistence backend (loopback only):
 
 ```bash
 mkdir -p projects/tasks/.test-data/run
-dotnet run --project projects/tasks/solution/Tasks.Server -- \
+dotnet run --project projects/tasks/solution/server/Tasks.Server.Middleware -- \
   --host 127.0.0.1 --port 8000 --backend sqlite \
   --data projects/tasks/.test-data/run/tasks.db
 
-dotnet run --project projects/tasks/solution/Tasks.Api -- \
+dotnet run --project projects/tasks/solution/server/Tasks.Server.MinimalApi -- \
   --host 127.0.0.1 --port 8000 --backend markdown \
   --data projects/tasks/.test-data/run/tasks.md
 ```
@@ -141,13 +154,13 @@ Then use any client, regardless of which server is running (`--transport`
 selects `raw` or `typed`, default `raw`):
 
 ```bash
-dotnet run --project projects/tasks/solution/Tasks.Cli -- \
+dotnet run --project projects/tasks/solution/client/Tasks.Cli -- \
   --transport raw   --base-url http://127.0.0.1:8000 add "Learn REST"
 
-dotnet run --project projects/tasks/solution/Tasks.Cli -- \
+dotnet run --project projects/tasks/solution/client/Tasks.Cli -- \
   --transport typed --base-url http://127.0.0.1:8000 list --completed false
 
-dotnet run --project projects/tasks/solution/Tasks.Cli -- \
+dotnet run --project projects/tasks/solution/client/Tasks.Cli -- \
   --transport typed --base-url http://127.0.0.1:8000 complete 1
 ```
 
@@ -185,8 +198,8 @@ whitelists that one type.
 
 | Boundary | Makes explicit | Provides |
 | --- | --- | --- |
-| `Tasks.Server` (low-level) | Routing, byte decoding, content length, JSON serialization, headers, status selection, and lifecycle | One terminal `RequestDelegate` over the shared service |
-| `Tasks.Api` (Minimal API) | Typed results and DI at the endpoint boundary | `MapX` routing, endpoint handlers, exception middleware, status-code pages, and OpenAPI-friendly metadata |
+| `Tasks.Server.Middleware` (low-level) | Routing, byte decoding, content length, JSON serialization, headers, status selection, and lifecycle | One terminal `RequestDelegate` over the shared service |
+| `Tasks.Server.MinimalApi` (Minimal API) | Typed results and DI at the endpoint boundary | `MapX` routing, endpoint handlers, exception middleware, status-code pages, and OpenAPI-friendly metadata |
 | Raw transport | Request construction, encoding, response ownership, and status handling | An owned `HttpClient` + `SocketsHttpHandler` (no redirects, no proxy, finite timeout) |
 | Typed transport | Client lifetime, timeout, and default headers | A client resolved from `IHttpClientFactory` via `AddHttpClient<T>` |
 

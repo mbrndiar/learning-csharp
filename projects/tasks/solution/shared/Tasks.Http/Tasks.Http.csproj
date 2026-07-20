@@ -1,0 +1,10 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Tasks.Http</RootNamespace>
+    <AssemblyName>Tasks.Http</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Tasks.Core/Tasks.Core.csproj" />
+  </ItemGroup>
+</Project>

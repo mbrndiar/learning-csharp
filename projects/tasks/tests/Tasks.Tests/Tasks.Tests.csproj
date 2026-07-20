@@ -40,21 +40,23 @@
   </ItemGroup>
 
   <ItemGroup Condition="'$(CourseImplementation)' == 'Starter'">
-    <ProjectReference Include="../../starter/Tasks.Core/Tasks.Core.csproj" />
-    <ProjectReference Include="../../starter/Tasks.Storage/Tasks.Storage.csproj" />
-    <ProjectReference Include="../../starter/Tasks.Server/Tasks.Server.csproj" />
-    <ProjectReference Include="../../starter/Tasks.Api/Tasks.Api.csproj" />
-    <ProjectReference Include="../../starter/Tasks.Client/Tasks.Client.csproj" />
-    <ProjectReference Include="../../starter/Tasks.Cli/Tasks.Cli.csproj" />
+    <ProjectReference Include="../../starter/shared/Tasks.Core/Tasks.Core.csproj" />
+    <ProjectReference Include="../../starter/shared/Tasks.Http/Tasks.Http.csproj" />
+    <ProjectReference Include="../../starter/server/Tasks.Server/Tasks.Server.csproj" />
+    <ProjectReference Include="../../starter/server/Tasks.Server.Middleware/Tasks.Server.Middleware.csproj" />
+    <ProjectReference Include="../../starter/server/Tasks.Server.MinimalApi/Tasks.Server.MinimalApi.csproj" />
+    <ProjectReference Include="../../starter/client/Tasks.Client/Tasks.Client.csproj" />
+    <ProjectReference Include="../../starter/client/Tasks.Cli/Tasks.Cli.csproj" />
   </ItemGroup>
 
   <ItemGroup Condition="'$(CourseImplementation)' == 'Solution'">
-    <ProjectReference Include="../../solution/Tasks.Core/Tasks.Core.csproj" />
-    <ProjectReference Include="../../solution/Tasks.Storage/Tasks.Storage.csproj" />
-    <ProjectReference Include="../../solution/Tasks.Server/Tasks.Server.csproj" />
-    <ProjectReference Include="../../solution/Tasks.Api/Tasks.Api.csproj" />
-    <ProjectReference Include="../../solution/Tasks.Client/Tasks.Client.csproj" />
-    <ProjectReference Include="../../solution/Tasks.Cli/Tasks.Cli.csproj" />
+    <ProjectReference Include="../../solution/shared/Tasks.Core/Tasks.Core.csproj" />
+    <ProjectReference Include="../../solution/shared/Tasks.Http/Tasks.Http.csproj" />
+    <ProjectReference Include="../../solution/server/Tasks.Server/Tasks.Server.csproj" />
+    <ProjectReference Include="../../solution/server/Tasks.Server.Middleware/Tasks.Server.Middleware.csproj" />
+    <ProjectReference Include="../../solution/server/Tasks.Server.MinimalApi/Tasks.Server.MinimalApi.csproj" />
+    <ProjectReference Include="../../solution/client/Tasks.Client/Tasks.Client.csproj" />
+    <ProjectReference Include="../../solution/client/Tasks.Cli/Tasks.Cli.csproj" />
   </ItemGroup>
 
   <Target Name="ValidateTasksSelectors" BeforeTargets="ResolveReferences">

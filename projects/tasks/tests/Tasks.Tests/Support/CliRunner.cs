@@ -21,6 +21,7 @@ public static class TestPaths
     public static string CliAssembly(string implementation) => Path.Combine(
         TasksRoot,
         implementation.ToLowerInvariant(),
+        "client",
         "Tasks.Cli",
         "bin",
         BuildConfiguration,

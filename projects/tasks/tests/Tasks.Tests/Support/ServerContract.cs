@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Microsoft.Extensions.Logging;
 using Tasks.Core;
-using Tasks.Core.Http;
+using Tasks.Http;
 
 namespace Tasks.Tests.Support;
 

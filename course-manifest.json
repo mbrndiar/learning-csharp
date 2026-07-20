@@ -280,20 +280,22 @@
       "slug": "tasks",
       "guide": "projects/tasks/README.md",
       "starterProjects": [
-        "projects/tasks/starter/Tasks.Core/Tasks.Core.csproj",
-        "projects/tasks/starter/Tasks.Storage/Tasks.Storage.csproj",
-        "projects/tasks/starter/Tasks.Server/Tasks.Server.csproj",
-        "projects/tasks/starter/Tasks.Api/Tasks.Api.csproj",
-        "projects/tasks/starter/Tasks.Client/Tasks.Client.csproj",
-        "projects/tasks/starter/Tasks.Cli/Tasks.Cli.csproj"
+        "projects/tasks/starter/shared/Tasks.Core/Tasks.Core.csproj",
+        "projects/tasks/starter/shared/Tasks.Http/Tasks.Http.csproj",
+        "projects/tasks/starter/server/Tasks.Server/Tasks.Server.csproj",
+        "projects/tasks/starter/server/Tasks.Server.Middleware/Tasks.Server.Middleware.csproj",
+        "projects/tasks/starter/server/Tasks.Server.MinimalApi/Tasks.Server.MinimalApi.csproj",
+        "projects/tasks/starter/client/Tasks.Client/Tasks.Client.csproj",
+        "projects/tasks/starter/client/Tasks.Cli/Tasks.Cli.csproj"
       ],
       "solutionProjects": [
-        "projects/tasks/solution/Tasks.Core/Tasks.Core.csproj",
-        "projects/tasks/solution/Tasks.Storage/Tasks.Storage.csproj",
-        "projects/tasks/solution/Tasks.Server/Tasks.Server.csproj",
-        "projects/tasks/solution/Tasks.Api/Tasks.Api.csproj",
-        "projects/tasks/solution/Tasks.Client/Tasks.Client.csproj",
-        "projects/tasks/solution/Tasks.Cli/Tasks.Cli.csproj"
+        "projects/tasks/solution/shared/Tasks.Core/Tasks.Core.csproj",
+        "projects/tasks/solution/shared/Tasks.Http/Tasks.Http.csproj",
+        "projects/tasks/solution/server/Tasks.Server/Tasks.Server.csproj",
+        "projects/tasks/solution/server/Tasks.Server.Middleware/Tasks.Server.Middleware.csproj",
+        "projects/tasks/solution/server/Tasks.Server.MinimalApi/Tasks.Server.MinimalApi.csproj",
+        "projects/tasks/solution/client/Tasks.Client/Tasks.Client.csproj",
+        "projects/tasks/solution/client/Tasks.Cli/Tasks.Cli.csproj"
       ],
       "testProjects": ["projects/tasks/tests/Tasks.Tests/Tasks.Tests.csproj"]
     },

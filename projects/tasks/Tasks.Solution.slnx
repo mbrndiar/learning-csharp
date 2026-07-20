@@ -1,11 +1,12 @@
 <Solution>
   <Folder Name="/solution/">
-    <Project Path="solution/Tasks.Core/Tasks.Core.csproj" />
-    <Project Path="solution/Tasks.Storage/Tasks.Storage.csproj" />
-    <Project Path="solution/Tasks.Server/Tasks.Server.csproj" />
-    <Project Path="solution/Tasks.Api/Tasks.Api.csproj" />
-    <Project Path="solution/Tasks.Client/Tasks.Client.csproj" />
-    <Project Path="solution/Tasks.Cli/Tasks.Cli.csproj" />
+    <Project Path="solution/shared/Tasks.Core/Tasks.Core.csproj" />
+    <Project Path="solution/shared/Tasks.Http/Tasks.Http.csproj" />
+    <Project Path="solution/server/Tasks.Server/Tasks.Server.csproj" />
+    <Project Path="solution/server/Tasks.Server.Middleware/Tasks.Server.Middleware.csproj" />
+    <Project Path="solution/server/Tasks.Server.MinimalApi/Tasks.Server.MinimalApi.csproj" />
+    <Project Path="solution/client/Tasks.Client/Tasks.Client.csproj" />
+    <Project Path="solution/client/Tasks.Cli/Tasks.Cli.csproj" />
   </Folder>
   <Folder Name="/tests/">
     <Project Path="tests/Tasks.Tests/Tasks.Tests.csproj" />

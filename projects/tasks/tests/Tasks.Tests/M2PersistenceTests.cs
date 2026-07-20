@@ -1,6 +1,6 @@
 using System.Text;
 using Tasks.Core;
-using Tasks.Storage;
+using Tasks.Server.Persistence;
 using Tasks.Tests.Support;
 
 namespace Tasks.Tests;

@@ -26,22 +26,23 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 | Pedagogy and sequence | Conforms | Fifteen ordered `lessons/*/README.md` guides; [curriculum matrix](CURRICULUM_MATRIX.md); 21 manifest-run lesson artifacts; top-level test-driven exercises; SQL and low-level HTTP prerequisites before applied work. |
 | Repository roles | Conforms | Shared `lessons/`, `exercises/`, `projects/tasks/`, and `capstones/{comparative,idiomatic}` roles with indexes; [migration guide](STRUCTURE_MIGRATION.md); no legacy `course/`, `Practice/`, `Samples/`, singular `capstone/`, or top-level `examples/` role. |
 | Integrity and completeness | Conforms locally | `course-manifest.json` validates lesson/exercise/destination paths; CourseVerifier runs every declared lesson artifact, checks links/anchors and README presentation, rejects legacy roles, verifies 15 intentionally-red lesson starters, and runs three destination starter smokes. |
-| Idiomaticity and currency | Conforms | SDK-style projects and `.slnx`; nullable analysis/analyzers; central package management and locks; .NET packages at 10.0.10; `Microsoft.Data.Sqlite` 10.0.10 with centrally pinned patched SQLitePCLRaw 2.1.12; Microsoft.OpenApi 3.9.0; xUnit v3/MTP v2. |
-| Lifecycle and environments | Conforms locally; remote matrix pending | Locked restore, format verification, Release build, 465 solution-selected tests, lesson execution, starter checks, three coverage gates, OpenAPI/spec checks, links, and audit configuration share the manual `.github/workflows/course.yml` commands. The final three-OS manual run remains delivery evidence to obtain. |
-| Projects and capstones | Conforms locally | Tasks has SQLite/Markdown stores, middleware/Minimal API servers, raw/typed clients, 2x2 interoperability, red milestones, and independent coverage. Comparative preserves frozen `comparative-kv` fixtures plus real processes. Idiomatic preserves Reading Log's JSON/HTTP/CLI behavior. |
+| Idiomaticity and currency | Conforms | SDK-style projects and `.slnx`; nullable analysis/analyzers; central package management and locks; .NET packages at 10.0.10, Microsoft.OpenApi 3.9.0, patched SQLitePCLRaw 2.1.12, and xUnit v3/MTP v2; applied trees enforce one top-level type per matching file; Tasks separates Core, HTTP protocol, server infrastructure/adapters, client, and CLI. |
+| Lifecycle and environments | Conforms locally; remote matrix deliberately deferred | Locked restore, format verification, Release build, 465 solution-selected tests, lesson execution, starter checks, three coverage gates, OpenAPI/spec checks, links, and audit configuration share the manual `.github/workflows/course.yml` commands. Per user instruction, the workflow remains manual-only and undispatched. |
+| Projects and capstones | Conforms locally | Tasks uses seven inward-pointing projects: Core + HTTP contract, shared server persistence/configuration, two leaf server adapters, reusable client, and CLI host. Comparative preserves frozen `comparative-kv` fixtures/processes. Idiomatic preserves Reading Log behavior. All three applied trees use one top-level type per file. |
 | Refinement and validation | Conforms locally | The role migration is evidence-backed across all sibling repositories, adapted to .NET rather than copied mechanically, and validated by change class. One final mixed read-only review remains required after the complete diff is staged. |
 | Git and delivery | Pending final delivery | Validated milestone commits use required trailers and push to `origin/main`. The final structural migration commit/range and remote manual workflow conclusion remain to be recorded. |
 | Evidence transfer | Conforms | Sibling repositories established the shared role invariant; C# paths, projects, packages, adapter comparison, SQLite APIs, test selection, and capstone implementations are target-specific and self-contained. |
 
 ## Local validation baseline
 
-- locked restore for 101 projects;
+- locked restore for 103 projects;
 - formatting verification and Release build with zero warnings/errors;
 - 465 passing solution-selected MTP tests, zero failures/skips;
 - 15 lesson starters compile and report focused intentional failures;
 - 3 project/capstone starter smoke suites pass;
 - 15 lessons, 21 independently executed runnables, 3 applied destinations,
-  25 formatted READMEs, 133 local links/anchors, and 102 external links;
+  251 structurally checked applied source files, 25 formatted READMEs,
+  133 local links/anchors, and 102 external links;
 - Tasks: 182 tests and 87.2% branch coverage;
 - comparative capstone: 38 tests, frozen manifest/fixtures, real-process checks,
   and 91.2% branch coverage;
@@ -61,6 +62,13 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 - Tasks compares low-level ASP.NET Core middleware with Minimal APIs and raw
   HttpClient ownership with typed `IHttpClientFactory` clients. Minimal APIs and
   typed clients remain the preferred normal application defaults.
+- Tasks keeps wire/routing/serialization behavior in `Tasks.Http`, domain and
+  application rules in `Tasks.Core`, persistence/configuration in shared
+  `Tasks.Server`, HTTP adapters in leaf server executables, and process concerns
+  in `Tasks.Cli`.
+- One top-level type per matching file is enforced for applied project/capstone
+  starter and solution code. Lessons/exercises retain a pedagogical exception
+  when co-locating tiny types materially improves comprehension.
 - OpenAPI documents are independent checked-in evidence parsed with maintained
   Microsoft.OpenApi; runtime tests remain necessary because schemas cannot prove
   behavior, lifecycle, concurrency, or cleanup.
@@ -73,12 +81,11 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 
 ## Final review and delivery gate
 
-Exactly one read-only mixed review inspected the complete staged migration for
-correctness, prerequisite safety, starter/solution boundaries, solution
-leakage, unsupported conformance claims, and generated artifacts. It found no
-blocker. Its two consistency findings are resolved: Tasks now explains why its
-shared async-shaped repository interface does not make SQLite I/O asynchronous,
-and the learner entry point no longer claims the pending three-OS manual run has
-already completed. Stale pre-migration learner-ignore paths were also removed.
-Affected documentation and link checks were repeated without a second final
-review; the executable baseline above was unchanged.
+Exactly one read-only mixed review inspected the staged Tasks/capstone
+architecture and type/file refactor. It found no blocker and independently
+confirmed inward project dependencies, starter/solution parity, unchanged
+observable contracts, capstone fixture integrity, the structural source gate,
+root wiring, and coverage scopes. Its one documentation suggestion is resolved
+by retaining concrete package-version evidence in the conformance summary.
+Affected documentation and link checks were repeated without a second review;
+the executable baseline above was unchanged.

@@ -2,15 +2,6 @@ using System.Collections.ObjectModel;
 
 namespace ComparativeKv.Core;
 
-public enum KvExitCode
-{
-    Success = 0,
-    Validation = 2,
-    Conflict = 3,
-    NotFound = 4,
-    Storage = 5,
-}
-
 public sealed class KvException : Exception
 {
     public KvException(string category, IReadOnlyDictionary<string, object?> details, KvExitCode exitCode)
@@ -105,19 +96,4 @@ public sealed class KvException : Exception
             "storage_error",
             new Dictionary<string, object?> { ["operation"] = operation, ["reason"] = "storage_failure" },
             KvExitCode.Storage);
-}
-
-public sealed class MilestoneIncompleteException : NotImplementedException
-{
-    public MilestoneIncompleteException(string feature)
-        : base($"{feature} is intentionally incomplete; implement the next milestone")
-    {
-    }
-}
-
-public static class MilestoneIncomplete
-{
-    public static void Throw(string feature) => throw new MilestoneIncompleteException(feature);
-
-    public static T Throw<T>(string feature) => throw new MilestoneIncompleteException(feature);
 }

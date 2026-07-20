@@ -472,13 +472,6 @@
           "xunit.v3.runner.common": "[3.2.2]"
         }
       },
-      "tasks.api": {
-        "type": "Project",
-        "dependencies": {
-          "Tasks.Core": "[1.0.0, )",
-          "Tasks.Storage": "[1.0.0, )"
-        }
-      },
       "tasks.cli": {
         "type": "Project",
         "dependencies": {
@@ -489,24 +482,40 @@
         "type": "Project",
         "dependencies": {
           "Microsoft.Extensions.Http": "[10.0.10, )",
-          "Tasks.Core": "[1.0.0, )"
+          "Tasks.Core": "[1.0.0, )",
+          "Tasks.Http": "[1.0.0, )"
         }
       },
       "tasks.core": {
         "type": "Project"
       },
-      "tasks.server": {
+      "tasks.http": {
         "type": "Project",
         "dependencies": {
-          "Tasks.Core": "[1.0.0, )",
-          "Tasks.Storage": "[1.0.0, )"
+          "Tasks.Core": "[1.0.0, )"
         }
       },
-      "tasks.storage": {
+      "tasks.server": {
         "type": "Project",
         "dependencies": {
           "Microsoft.Data.Sqlite": "[10.0.10, )",
           "Tasks.Core": "[1.0.0, )"
+        }
+      },
+      "tasks.server.middleware": {
+        "type": "Project",
+        "dependencies": {
+          "Tasks.Core": "[1.0.0, )",
+          "Tasks.Http": "[1.0.0, )",
+          "Tasks.Server": "[1.0.0, )"
+        }
+      },
+      "tasks.server.minimalapi": {
+        "type": "Project",
+        "dependencies": {
+          "Tasks.Core": "[1.0.0, )",
+          "Tasks.Http": "[1.0.0, )",
+          "Tasks.Server": "[1.0.0, )"
         }
       },
       "Microsoft.Data.Sqlite": {

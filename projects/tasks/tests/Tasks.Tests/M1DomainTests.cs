@@ -113,7 +113,7 @@ public sealed class M1DomainTests
         Maybe<bool> set = false;
         Assert.True(set.HasValue);
         Assert.False(set.Value);
-        Assert.Equal(Maybe.Of(false), set);
+        Assert.Equal(MaybeFactory.Of(false), set);
         Assert.NotEqual(unset, set);
     }
 

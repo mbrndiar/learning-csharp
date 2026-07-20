@@ -1,7 +1,7 @@
 using System.Text.Json;
 using Tasks.Core;
-using Tasks.Core.Hosting;
-using Tasks.Core.Http;
+using Tasks.Http;
+using Tasks.Server.Configuration;
 
 namespace Tasks.Tests;
 
@@ -26,13 +26,13 @@ public sealed class CoreContractTests
         Assert.Equal("x", value);
         Assert.Equal("x", set.Value);
 
-        Assert.True(set == Maybe.Of("x"));
+        Assert.True(set == MaybeFactory.Of("x"));
         Assert.True(set != unset);
         Assert.False(set.Equals(unset));
-        Assert.True(set.Equals((object)Maybe.Of("x")));
+        Assert.True(set.Equals((object)MaybeFactory.Of("x")));
         Assert.False(set.Equals("not a maybe"));
-        Assert.Equal(Maybe.Of("x").GetHashCode(), set.GetHashCode());
-        Assert.Equal(Maybe.None<string>(), unset);
+        Assert.Equal(MaybeFactory.Of("x").GetHashCode(), set.GetHashCode());
+        Assert.Equal(MaybeFactory.None<string>(), unset);
     }
 
     [Theory]

@@ -125,12 +125,14 @@ internal static partial class VerificationApplication
             }
         }
 
+        int appliedSourceCount = VerifyAppliedSourceLayout(root);
         int readmeCount = VerifyReadmePresentation(root);
         int linkCount = VerifyMarkdownLinks(root);
         Console.WriteLine(
             $"Verified {manifest.Lessons.Count} lessons, "
             + $"{manifest.Lessons.Sum(lesson => lesson.Runnables.Count)} runnables, "
             + $"{manifest.Destinations.Count} applied destinations, "
+            + $"{appliedSourceCount} applied source files, "
             + $"{readmeCount} formatted READMEs, "
             + $"and {linkCount} local Markdown links.");
         return 0;
@@ -355,6 +357,73 @@ internal static partial class VerificationApplication
         }
 
         return readmePaths.Length;
+    }
+
+    private static int VerifyAppliedSourceLayout(string root)
+    {
+        string[] sourceRoots =
+        [
+            "projects/tasks/starter",
+            "projects/tasks/solution",
+            "capstones/comparative/starter",
+            "capstones/comparative/solution",
+            "capstones/idiomatic/starter",
+            "capstones/idiomatic/solution",
+        ];
+        int checkedFiles = 0;
+
+        foreach (string sourceRoot in sourceRoots)
+        {
+            string absoluteRoot = Path.Combine(root, sourceRoot);
+            if (!Directory.Exists(absoluteRoot))
+            {
+                throw new InvalidDataException($"Applied source root is missing: {sourceRoot}.");
+            }
+
+            foreach (string sourcePath in Directory.EnumerateFiles(
+                         absoluteRoot,
+                         "*.cs",
+                         SearchOption.AllDirectories))
+            {
+                if (IsGeneratedPath(sourcePath))
+                {
+                    continue;
+                }
+
+                checkedFiles++;
+                string source = File.ReadAllText(sourcePath);
+                Match[] declarations = TopLevelTypePattern().Matches(source).Cast<Match>().ToArray();
+                string relativePath = Path.GetRelativePath(root, sourcePath);
+                if (declarations.Length > 1)
+                {
+                    throw new InvalidDataException(
+                        $"{relativePath} declares multiple top-level types: "
+                        + string.Join(", ", declarations.Select(match => match.Groups["name"].Value)));
+                }
+
+                if (declarations.Length == 0)
+                {
+                    if (!string.Equals(Path.GetFileName(sourcePath), "Program.cs", StringComparison.Ordinal))
+                    {
+                        throw new InvalidDataException(
+                            $"{relativePath} must declare one top-level type or be Program.cs.");
+                    }
+
+                    continue;
+                }
+
+                string typeName = declarations[0].Groups["name"].Value;
+                string fileName = Path.GetFileNameWithoutExtension(sourcePath);
+                if (!string.Equals(fileName, typeName, StringComparison.Ordinal)
+                    && !fileName.StartsWith(typeName + ".", StringComparison.Ordinal))
+                {
+                    throw new InvalidDataException(
+                        $"{relativePath} must match its top-level type '{typeName}'.");
+                }
+            }
+        }
+
+        return checkedFiles;
     }
 
     private static bool StartsWithEmoji(string value)
@@ -719,6 +788,11 @@ internal static partial class VerificationApplication
 
     [GeneratedRegex(@"<[^>]+>")]
     private static partial Regex InlineHtmlPattern();
+
+    [GeneratedRegex(
+        @"^(?:(?:public|internal)\s+)?(?:(?:sealed|static|abstract|readonly|partial)\s+)*(?:delegate\s+[A-Za-z_][A-Za-z0-9_<>,?.\[\]]*\s+(?<name>[A-Za-z_][A-Za-z0-9_]*)|(?:class|record(?:\s+(?:class|struct))?|interface|enum|struct)\s+(?<name>[A-Za-z_][A-Za-z0-9_]*))",
+        RegexOptions.Multiline)]
+    private static partial Regex TopLevelTypePattern();
 
     [GeneratedRegex(@"\s+#+\s*$")]
     private static partial Regex ClosingHeadingMarkerPattern();
