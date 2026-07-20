@@ -1,0 +1,11 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Tasks.Cli</RootNamespace>
+    <AssemblyName>Tasks.Cli</AssemblyName>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Tasks.Client/Tasks.Client.csproj" />
+  </ItemGroup>
+</Project>

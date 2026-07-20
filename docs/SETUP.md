@@ -57,10 +57,10 @@ The first restore creates local NuGet caches. Later validation uses
 dotnet restore LearningCSharp.slnx --locked-mode
 ```
 
-## 5. Run the first sample
+## 5. Run the first lesson
 
 ```console
-dotnet course/01-first-program/Samples/hello-first-program.cs
+dotnet lessons/01_first_program/01_hello_first_program.cs
 ```
 
 File-based apps are compiled C# programs. .NET generates temporary project
@@ -79,10 +79,10 @@ hide required build or test steps.
 
 ## Daily workflow
 
-Run the smallest relevant sample or test first. For example:
+Run the smallest relevant lesson or test first. For example:
 
 ```console
-dotnet test --project course/07-modeling-data-and-behavior/Practice/Tests/ModelingDataBehaviorPractice.Tests.csproj
+dotnet test --project exercises/07_modeling_data_and_behavior/tests/ModelingDataBehaviorPractice.Tests.csproj
 ```
 
 Then widen the checks:
@@ -92,11 +92,12 @@ dotnet format LearningCSharp.slnx
 dotnet build LearningCSharp.slnx --configuration Release
 dotnet test --solution LearningCSharp.slnx --configuration Release
 dotnet run --project tools/CourseVerifier -- verify
+dotnet run --project tools/CourseVerifier -- starters
 ```
 
-`dotnet format` modifies files. CI uses `--verify-no-changes` to prove formatting
-was already applied. Review formatter changes; formatting is not a behavior
-test.
+`dotnet format` modifies files. The validation workflow uses
+`--verify-no-changes` to prove formatting was already applied. Review formatter
+changes; formatting is not a behavior test.
 
 Build output is generated under `bin/` and `obj/`. It is ignored by Git and can
 be removed safely with:
@@ -105,12 +106,12 @@ be removed safely with:
 dotnet clean LearningCSharp.slnx
 ```
 
-## Run starter feedback
+## Run exercise starter feedback
 
-Practice tests target the reference solution by default. Select the starter:
+Exercise tests target the reference solution by default. Select the starter:
 
 ```console
-dotnet test --project course/09-linq-and-transformations/Practice/Tests/LinqTransformationsPractice.Tests.csproj \
+dotnet test --project exercises/09_linq_and_transformations/tests/LinqTransformationsPractice.Tests.csproj \
   -p:CourseImplementation=Starter
 ```
 

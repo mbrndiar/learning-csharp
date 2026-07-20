@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="ComparativeKv.Core/ComparativeKv.Core.csproj" />
+  <Project Path="ComparativeKv.Application/ComparativeKv.Application.csproj" />
+  <Project Path="ComparativeKv.Storage.Sqlite/ComparativeKv.Storage.Sqlite.csproj" />
+  <Project Path="ComparativeKv.Cli/ComparativeKv.Cli.csproj" />
+</Solution>

@@ -138,6 +138,36 @@ Async methods performing I/O conventionally end in `Async`. Pass
 `CancellationToken` to the operation that can stop; do not merely check it once
 at the entry point.
 
+## SQLite with Microsoft.Data.Sqlite
+
+```csharp
+using Microsoft.Data.Sqlite;
+
+using var connection = new SqliteConnection($"Data Source={databasePath}");
+connection.Open();
+
+using SqliteCommand command = connection.CreateCommand();
+command.CommandText = """
+    SELECT id, title
+    FROM tasks
+    WHERE completed = $completed
+    ORDER BY id;
+    """;
+command.Parameters.AddWithValue("$completed", 0);
+
+using SqliteDataReader reader = command.ExecuteReader();
+while (reader.Read())
+{
+    long id = reader.GetInt64(0);
+    string title = reader.GetString(1);
+}
+```
+
+Use named parameters instead of concatenating values into SQL. Own and dispose
+connections, commands, readers, and transactions explicitly. Microsoft.Data.Sqlite
+executes its ADO.NET async methods synchronously because SQLite has no
+asynchronous I/O; do not wrap database calls in `Task.Run` to pretend otherwise.
+
 ## Tests
 
 ```csharp

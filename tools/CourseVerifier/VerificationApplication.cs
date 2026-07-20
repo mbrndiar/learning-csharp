@@ -12,6 +12,15 @@ internal static partial class VerificationApplication
 {
     private static readonly JsonSerializerOptions ManifestJsonOptions =
         new(JsonSerializerDefaults.Web);
+    private static readonly string[] RequiredRoleIndexes =
+    [
+        "lessons/README.md",
+        "exercises/README.md",
+        "projects/README.md",
+        "capstones/README.md",
+    ];
+    private static readonly string[] LegacyTopLevelRoles = ["course", "capstone", "examples"];
+    private static readonly string[] InstructionalRoleRoots = ["lessons", "exercises"];
 
     public static async Task<int> RunAsync(string[] args)
     {
@@ -41,73 +50,87 @@ internal static partial class VerificationApplication
     {
         CourseManifest manifest = await LoadManifestAsync(root);
 
-        if (manifest.Modules.Count == 0)
+        if (manifest.Lessons.Count == 0)
         {
-            throw new InvalidDataException("The course manifest contains no modules.");
+            throw new InvalidDataException("The course manifest contains no lessons.");
         }
 
-        var duplicateOrders = manifest.Modules
-            .GroupBy(module => module.Order)
+        var duplicateOrders = manifest.Lessons
+            .GroupBy(lesson => lesson.Order)
             .Where(group => group.Count() > 1)
             .Select(group => group.Key)
             .ToArray();
         if (duplicateOrders.Length > 0)
         {
             throw new InvalidDataException(
-                $"Duplicate module orders: {string.Join(", ", duplicateOrders)}.");
+                $"Duplicate lesson orders: {string.Join(", ", duplicateOrders)}.");
         }
 
-        int[] expectedOrders = Enumerable.Range(1, manifest.Modules.Count).ToArray();
-        int[] actualOrders = manifest.Modules.Select(module => module.Order).Order().ToArray();
+        int[] expectedOrders = Enumerable.Range(1, manifest.Lessons.Count).ToArray();
+        int[] actualOrders = manifest.Lessons.Select(lesson => lesson.Order).Order().ToArray();
         if (!expectedOrders.SequenceEqual(actualOrders))
         {
             throw new InvalidDataException(
-                $"Module orders must be contiguous from 1 through {manifest.Modules.Count}.");
+                $"Lesson orders must be contiguous from 1 through {manifest.Lessons.Count}.");
         }
 
-        foreach (CourseModule module in manifest.Modules.OrderBy(module => module.Order))
+        VerifyRoleStructure(root);
+
+        foreach (CourseLesson lesson in manifest.Lessons.OrderBy(lesson => lesson.Order))
         {
-            if (module.StarterProjects.Count == 0
-                || module.SolutionProjects.Count == 0
-                || module.TestProjects.Count == 0
-                || module.Samples.Count == 0)
+            if (lesson.StarterProjects.Count == 0
+                || lesson.SolutionProjects.Count == 0
+                || lesson.TestProjects.Count == 0
+                || lesson.Runnables.Count == 0)
             {
                 throw new InvalidDataException(
-                    $"Module {module.Order:00} must declare starter, solution, test, and sample artifacts.");
+                    $"Lesson {lesson.Order:00} must declare starter, solution, test, and runnable artifacts.");
             }
 
-            RequireFile(root, module.Guide);
-            foreach (string project in module.StarterProjects
-                         .Concat(module.SolutionProjects)
-                         .Concat(module.TestProjects))
+            RequireFile(root, lesson.Guide);
+            foreach (string project in lesson.StarterProjects
+                         .Concat(lesson.SolutionProjects)
+                         .Concat(lesson.TestProjects))
             {
                 RequireFile(root, project);
             }
 
-            foreach (CourseSample sample in module.Samples)
+            foreach (CourseRunnable runnable in lesson.Runnables)
             {
-                RequireFile(root, sample.Path);
-                if (sample.Path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
+                RequireFile(root, runnable.Path);
+                if (runnable.Path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
                 {
-                    string sampleDirectory = Path.GetDirectoryName(sample.Path)!;
-                    string lockFile = Path.Combine(root, sampleDirectory, "packages.lock.json");
+                    string lessonDirectory = Path.GetDirectoryName(runnable.Path)!;
+                    string lockFile = Path.Combine(root, lessonDirectory, "packages.lock.json");
                     if (File.Exists(lockFile))
                     {
                         throw new InvalidDataException(
-                            $"File-based samples must not commit SDK- and OS-specific lock files: "
+                            $"File-based lessons must not commit SDK- and OS-specific lock files: "
                             + $"{Path.GetRelativePath(root, lockFile)}.");
                     }
                 }
 
-                await RunSampleAsync(root, sample);
+                await RunRunnableAsync(root, runnable);
+            }
+        }
+
+        foreach (LearningDestination destination in manifest.Destinations)
+        {
+            RequireFile(root, destination.Guide);
+            foreach (string project in destination.StarterProjects
+                         .Concat(destination.SolutionProjects)
+                         .Concat(destination.TestProjects))
+            {
+                RequireFile(root, project);
             }
         }
 
         int readmeCount = VerifyReadmePresentation(root);
         int linkCount = VerifyMarkdownLinks(root);
         Console.WriteLine(
-            $"Verified {manifest.Modules.Count} modules, "
-            + $"{manifest.Modules.Sum(module => module.Samples.Count)} samples, "
+            $"Verified {manifest.Lessons.Count} lessons, "
+            + $"{manifest.Lessons.Sum(lesson => lesson.Runnables.Count)} runnables, "
+            + $"{manifest.Destinations.Count} applied destinations, "
             + $"{readmeCount} formatted READMEs, "
             + $"and {linkCount} local Markdown links.");
         return 0;
@@ -117,9 +140,9 @@ internal static partial class VerificationApplication
     {
         CourseManifest manifest = await LoadManifestAsync(root);
 
-        foreach (CourseModule module in manifest.Modules.OrderBy(module => module.Order))
+        foreach (CourseLesson lesson in manifest.Lessons.OrderBy(lesson => lesson.Order))
         {
-            foreach (string testProject in module.TestProjects)
+            foreach (string testProject in lesson.TestProjects)
             {
                 ProcessResult build = await RunDotnetAsync(
                     root,
@@ -159,10 +182,69 @@ internal static partial class VerificationApplication
             }
         }
 
+        foreach (StarterCheck check in manifest.StarterChecks)
+        {
+            RequireFile(root, check.Project);
+            var arguments = new List<string>
+            {
+                "test",
+                "--project",
+                check.Project,
+                "--configuration",
+                "Release",
+            };
+            arguments.AddRange(check.Properties.Select(property => $"-p:{property}"));
+            if (check.RunnerArguments.Count > 0)
+            {
+                arguments.Add("--");
+                arguments.AddRange(check.RunnerArguments);
+            }
+
+            ProcessResult result = await RunDotnetAsync(root, arguments);
+            if (result.ExitCode != 0)
+            {
+                throw new InvalidDataException(
+                    $"{check.Name} failed: {(result.StandardError + result.StandardOutput).Trim()}");
+            }
+        }
+
         Console.WriteLine(
             $"Verified compileable, intentionally failing feedback for "
-            + $"{manifest.Modules.Sum(module => module.TestProjects.Count)} module starters.");
+            + $"{manifest.Lessons.Sum(lesson => lesson.TestProjects.Count)} lesson starters, "
+            + $"plus {manifest.StarterChecks.Count} project/capstone starter smoke checks.");
         return 0;
+    }
+
+    private static void VerifyRoleStructure(string root)
+    {
+        foreach (string index in RequiredRoleIndexes)
+        {
+            RequireFile(root, index);
+        }
+
+        foreach (string legacyRoot in LegacyTopLevelRoles)
+        {
+            if (Directory.Exists(Path.Combine(root, legacyRoot)))
+            {
+                throw new InvalidDataException(
+                    $"Legacy or unsupported top-level role remains: {legacyRoot}/");
+            }
+        }
+
+        string[] legacyRoleDirectories = InstructionalRoleRoots
+            .SelectMany(role => Directory.EnumerateDirectories(
+                Path.Combine(root, role),
+                "*",
+                SearchOption.AllDirectories))
+            .Where(path => !IsGeneratedPath(path))
+            .Where(path => Path.GetFileName(path) is "Samples" or "Practice")
+            .Select(path => Path.GetRelativePath(root, path))
+            .ToArray();
+        if (legacyRoleDirectories.Length > 0)
+        {
+            throw new InvalidDataException(
+                $"Legacy lesson role directories remain: {string.Join(", ", legacyRoleDirectories)}.");
+        }
     }
 
     private static async Task<CourseManifest> LoadManifestAsync(string root)
@@ -461,7 +543,7 @@ internal static partial class VerificationApplication
         {
             throw new InvalidDataException(
                 "Use 'coverage <results-directory> <minimum-branch-rate>', "
-                + "for example 'coverage capstone/reading-log/Tests 0.85'.");
+                + "for example 'coverage capstones/idiomatic/tests 0.85'.");
         }
 
         string resultsRoot = Path.GetFullPath(Path.Combine(root, args[1]));
@@ -503,32 +585,32 @@ internal static partial class VerificationApplication
         return 0;
     }
 
-    private static async Task RunSampleAsync(string root, CourseSample sample)
+    private static async Task RunRunnableAsync(string root, CourseRunnable runnable)
     {
         List<string> arguments = [];
-        if (sample.Path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
+        if (runnable.Path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase))
         {
-            arguments.Add(sample.Path);
+            arguments.Add(runnable.Path);
         }
         else
         {
-            arguments.AddRange(["run", "--project", sample.Path, "--no-restore"]);
+            arguments.AddRange(["run", "--project", runnable.Path, "--no-restore"]);
         }
 
-        arguments.AddRange(sample.Arguments);
+        arguments.AddRange(runnable.Arguments);
         ProcessResult result = await RunDotnetAsync(root, arguments);
         if (result.ExitCode != 0)
         {
             throw new InvalidDataException(
-                $"Sample failed ({sample.Path}): {result.StandardError.Trim()}");
+                $"Runnable failed ({runnable.Path}): {result.StandardError.Trim()}");
         }
 
-        foreach (string expectedText in sample.ExpectedOutputContains)
+        foreach (string expectedText in runnable.ExpectedOutputContains)
         {
             if (!result.StandardOutput.Contains(expectedText, StringComparison.Ordinal))
             {
                 throw new InvalidDataException(
-                    $"Sample {sample.Path} did not print expected text '{expectedText}'.");
+                    $"Runnable {runnable.Path} did not print expected text '{expectedText}'.");
             }
         }
     }
@@ -645,21 +727,38 @@ internal static partial class VerificationApplication
     private static partial Regex PlainUrlPattern();
 }
 
-internal sealed record CourseManifest(IReadOnlyList<CourseModule> Modules);
+internal sealed record CourseManifest(
+    IReadOnlyList<CourseLesson> Lessons,
+    IReadOnlyList<LearningDestination> Destinations,
+    IReadOnlyList<StarterCheck> StarterChecks);
 
-internal sealed record CourseModule(
+internal sealed record CourseLesson(
     int Order,
     string Slug,
     string Guide,
     IReadOnlyList<string> StarterProjects,
     IReadOnlyList<string> SolutionProjects,
     IReadOnlyList<string> TestProjects,
-    IReadOnlyList<CourseSample> Samples);
+    IReadOnlyList<CourseRunnable> Runnables);
 
-internal sealed record CourseSample(
+internal sealed record CourseRunnable(
     string Path,
     IReadOnlyList<string> Arguments,
     IReadOnlyList<string> ExpectedOutputContains);
+
+internal sealed record LearningDestination(
+    string Kind,
+    string Slug,
+    string Guide,
+    IReadOnlyList<string> StarterProjects,
+    IReadOnlyList<string> SolutionProjects,
+    IReadOnlyList<string> TestProjects);
+
+internal sealed record StarterCheck(
+    string Name,
+    string Project,
+    IReadOnlyList<string> Properties,
+    IReadOnlyList<string> RunnerArguments);
 
 internal sealed record ProcessResult(
     int ExitCode,

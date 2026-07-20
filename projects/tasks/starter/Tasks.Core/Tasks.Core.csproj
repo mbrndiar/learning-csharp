@@ -1,0 +1,6 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <RootNamespace>Tasks.Core</RootNamespace>
+    <AssemblyName>Tasks.Core</AssemblyName>
+  </PropertyGroup>
+</Project>

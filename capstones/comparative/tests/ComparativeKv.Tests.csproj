@@ -1,0 +1,82 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ComparativeKv.Tests</AssemblyName>
+    <RootNamespace>ComparativeKv.Tests</RootNamespace>
+    <OutputType>Exe</OutputType>
+    <IsTestProject>true</IsTestProject>
+    <IsPackable>false</IsPackable>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(ComparativeImplementation)' == 'Solution'">
+    <DefineConstants>$(DefineConstants);COMPARATIVE_SOLUTION</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(ComparativeImplementation)' == 'Starter'">
+    <DefineConstants>$(DefineConstants);COMPARATIVE_STARTER</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(ComparativeMilestone)' == '1'">
+    <DefineConstants>$(DefineConstants);COMPARATIVE_MILESTONE_1</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(ComparativeMilestone)' == '2'">
+    <DefineConstants>$(DefineConstants);COMPARATIVE_MILESTONE_2</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(ComparativeMilestone)' == '3'">
+    <DefineConstants>$(DefineConstants);COMPARATIVE_MILESTONE_3</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(ComparativeMilestone)' == '4'">
+    <DefineConstants>$(DefineConstants);COMPARATIVE_MILESTONE_4</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(ComparativeMilestone)' == '5'">
+    <DefineConstants>$(DefineConstants);COMPARATIVE_MILESTONE_5</DefineConstants>
+  </PropertyGroup>
+
+  <Target Name="ValidateComparativeImplementation" BeforeTargets="CollectPackageReferences;AssignProjectConfiguration;ResolveProjectReferences;PrepareForBuild">
+    <Error
+      Condition="'$(ComparativeImplementation)' != 'Starter' and '$(ComparativeImplementation)' != 'Solution'"
+      Text="ComparativeImplementation must be exactly 'Starter' or 'Solution'. Current value: '$(ComparativeImplementation)'." />
+    <Error
+      Condition="'$(ComparativeMilestone)' != '' and '$(ComparativeMilestone)' != '1' and '$(ComparativeMilestone)' != '2' and '$(ComparativeMilestone)' != '3' and '$(ComparativeMilestone)' != '4' and '$(ComparativeMilestone)' != '5'"
+      Text="ComparativeMilestone must be empty or one of 1, 2, 3, 4, or 5. Current value: '$(ComparativeMilestone)'." />
+    <Error
+      Condition="'$(ComparativeMilestone)' != '' and '$(ComparativeImplementation)' != 'Starter'"
+      Text="ComparativeMilestone is an actionable starter-feedback selector and requires ComparativeImplementation=Starter." />
+  </Target>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+    <PackageReference Include="xunit.v3.mtp-v2" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(ComparativeImplementation)' == 'Starter' or '$(ComparativeImplementation)' == 'Solution'">
+    <ProjectReference Include="../$(ComparativeImplementationPath)/ComparativeKv.Core/ComparativeKv.Core.csproj" />
+    <ProjectReference Include="../$(ComparativeImplementationPath)/ComparativeKv.Application/ComparativeKv.Application.csproj" />
+    <ProjectReference Include="../$(ComparativeImplementationPath)/ComparativeKv.Storage.Sqlite/ComparativeKv.Storage.Sqlite.csproj" />
+    <ProjectReference Include="../$(ComparativeImplementationPath)/ComparativeKv.Cli/ComparativeKv.Cli.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Remove="ComparativeKv.ProcessSupport/**/*.cs" />
+    <ProjectReference Include="ComparativeKv.ProcessSupport/ComparativeKv.ProcessSupport.csproj" />
+    <Content Include="../spec/**">
+      <Link>spec/%(RecursiveDir)%(Filename)%(Extension)</Link>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(ComparativeImplementation)' == 'Solution'">
+    <Compile Remove="Integration/StarterBoundaryTests.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(ComparativeImplementation)' == 'Starter'">
+    <Compile Remove="Application/ConfigurationApplicationTests.cs" />
+    <Compile Remove="Domain/JsonValueSemanticTests.cs" />
+    <Compile Remove="Domain/MilestoneOneFixtureTests.cs" Condition="'$(ComparativeMilestone)' != '1'" />
+    <Compile Remove="Domain/RestrictedJsonEdgeTests.cs" />
+    <Compile Remove="Integration/MilestoneTwoCliTests.cs" Condition="'$(ComparativeMilestone)' != '2'" />
+    <Compile Remove="Integration/MilestoneThreeStorageTests.cs" Condition="'$(ComparativeMilestone)' != '3'" />
+    <Compile Remove="Integration/MilestoneFourMutationTests.cs" Condition="'$(ComparativeMilestone)' != '4'" />
+    <Compile Remove="Integration/MilestoneFiveProcessTests.cs" Condition="'$(ComparativeMilestone)' != '5'" />
+    <Compile Remove="Storage/SqliteStoreInvariantTests.cs" />
+  </ItemGroup>
+</Project>

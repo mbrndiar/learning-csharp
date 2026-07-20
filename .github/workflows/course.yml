@@ -47,15 +47,17 @@ jobs:
 
       - name: Verify learner starter feedback
         if: matrix.os == 'ubuntu-latest'
-        run: |
-          dotnet run --project tools/CourseVerifier --configuration Release --no-build -- starters
-          dotnet test --project capstone/reading-log/Tests/ReadingLog.Tests.csproj --configuration Release -p:CapstoneImplementation=Starter -- --filter-class ReadingLog.Tests.Smoke.StarterSmokeTests
+        run: dotnet run --project tools/CourseVerifier --configuration Release --no-build -- starters
 
-      - name: Enforce capstone branch coverage
+      - name: Enforce project and capstone branch coverage
         if: matrix.os == 'ubuntu-latest'
         run: |
-          dotnet test --project capstone/reading-log/Tests/ReadingLog.Tests.csproj --configuration Release --no-build --results-directory capstone/reading-log/Tests/TestResults -- --coverage --coverage-output solution-coverage.cobertura.xml --coverage-output-format cobertura --coverage-settings capstone/reading-log/Tests/coverage.runsettings
-          dotnet run --project tools/CourseVerifier --configuration Release --no-build -- coverage capstone/reading-log/Tests 0.85
+          dotnet test --project projects/tasks/tests/Tasks.Tests/Tasks.Tests.csproj --configuration Release --no-build -p:CourseImplementation=Solution --results-directory projects/tasks/tests/Tasks.Tests/TestResults -- --coverage --coverage-output tasks.cobertura.xml --coverage-output-format cobertura --coverage-settings projects/tasks/tests/Tasks.Tests/coverage.runsettings
+          dotnet run --project tools/CourseVerifier --configuration Release --no-build -- coverage projects/tasks/tests/Tasks.Tests/TestResults 0.85
+          dotnet test --project capstones/comparative/tests/ComparativeKv.Tests.csproj --configuration Release --no-build -p:ComparativeImplementation=Solution --results-directory capstones/comparative/tests/TestResults -- --coverage --coverage-output comparative.cobertura.xml --coverage-output-format cobertura --coverage-settings capstones/comparative/tests/coverage.runsettings
+          dotnet run --project tools/CourseVerifier --configuration Release --no-build -- coverage capstones/comparative/tests/TestResults 0.85
+          dotnet test --project capstones/idiomatic/tests/ReadingLog.Tests.csproj --configuration Release --no-build -p:CapstoneImplementation=Solution --results-directory capstones/idiomatic/tests/TestResults -- --coverage --coverage-output idiomatic.cobertura.xml --coverage-output-format cobertura --coverage-settings capstones/idiomatic/tests/coverage.runsettings
+          dotnet run --project tools/CourseVerifier --configuration Release --no-build -- coverage capstones/idiomatic/tests/TestResults 0.85
 
       - name: Verify external documentation links
         if: matrix.os == 'ubuntu-latest'

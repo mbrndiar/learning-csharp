@@ -33,6 +33,10 @@ repository remain independently runnable evidence.
 - [Microsoft Testing Platform](https://learn.microsoft.com/dotnet/core/testing/microsoft-testing-platform-intro)
 - [Testing with `dotnet test`](https://learn.microsoft.com/dotnet/core/testing/unit-testing-with-dotnet-test)
 - [xUnit.net v3 with MTP](https://xunit.net/docs/getting-started/v3/microsoft-testing-platform)
+- [Microsoft.Data.Sqlite overview](https://learn.microsoft.com/dotnet/standard/data/sqlite/)
+- [Microsoft.Data.Sqlite parameters](https://learn.microsoft.com/dotnet/standard/data/sqlite/parameters)
+- [Microsoft.Data.Sqlite transactions](https://learn.microsoft.com/dotnet/standard/data/sqlite/transactions)
+- [Microsoft.Data.Sqlite ADO.NET limitations](https://learn.microsoft.com/dotnet/standard/data/sqlite/adonet-limitations)
 - [`System.Text.Json`](https://learn.microsoft.com/dotnet/standard/serialization/system-text-json/overview)
 - [`DateOnly` and `TimeOnly`](https://learn.microsoft.com/dotnet/standard/datetime/how-to-use-dateonly-timeonly)
 - [Choose between `DateTime`, `DateOnly`, and `DateTimeOffset`](https://learn.microsoft.com/dotnet/standard/datetime/choosing-between-datetime)
@@ -40,8 +44,13 @@ repository remain independently runnable evidence.
 - [Asynchronous programming](https://learn.microsoft.com/dotnet/csharp/asynchronous-programming/)
 - [Cancellation](https://learn.microsoft.com/dotnet/standard/threading/cancellation-in-managed-threads)
 - [`HttpClient` guidelines](https://learn.microsoft.com/dotnet/fundamentals/networking/http/httpclient-guidelines)
+- [`IHttpClientFactory`](https://learn.microsoft.com/dotnet/core/extensions/httpclient-factory)
+- [ASP.NET Core middleware](https://learn.microsoft.com/aspnet/core/fundamentals/middleware/)
+- [ASP.NET Core request and response operations](https://learn.microsoft.com/aspnet/core/fundamentals/use-http-context)
 - [ASP.NET Core API approaches](https://learn.microsoft.com/aspnet/core/fundamentals/apis?view=aspnetcore-10.0)
 - [Minimal API quick reference](https://learn.microsoft.com/aspnet/core/fundamentals/minimal-apis?view=aspnetcore-10.0)
+- [OpenAPI support in ASP.NET Core](https://learn.microsoft.com/aspnet/core/fundamentals/openapi/overview?view=aspnetcore-10.0)
+- [Microsoft.OpenApi 3.9.0](https://www.nuget.org/packages/Microsoft.OpenApi/3.9.0)
 
 ## Deliberate boundaries
 

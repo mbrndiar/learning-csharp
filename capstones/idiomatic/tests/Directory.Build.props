@@ -1,0 +1,12 @@
+<Project>
+  <Import Project="../../../Directory.Build.props" />
+  <PropertyGroup>
+    <CapstoneImplementation Condition="'$(CapstoneImplementation)' == ''">Solution</CapstoneImplementation>
+    <CapstoneImplementationDirectory Condition="'$(CapstoneImplementation)' == 'Starter'">starter</CapstoneImplementationDirectory>
+    <CapstoneImplementationDirectory Condition="'$(CapstoneImplementation)' == 'Solution'">solution</CapstoneImplementationDirectory>
+    <BaseIntermediateOutputPath>obj/$(CapstoneImplementation)/</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+    <OutputPath>bin/$(CapstoneImplementation)/$(Configuration)/</OutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

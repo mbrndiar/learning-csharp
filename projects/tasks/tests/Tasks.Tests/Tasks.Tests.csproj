@@ -1,0 +1,71 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Solution</CourseImplementation>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <PackageReference Include="Microsoft.Testing.Extensions.CodeCoverage" />
+    <PackageReference Include="Microsoft.OpenApi" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyMetadata Include="CourseImplementation" Value="$(CourseImplementation)" />
+  </ItemGroup>
+
+  <!-- Compile-time test selection: substantive milestone classes compile for the
+       Solution by default, and for the Starter only when TasksMilestone selects
+       them (producing intentional red feedback). Starter smoke compiles only for
+       the Starter. There is no runtime skipping. -->
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Solution'">
+    <Compile Remove="StarterSmokeTests.cs" />
+  </ItemGroup>
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Starter'">
+    <Compile Remove="M1DomainTests.cs" Condition="'$(TasksMilestone)' != '1'" />
+    <Compile Remove="M2PersistenceTests.cs" Condition="'$(TasksMilestone)' != '2'" />
+    <Compile Remove="M3LowLevelServerAndRawClientTests.cs" Condition="'$(TasksMilestone)' != '3'" />
+    <Compile Remove="M4MinimalApiAndTypedClientTests.cs" Condition="'$(TasksMilestone)' != '4'" />
+    <Compile Remove="M5InteropTests.cs" Condition="'$(TasksMilestone)' != '5'" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Starter'">
+    <ProjectReference Include="../../starter/Tasks.Core/Tasks.Core.csproj" />
+    <ProjectReference Include="../../starter/Tasks.Storage/Tasks.Storage.csproj" />
+    <ProjectReference Include="../../starter/Tasks.Server/Tasks.Server.csproj" />
+    <ProjectReference Include="../../starter/Tasks.Api/Tasks.Api.csproj" />
+    <ProjectReference Include="../../starter/Tasks.Client/Tasks.Client.csproj" />
+    <ProjectReference Include="../../starter/Tasks.Cli/Tasks.Cli.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Solution'">
+    <ProjectReference Include="../../solution/Tasks.Core/Tasks.Core.csproj" />
+    <ProjectReference Include="../../solution/Tasks.Storage/Tasks.Storage.csproj" />
+    <ProjectReference Include="../../solution/Tasks.Server/Tasks.Server.csproj" />
+    <ProjectReference Include="../../solution/Tasks.Api/Tasks.Api.csproj" />
+    <ProjectReference Include="../../solution/Tasks.Client/Tasks.Client.csproj" />
+    <ProjectReference Include="../../solution/Tasks.Cli/Tasks.Cli.csproj" />
+  </ItemGroup>
+
+  <Target Name="ValidateTasksSelectors" BeforeTargets="ResolveReferences">
+    <Error
+      Condition="'$(CourseImplementation)' != 'Starter' and '$(CourseImplementation)' != 'Solution'"
+      Text="CourseImplementation must be exactly 'Starter' or 'Solution'. Received '$(CourseImplementation)'." />
+    <Error
+      Condition="'$(TasksMilestone)' != '' and '$(CourseImplementation)' != 'Starter'"
+      Text="TasksMilestone can only be combined with CourseImplementation=Starter. Received CourseImplementation='$(CourseImplementation)'." />
+    <Error
+      Condition="'$(TasksMilestone)' != '' and '$(TasksMilestone)' != '1' and '$(TasksMilestone)' != '2' and '$(TasksMilestone)' != '3' and '$(TasksMilestone)' != '4' and '$(TasksMilestone)' != '5'"
+      Text="TasksMilestone must be one of 1, 2, 3, 4, 5. Received '$(TasksMilestone)'." />
+  </Target>
+</Project>

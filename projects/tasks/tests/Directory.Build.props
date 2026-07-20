@@ -1,0 +1,12 @@
+<Project>
+  <Import Project="../../../Directory.Build.props" />
+  <PropertyGroup>
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Solution</CourseImplementation>
+    <TasksMilestoneKey Condition="'$(TasksMilestone)' == ''">all</TasksMilestoneKey>
+    <TasksMilestoneKey Condition="'$(TasksMilestone)' != ''">milestone-$(TasksMilestone)</TasksMilestoneKey>
+    <BaseIntermediateOutputPath>obj/$(CourseImplementation)/$(TasksMilestoneKey)/</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+    <OutputPath>bin/$(CourseImplementation)/$(TasksMilestoneKey)/$(Configuration)/</OutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

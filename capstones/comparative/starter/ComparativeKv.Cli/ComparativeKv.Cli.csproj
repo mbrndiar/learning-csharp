@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ComparativeKv.Cli</AssemblyName>
+    <RootNamespace>ComparativeKv.Cli</RootNamespace>
+    <OutputType>Exe</OutputType>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ComparativeKv.Core/ComparativeKv.Core.csproj" />
+    <ProjectReference Include="../ComparativeKv.Application/ComparativeKv.Application.csproj" />
+    <ProjectReference Include="../ComparativeKv.Storage.Sqlite/ComparativeKv.Storage.Sqlite.csproj" />
+  </ItemGroup>
+</Project>

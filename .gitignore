@@ -14,10 +14,14 @@ coverage/
 *.suo
 
 # Local course work and data
-course/**/Practice/Starter/.learner/
-capstone/reading-log/Starter/.learner/
+exercises/**/starter/.learner/
+projects/**/starter/.learner/
+capstones/**/starter/.learner/
 *.local.json
 reading-log-data/
+projects/tasks/.test-data/
+capstones/comparative/.test-data/
+capstones/idiomatic/.test-data/
 
 # Operating-system files
 .DS_Store

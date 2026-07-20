@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ComparativeKv.Application</AssemblyName>
+    <RootNamespace>ComparativeKv.Application</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ComparativeKv.Core/ComparativeKv.Core.csproj" />
+  </ItemGroup>
+</Project>

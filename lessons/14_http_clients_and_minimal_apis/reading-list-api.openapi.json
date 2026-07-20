@@ -1,0 +1,122 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "Reading List API",
+    "version": "1.0.0",
+    "description": "Checked-in OpenAPI 3.1 contract for the tiny Books resource used throughout this lesson and its exercise. This file is hand-authored and versioned as the source of truth for the contract; it is not generated from the running server. See the lesson README for why generation and source-of-truth are kept separate here, and for the contract's boundary limitations."
+  },
+  "paths": {
+    "/books": {
+      "get": {
+        "summary": "List books, optionally filtered by author",
+        "parameters": [
+          {
+            "name": "author",
+            "in": "query",
+            "required": false,
+            "schema": { "type": "string" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A JSON list of books, bounded by the configured Catalog:MaxResults limit",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/BookListResponse" }
+              }
+            }
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a book",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": { "$ref": "#/components/schemas/CreateBookRequest" }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "The created book",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Book" }
+              }
+            }
+          },
+          "400": {
+            "description": "Title, author, or yearPublished failed validation"
+          },
+          "413": {
+            "description": "The request body is missing or exceeds the size boundary this contract enforces"
+          },
+          "415": {
+            "description": "The request Content-Type was not application/json"
+          }
+        }
+      }
+    },
+    "/books/{id}": {
+      "get": {
+        "summary": "Get a book by id",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": { "type": "string", "format": "uuid" }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The book",
+            "content": {
+              "application/json": {
+                "schema": { "$ref": "#/components/schemas/Book" }
+              }
+            }
+          },
+          "400": { "description": "The id was Guid.Empty" },
+          "404": { "description": "No book has that id" }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Book": {
+        "type": "object",
+        "required": ["id", "title", "author", "yearPublished"],
+        "properties": {
+          "id": { "type": "string", "format": "uuid" },
+          "title": { "type": "string" },
+          "author": { "type": "string" },
+          "yearPublished": { "type": "integer" }
+        }
+      },
+      "BookListResponse": {
+        "type": "object",
+        "required": ["books"],
+        "properties": {
+          "books": {
+            "type": "array",
+            "items": { "$ref": "#/components/schemas/Book" }
+          },
+          "authorFilter": { "type": ["string", "null"] }
+        }
+      },
+      "CreateBookRequest": {
+        "type": "object",
+        "required": ["title", "author", "yearPublished"],
+        "properties": {
+          "title": { "type": "string", "minLength": 1 },
+          "author": { "type": "string", "minLength": 1 },
+          "yearPublished": { "type": "integer", "minimum": 1450, "maximum": 2100 }
+        }
+      }
+    }
+  }
+}

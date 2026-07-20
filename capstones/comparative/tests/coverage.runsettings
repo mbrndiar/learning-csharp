@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Configuration>
+  <Format>cobertura</Format>
+  <IncludeTestAssembly>False</IncludeTestAssembly>
+  <ExcludeAssembliesWithoutSources>MissingAll</ExcludeAssembliesWithoutSources>
+  <DeterministicReport>True</DeterministicReport>
+  <CodeCoverage>
+    <ModulePaths>
+      <Include>
+        <ModulePath>.*ComparativeKv\.Core\.dll$</ModulePath>
+        <ModulePath>.*ComparativeKv\.Application\.dll$</ModulePath>
+        <ModulePath>.*ComparativeKv\.Storage\.Sqlite\.dll$</ModulePath>
+        <ModulePath>.*ComparativeKv\.Cli\.dll$</ModulePath>
+      </Include>
+    </ModulePaths>
+    <Sources>
+      <Exclude>
+        <Source>.*[/\\]obj[/\\].*\.g\.cs$</Source>
+      </Exclude>
+    </Sources>
+  </CodeCoverage>
+</Configuration>

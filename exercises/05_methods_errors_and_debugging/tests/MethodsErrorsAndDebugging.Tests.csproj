@@ -1,0 +1,28 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <IsPackable>false</IsPackable>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <RootNamespace>LearningCSharp.MethodsErrorsAndDebugging.Tests</RootNamespace>
+    <AssemblyName>LearningCSharp.MethodsErrorsAndDebugging.Tests</AssemblyName>
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Solution</CourseImplementation>
+  </PropertyGroup>
+
+  <Target Name="ValidateCourseImplementation" BeforeTargets="PrepareForBuild">
+    <Error
+      Condition="'$(CourseImplementation)' != 'Starter' and '$(CourseImplementation)' != 'Solution'"
+      Text="CourseImplementation must be Starter or Solution. Current value: '$(CourseImplementation)'." />
+  </Target>
+
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Starter'">
+    <ProjectReference Include="../starter/MethodsErrorsAndDebugging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Solution'">
+    <ProjectReference Include="../solution/MethodsErrorsAndDebugging.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+  </ItemGroup>
+</Project>

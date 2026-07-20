@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <AssemblyName>ComparativeKv.Storage.Sqlite</AssemblyName>
+    <RootNamespace>ComparativeKv.Storage.Sqlite</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="../ComparativeKv.Core/ComparativeKv.Core.csproj" />
+    <ProjectReference Include="../ComparativeKv.Application/ComparativeKv.Application.csproj" />
+  </ItemGroup>
+</Project>

@@ -47,7 +47,7 @@ That is expected when the failure names unfinished behavior. Read:
 1. the test name;
 2. expected and actual values;
 3. the first stack frame in your starter code;
-4. the practice contract in the module guide.
+4. the exercise contract in the lesson guide.
 
 Unexpected compile errors usually mean an intentional method signature was
 changed. Restore the required public shape, then change the method body.
@@ -57,7 +57,7 @@ changed. Restore the required public shape, then change the method body.
 Pass the selector exactly:
 
 ```console
-dotnet test --project path/to/Practice/Tests/Name.Tests.csproj \
+dotnet test --project exercises/09_linq_and_transformations/tests/LinqTransformationsPractice.Tests.csproj \
   -p:CourseImplementation=Starter
 ```
 
@@ -84,7 +84,7 @@ Warnings identify a correctness, maintainability, or portability risk under the
 course configuration. Read the diagnostic ID, locate it in Microsoft Learn,
 and correct the cause. Do not add a broad suppression. A narrowly justified
 teaching exception belongs next to the relevant project configuration and in
-the module explanation.
+the lesson explanation.
 
 ## A file or JSON test behaves differently on another OS
 
