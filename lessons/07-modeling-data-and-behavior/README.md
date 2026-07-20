@@ -268,13 +268,13 @@ dotnet build exercises/07-modeling-data-and-behavior/solution/ModelingDataBehavi
 Run the tests against the starter implementation while you work:
 
 ```bash
-dotnet test --project exercises/07-modeling-data-and-behavior/tests/ModelingDataBehaviorPractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/07-modeling-data-and-behavior/tests/ModelingDataBehaviorPractice.Tests.csproj
 ```
 
 Run the tests against the finished solution:
 
 ```bash
-dotnet test --project exercises/07-modeling-data-and-behavior/tests/ModelingDataBehaviorPractice.Tests.csproj
+dotnet test --project exercises/07-modeling-data-and-behavior/tests/ModelingDataBehaviorPractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 📝 Summary

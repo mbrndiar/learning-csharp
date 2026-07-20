@@ -131,6 +131,7 @@ Complete `OrderService` and the learner-owned `OrderServiceLearnerTests` in `Tes
 - In `exercises/10-testing-and-dependency-boundaries/starter/OrderServiceLearnerTests.cs`, replace the two scaffold methods with one enabled `[Fact]` and one enabled `[Theory]`.
 - Give the theory at least two `[InlineData]` rows, and keep each test focused on one observable `OrderService` behavior using hand-written fakes.
 - The supplied meta-feedback fails clearly when either scenario shape is missing, but intentionally does not prescribe the exact inputs, fake implementation, or assertions.
+- The scaffold file itself is intentionally incomplete: its class/method comments describe the required test shape (one enabled `[Fact]`, one enabled `[Theory]` with at least two `[InlineData]` rows, arrange-act-assert with hand-written fakes) without revealing which scenario, fake behavior, or assertion to use — that choice is yours.
 
 ### Required behavior
 - constructor rejects null dependencies
@@ -165,22 +166,30 @@ Build the reference solution:
 dotnet build exercises/10-testing-and-dependency-boundaries/solution/TestingDependencyBoundariesPractice.csproj
 ```
 
-Run the tests against the starter implementation while you work:
-
-```bash
-dotnet test --project exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj -p:CourseImplementation=Starter
-```
-
-Run the tests against the finished solution:
+Run the tests against the starter implementation while you work. `Starter` is the default, so no `-p:CourseImplementation` property is needed:
 
 ```bash
 dotnet test --project exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj
 ```
 
-Run the tests with coverage enabled:
+Keep that suite running in the background while you write `OrderServiceLearnerTests` and implement `OrderService`, so every save reruns it automatically:
 
 ```bash
-dotnet test --project exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj --coverage
+dotnet watch test --project exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj
+```
+
+`dotnet watch` detects changes in the test project and the referenced starter project, then reruns the suite, so you see fresh pass/fail feedback (including the learner-test meta-feedback) after every save. Press `Ctrl+C` to stop watching.
+
+Run the tests against the finished reference solution with an explicit `-p:CourseImplementation=Solution`:
+
+```bash
+dotnet test --project exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj -p:CourseImplementation=Solution
+```
+
+Run the finished reference solution tests with coverage enabled:
+
+```bash
+dotnet test --project exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj -p:CourseImplementation=Solution --coverage
 ```
 
 ## 📝 Summary

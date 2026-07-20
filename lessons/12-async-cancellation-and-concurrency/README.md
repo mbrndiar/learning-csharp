@@ -91,16 +91,16 @@ Expected behavior:
 
 ## 🧪 Practice contract
 
-Default solution tests:
+Starter feedback (the default):
 
 ```bash
 dotnet test --project exercises/12-async-cancellation-and-concurrency/tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj
 ```
 
-Starter feedback:
+Reference solution tests:
 
 ```bash
-dotnet test --project exercises/12-async-cancellation-and-concurrency/tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/12-async-cancellation-and-concurrency/tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 Your implementation must make these statements true:

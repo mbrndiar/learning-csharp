@@ -168,13 +168,13 @@ dotnet build exercises/09-linq-and-transformations/solution/LinqTransformationsP
 Run the tests against the starter implementation while you work:
 
 ```bash
-dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj
 ```
 
 Run the tests against the finished solution:
 
 ```bash
-dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj
+dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 📝 Summary

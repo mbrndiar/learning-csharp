@@ -3,7 +3,7 @@
     <IsPackable>false</IsPackable>
     <OutputType>Exe</OutputType>
     <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
-    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Solution</CourseImplementation>
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Starter</CourseImplementation>
   </PropertyGroup>
 
   <Target Name="ValidateCourseImplementation" BeforeTargets="CollectPackageReferences;ResolveReferences">

@@ -38,7 +38,7 @@ dotnet lessons/03-decisions-and-repetition/01-Decisions.cs
 dotnet lessons/03-decisions-and-repetition/02-Repetition.cs
 dotnet build exercises/03-decisions-and-repetition/starter/DecisionsAndRepetition.csproj
 dotnet test --project exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj
-dotnet test --project exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 👀 Expected observable behavior
@@ -73,7 +73,7 @@ Contract details:
 
 ## 🔁 Feedback instructions
 - Build the starter: `dotnet build exercises/03-decisions-and-repetition/starter/DecisionsAndRepetition.csproj`
-- Test your implementation: `dotnet test --project exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj -p:CourseImplementation=Starter`
+- Test your implementation: `dotnet test --project exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj`
 - If countdown tests fail, trace the string after each loop pass on paper.
 - If score tests fail, read your conditions from top to bottom and check which one matches first.
 

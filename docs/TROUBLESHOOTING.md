@@ -52,16 +52,20 @@ That is expected when the failure names unfinished behavior. Read:
 Unexpected compile errors usually mean an intentional method signature was
 changed. Restore the required public shape, then change the method body.
 
-## Tests run the solution instead of the starter
+## Tests are not exercising the implementation you expect
 
-Pass the selector exactly:
+Exercise test projects default to your starter work, so the shortest command
+checks the code you are changing. If a `CourseImplementation` value is set in
+your environment or passed on the command line, it overrides that default.
+Select the implementation explicitly when you need to be sure:
 
 ```console
 dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj \
   -p:CourseImplementation=Starter
 ```
 
-Only `Starter` and `Solution` are accepted, including capitalization.
+Pass `-p:CourseImplementation=Solution` instead to run the finished reference
+solution. Only `Starter` and `Solution` are accepted, including capitalization.
 
 ## Formatting fails in CI
 

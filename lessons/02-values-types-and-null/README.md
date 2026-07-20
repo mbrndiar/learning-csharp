@@ -64,7 +64,7 @@ dotnet lessons/02-values-types-and-null/01-ValuesAndTypes.cs
 dotnet lessons/02-values-types-and-null/02-NullableValues.cs
 dotnet build exercises/02-values-types-and-null/starter/ValuesTypesAndNull.csproj
 dotnet test --project exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj
-dotnet test --project exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 👀 Expected observable behavior
@@ -102,7 +102,7 @@ Implement `ReadingProgressFormatter.DescribeProgress(string? title, int pagesRea
 
 ## 🔁 Feedback instructions
 - Build your starter project: `dotnet build exercises/02-values-types-and-null/starter/ValuesTypesAndNull.csproj`
-- Run the shared tests against starter code: `dotnet test --project exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj -p:CourseImplementation=Starter`
+- Run the shared tests against starter code: `dotnet test --project exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj`
 - When a test fails, check the exact punctuation, numeric formatting, and fallback text first.
 - Compare your output to the demonstration format before changing the algorithm.
 

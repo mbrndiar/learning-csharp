@@ -178,13 +178,13 @@ dotnet build exercises/08-abstractions-generics-and-delegates/solution/Abstracti
 Run the tests against the starter implementation while you work:
 
 ```bash
-dotnet test --project exercises/08-abstractions-generics-and-delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/08-abstractions-generics-and-delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj
 ```
 
 Run the tests against the finished solution:
 
 ```bash
-dotnet test --project exercises/08-abstractions-generics-and-delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj
+dotnet test --project exercises/08-abstractions-generics-and-delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 📝 Summary

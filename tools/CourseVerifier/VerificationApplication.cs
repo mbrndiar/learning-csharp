@@ -115,6 +115,8 @@ internal static partial class VerificationApplication
             }
         }
 
+        VerifyLessonTestProjectDefaults(root, manifest);
+
         foreach (LearningDestination destination in manifest.Destinations)
         {
             RequireFile(root, destination.Guide);
@@ -341,6 +343,45 @@ internal static partial class VerificationApplication
             throw new InvalidDataException(
                 "Lesson directories must use kebab-case taxonomy or PascalCase project names: "
                 + string.Join(", ", underscoredLessonDirectories) + ".");
+        }
+    }
+
+    private static void VerifyLessonTestProjectDefaults(string root, CourseManifest manifest)
+    {
+        const string DefaultCondition = "'$(CourseImplementation)' == ''";
+
+        foreach (string testProject in manifest.Lessons
+                     .OrderBy(lesson => lesson.Order)
+                     .SelectMany(lesson => lesson.TestProjects))
+        {
+            XDocument document = XDocument.Load(Path.Combine(root, testProject));
+            XElement[] implementations = document
+                .Descendants()
+                .Where(element => element.Name.LocalName == "CourseImplementation")
+                .ToArray();
+
+            bool hasStarterDefault = implementations.Length == 1
+                && string.Equals(
+                    implementations[0].Attribute("Condition")?.Value,
+                    DefaultCondition,
+                    StringComparison.Ordinal)
+                && string.Equals(
+                    implementations[0].Value.Trim(),
+                    "Starter",
+                    StringComparison.Ordinal);
+            if (!hasStarterDefault)
+            {
+                string found = implementations.Length == 0
+                    ? "<missing>"
+                    : string.Join(
+                        ", ",
+                        implementations.Select(element =>
+                            $"'{element.Value.Trim()}' (Condition: "
+                            + $"'{element.Attribute("Condition")?.Value ?? "<none>"}')"));
+                throw new InvalidDataException(
+                    $"Lesson test project '{testProject}' must default CourseImplementation to "
+                    + $"'Starter'; found {found}.");
+            }
         }
     }
 

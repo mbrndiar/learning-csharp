@@ -27,7 +27,7 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 | Repository roles | Conforms | Shared `lessons/`, `exercises/`, `projects/tasks/`, and `capstones/{comparative,idiomatic}` roles with indexes; [migration guide](STRUCTURE_MIGRATION.md); no legacy `course/`, `Practice/`, `Samples/`, singular `capstone/`, or top-level `examples/` role. |
 | Integrity and completeness | Conforms locally | `course-manifest.json` validates lesson/exercise/destination paths; CourseVerifier runs every declared lesson artifact, checks links/anchors and README presentation, enforces the instructional naming boundary, rejects legacy roles, verifies 15 intentionally-red lesson starters, and runs three destination starter smokes. |
 | Idiomaticity and currency | Conforms | Ordered instructional slugs use `NN-kebab-case`; ordered file apps use `NN-PascalCase.cs`; buildable lesson directories match PascalCase project identities; SDK-style projects and `.slnx`; nullable analysis/analyzers; central package management and locks; .NET packages at 10.0.10, Microsoft.OpenApi 3.9.0, patched SQLitePCLRaw 2.1.12, and xUnit v3/MTP v2; applied trees enforce one top-level type per matching file; Tasks separates Core, HTTP protocol, server infrastructure/adapters, client, and CLI. |
-| Lifecycle and environments | Conforms locally; remote matrix deliberately deferred | Locked restore, format verification, Release build, 465 solution-selected tests, lesson execution, starter checks, three coverage gates, OpenAPI/spec checks, links, and audit configuration share the manual `.github/workflows/course.yml` commands. Per user instruction, the workflow remains manual-only and undispatched. |
+| Lifecycle and environments | Conforms locally; remote matrix deliberately deferred | Locked restore, format verification, Release build, 465 tests run with an explicit `-p:CourseImplementation=Solution` selector (exercise test projects default to the learner starter), lesson execution, starter checks, three coverage gates, OpenAPI/spec checks, links, and audit configuration share the manual `.github/workflows/course.yml` commands. Per user instruction, the workflow remains manual-only and undispatched. |
 | Projects and capstones | Conforms locally | Tasks uses seven inward-pointing projects: Core + HTTP contract, shared server persistence/configuration, two leaf server adapters, reusable client, and CLI host. Comparative preserves frozen `comparative-kv` fixtures/processes. Idiomatic preserves Reading Log behavior. All three applied trees use one top-level type per file. |
 | Refinement and validation | Conforms locally | The role and naming migrations are evidence-backed, adapted to .NET rather than copied mechanically, validated by change class, and independently reviewed once after the complete diff was staged. |
 | Git and delivery | Conforms | Validated milestone and naming-migration commits use required trailers and push to `origin/main`; the GitHub Actions workflow remains manual-only and undispatched. |
@@ -37,7 +37,9 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 
 - locked restore for 103 projects;
 - formatting verification and Release build with zero warnings/errors;
-- 465 passing solution-selected MTP tests, zero failures/skips;
+- 465 passing MTP tests, zero failures/skips, run with an explicit
+  `-p:CourseImplementation=Solution` selector because exercise test projects
+  default to the learner starter;
 - 15 lesson starters compile and report focused intentional failures;
 - 3 project/capstone starter smoke suites pass;
 - 15 lessons, 21 independently executed runnables, 3 applied destinations,
@@ -58,6 +60,11 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
   structural rather than .NET identities.
 - Most exercises supply tests for production-code work. Lesson 10 also requires
   learner-authored Fact/Theory scenarios with non-leaking meta-feedback.
+- Exercise test projects default `CourseImplementation` to `Starter` so the
+  shortest no-property command exercises learner work; the reference solution,
+  full-suite runs, and the manual workflow select it with an explicit
+  `-p:CourseImplementation=Solution`. Selector-specific `bin/obj` paths prevent
+  Starter and Solution dependency metadata from contaminating each other.
 - File-based C# apps reduce early ceremony and omit SDK/RID-specific virtual
   project lockfiles. Lesson 6 transitions to normal locked SDK projects.
 - Microsoft.Data.Sqlite's async ADO.NET methods execute synchronously because
@@ -85,10 +92,12 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 
 ## Final review and delivery gate
 
-Exactly one final read-only mixed review inspected the complete staged naming
-migration. It found no blocker and independently confirmed the 15 lesson and 15
-exercise slugs, ten ordered file-app names, PascalCase lesson project identities,
-all 103 solution projects, manifest paths, project references, documentation,
-stale-name absence, naming verifier behavior, and the unchanged manual-only
-workflow. Affected documentation and link checks were repeated without a second
-review; the executable baseline above was unchanged.
+The naming migration's single final review confirmed the instructional slugs,
+file/project identities, 103-project inventory, manifest, and naming verifier.
+The subsequent learner-first test-default change also received exactly one final
+read-only review. It found no blocker and independently confirmed all 15 Starter
+defaults, selector-isolated `bin/obj` paths, dual locked restores, explicit
+Solution build/test selection, default-red and explicit-green behavior, Lesson
+10's comment-only test scaffold, and the unchanged manual-only workflow.
+Affected documentation and link checks were repeated without a second review;
+the 465-test executable baseline remained green.

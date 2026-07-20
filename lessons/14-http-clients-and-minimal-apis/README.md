@@ -327,11 +327,13 @@ The matching exercise lives in
 It asks you to implement the same small Books contract across **four**
 surfaces - a low-level middleware app, a Minimal API app, a raw HTTP client,
 and a typed client + `IHttpClientFactory` - plus semantic validation against
-the checked-in contract above. Run its tests from the repository root:
+the checked-in contract above. Run its tests from the repository root. The
+first command checks your starter work (the default); the second selects the
+finished reference solution:
 
 ```bash
 dotnet test --project exercises/14-http-clients-and-minimal-apis/tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj
-dotnet test --project exercises/14-http-clients-and-minimal-apis/tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/14-http-clients-and-minimal-apis/tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 🧩 Experiment

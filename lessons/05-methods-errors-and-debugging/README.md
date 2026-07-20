@@ -83,7 +83,7 @@ dotnet lessons/05-methods-errors-and-debugging/01-MethodsAndOverloads.cs
 dotnet lessons/05-methods-errors-and-debugging/02-ExceptionsAndDebugging.cs
 dotnet build exercises/05-methods-errors-and-debugging/starter/MethodsErrorsAndDebugging.csproj
 dotnet test --project exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj
-dotnet test --project exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 👀 Expected observable behavior
@@ -128,7 +128,7 @@ Contract details:
 
 ## 🔁 Feedback instructions
 - Build the starter project: `dotnet build exercises/05-methods-errors-and-debugging/starter/MethodsErrorsAndDebugging.csproj`
-- Test your implementation: `dotnet test --project exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj -p:CourseImplementation=Starter`
+- Test your implementation: `dotnet test --project exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj`
 - If an exception test fails, compare both the exception type and the parameter name.
 - If average tests fail, inspect where integer division happens and whether you cast soon enough.
 

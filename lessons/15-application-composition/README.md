@@ -164,11 +164,12 @@ Expected behavior:
 
 The matching exercise lives in
 [`exercises/15-application-composition/`](../../exercises/15-application-composition/).
-Run its tests from the repository root:
+Run its tests from the repository root. The first command checks your starter
+work (the default); the second selects the finished reference solution:
 
 ```bash
 dotnet test --project exercises/15-application-composition/tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj
-dotnet test --project exercises/15-application-composition/tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/15-application-composition/tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 Run the composed CLI manually (file adapter, the default):
@@ -259,9 +260,10 @@ test, and runs `tools/CourseVerifier`'s checks (`verify`, `starters`,
 
 ```bash
 dotnet restore --locked-mode
+dotnet restore --locked-mode -p:CourseImplementation=Solution
 dotnet format --verify-no-changes --no-restore
-dotnet build --configuration Release --no-restore
-dotnet test --configuration Release --no-build
+dotnet build --configuration Release --no-restore -p:CourseImplementation=Solution
+dotnet test --solution LearningCSharp.slnx --configuration Release --no-build -p:CourseImplementation=Solution
 dotnet run --project tools/CourseVerifier --configuration Release --no-build -- verify
 dotnet run --project tools/CourseVerifier --configuration Release --no-build -- starters
 dotnet run --project tools/CourseVerifier --configuration Release --no-build -- external-links

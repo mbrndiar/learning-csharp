@@ -65,7 +65,7 @@ dotnet lessons/04-collections-and-iteration/01-CollectionsOverview.cs
 dotnet lessons/04-collections-and-iteration/02-MutationVsCopying.cs
 dotnet build exercises/04-collections-and-iteration/starter/CollectionsAndIteration.csproj
 dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj
-dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 👀 Expected observable behavior
@@ -107,7 +107,7 @@ Contract details:
 
 ## 🔁 Feedback instructions
 - Build the starter project: `dotnet build exercises/04-collections-and-iteration/starter/CollectionsAndIteration.csproj`
-- Test your work: `dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj -p:CourseImplementation=Starter`
+- Test your work: `dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj`
 - If counts are wrong, print the normalized value for each loop pass.
 - If duplicate tests fail, check whether you are adding the same normalized value more than once.
 

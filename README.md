@@ -125,17 +125,20 @@ exercises/<lesson>/
   tests/                 shared behavioral feedback
 ```
 
-Run a lesson's solution feedback from the repository root:
+Run a lesson's tests against your starter work from the repository root. The
+test projects default to the starter, so the shortest command exercises the
+code you are changing:
 
 ```console
 dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj
 ```
 
-Select your starter explicitly while working:
+Check the same tests against the finished reference solution by selecting it
+explicitly:
 
 ```console
 dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj \
-  -p:CourseImplementation=Starter
+  -p:CourseImplementation=Solution
 ```
 
 On PowerShell, place the command on one line or use PowerShell's backtick
@@ -153,16 +156,18 @@ feedback from the repository root:
 
 ```bash
 dotnet restore LearningCSharp.slnx --locked-mode
+dotnet restore LearningCSharp.slnx --locked-mode -p:CourseImplementation=Solution
 dotnet format LearningCSharp.slnx --verify-no-changes --no-restore
-dotnet build LearningCSharp.slnx --configuration Release --no-restore
-dotnet test --solution LearningCSharp.slnx --configuration Release --no-build
+dotnet build LearningCSharp.slnx --configuration Release --no-restore -p:CourseImplementation=Solution
+dotnet test --solution LearningCSharp.slnx --configuration Release --no-build -p:CourseImplementation=Solution
 dotnet run --project tools/CourseVerifier --configuration Release --no-build -- verify
 dotnet run --project tools/CourseVerifier --configuration Release --no-build -- starters
 ```
 
 The commands have separate jobs:
 
-- restore resolves the exact recorded dependency graph;
+- the two restores resolve the exact recorded Starter and Solution dependency
+  graphs;
 - format checks whitespace and configured code-style rules;
 - build compiles and runs SDK analyzers with warnings treated as errors;
 - test checks observable behavior;

@@ -30,17 +30,19 @@ jobs:
           cache-dependency-path: "**/packages.lock.json"
 
       - name: Restore locked dependencies
-        run: dotnet restore LearningCSharp.slnx --locked-mode
+        run: |
+          dotnet restore LearningCSharp.slnx --locked-mode
+          dotnet restore LearningCSharp.slnx --locked-mode -p:CourseImplementation=Solution
 
       - name: Verify formatting and analyzer fixes
         if: matrix.os == 'ubuntu-latest'
         run: dotnet format LearningCSharp.slnx --verify-no-changes --no-restore
 
       - name: Build all course artifacts
-        run: dotnet build LearningCSharp.slnx --configuration Release --no-restore
+        run: dotnet build LearningCSharp.slnx --configuration Release --no-restore -p:CourseImplementation=Solution
 
       - name: Run all solution tests
-        run: dotnet test --solution LearningCSharp.slnx --configuration Release --no-build
+        run: dotnet test --solution LearningCSharp.slnx --configuration Release --no-build -p:CourseImplementation=Solution
 
       - name: Verify course manifest, samples, and local links
         run: dotnet run --project tools/CourseVerifier --configuration Release --no-build -- verify

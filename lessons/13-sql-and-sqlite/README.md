@@ -125,16 +125,16 @@ Expected behavior:
 
 ## 🧪 Practice contract
 
-Default solution tests:
+Starter feedback (the default):
 
 ```bash
 dotnet test --project exercises/13-sql-and-sqlite/tests/LibraryCatalogPractice.Tests/LibraryCatalogPractice.Tests.csproj
 ```
 
-Starter feedback:
+Reference solution tests:
 
 ```bash
-dotnet test --project exercises/13-sql-and-sqlite/tests/LibraryCatalogPractice.Tests/LibraryCatalogPractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/13-sql-and-sqlite/tests/LibraryCatalogPractice.Tests/LibraryCatalogPractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 Your implementation must make these statements true:

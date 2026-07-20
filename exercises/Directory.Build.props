@@ -1,0 +1,10 @@
+<Project>
+  <Import Project="../Directory.Build.props" />
+  <PropertyGroup Condition="$([System.String]::Copy('$(MSBuildProjectName)').EndsWith('.Tests'))">
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Starter</CourseImplementation>
+    <BaseIntermediateOutputPath>obj/$(CourseImplementation)/</BaseIntermediateOutputPath>
+    <MSBuildProjectExtensionsPath>$(BaseIntermediateOutputPath)</MSBuildProjectExtensionsPath>
+    <OutputPath>bin/$(CourseImplementation)/$(Configuration)/</OutputPath>
+    <DefaultItemExcludes>$(DefaultItemExcludes);obj/**;bin/**</DefaultItemExcludes>
+  </PropertyGroup>
+</Project>

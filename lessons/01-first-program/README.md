@@ -34,7 +34,7 @@ dotnet lessons/01-first-program/01-HelloFirstProgram.cs
 dotnet lessons/01-first-program/02-PredictRunModify.cs
 dotnet build exercises/01-first-program/starter/FirstProgram.csproj
 dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj
-dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 👀 Expected observable behavior
@@ -60,8 +60,8 @@ Running `02-PredictRunModify.cs` prints three numbered lines. If you edit one st
   **Diagnosis:** `dotnet` cannot find the file. Use the full repository-relative path shown above.
 - **Mistake:** Forgetting the semicolon after `Console.WriteLine(...)`.
   **Diagnosis:** The build fails before the program runs, because C# cannot parse the statement boundary.
-- **Mistake:** Editing the starter project but running tests without `-p:CourseImplementation=Starter`.
-  **Diagnosis:** You keep testing the solution project by default, so your changes appear to have no effect.
+- **Mistake:** Editing the starter project but running tests with `-p:CourseImplementation=Solution`.
+  **Diagnosis:** You keep testing the reference solution, so your changes appear to have no effect. The tests default to the starter, so omit the property to check your own work.
 
 ## 🧪 Practice contract
 Implement `FirstProgramExercise.BuildCelebrationMessage(string learnerName)`.
@@ -73,9 +73,9 @@ Implement `FirstProgramExercise.BuildCelebrationMessage(string learnerName)`.
 
 ## 🔁 Feedback instructions
 - Build your starter project first: `dotnet build exercises/01-first-program/starter/FirstProgram.csproj`
-- Then run the shared tests against your work: `dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj -p:CourseImplementation=Starter`
+- Then run the shared tests against your work: `dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj`
 - If a test fails, read the test name first, then compare the expected line breaks and exact text.
-- When you want a reference answer, inspect the solution project or run the default solution tests.
+- When you want a reference answer, inspect the solution project or run the tests with `-p:CourseImplementation=Solution`.
 
 ## 📝 Concise summary
 A first C# program is just source text that `dotnet` builds and runs. Top-level statements execute in order, and `Console.WriteLine` makes observable terminal output.

@@ -112,16 +112,16 @@ Expected behavior:
 
 ## 🧪 Practice contract
 
-Project:
+Starter feedback (the default):
 
 ```bash
 dotnet test --project exercises/11-files-streams-and-json/tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj
 ```
 
-Starter feedback command:
+Reference solution:
 
 ```bash
-dotnet test --project exercises/11-files-streams-and-json/tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/11-files-streams-and-json/tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 Your job in `RecipeStoragePractice` is to make these behaviors true:

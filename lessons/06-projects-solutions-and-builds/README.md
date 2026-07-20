@@ -214,13 +214,13 @@ dotnet build exercises/06-projects-solutions-and-builds/solution/ProjectsSolutio
 Run the shared tests against the starter while you work:
 
 ```bash
-dotnet test --project exercises/06-projects-solutions-and-builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj -p:CourseImplementation=Starter
+dotnet test --project exercises/06-projects-solutions-and-builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj
 ```
 
 Run the shared tests against the finished solution:
 
 ```bash
-dotnet test --project exercises/06-projects-solutions-and-builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj
+dotnet test --project exercises/06-projects-solutions-and-builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj -p:CourseImplementation=Solution
 ```
 
 ## 📝 Summary

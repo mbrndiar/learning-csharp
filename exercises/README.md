@@ -20,14 +20,51 @@ failures are not accepted feedback. The solution passes the same public
 contract. Tests assert observable behavior rather than requiring identical
 implementation syntax.
 
+Some exercises (currently Lesson 10) also ask you to complete a
+learner-authored test scaffold, such as `OrderServiceLearnerTests.cs`. Those
+scaffold files use class/method comments to explain the *shape* of the tests
+you must add (for example, one enabled `[Fact]` plus one enabled `[Theory]`
+with several `[InlineData]` rows) without prescribing the exact scenario, fake
+implementation, or assertions — you choose those yourself.
+
 ## 🔁 Working loop
 
 1. Read the matching lesson and exercise contract.
 2. Build the starter.
-3. Run the shared tests with `-p:CourseImplementation=Starter`.
+3. Run the shared tests. Each shared test project selects the `Starter`
+   implementation by default, so no `-p:CourseImplementation` property is
+   needed, for example:
+
+   ```bash
+   dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj
+   ```
+
 4. Fix one failing behavior at a time.
 5. Add your own boundary checks where the lesson asks for them.
-6. Compare with `solution/` only after a genuine attempt.
+6. Compare with `solution/` only after a genuine attempt, by passing an
+   explicit `-p:CourseImplementation=Solution`, for example:
+
+   ```bash
+   dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj -p:CourseImplementation=Solution
+   ```
+
+## 🔄 Continuous feedback with `dotnet watch test`
+
+While you edit a starter implementation (or, for Lesson 10, while you write
+your own tests), run the shared tests in watch mode instead of re-typing
+`dotnet test` after every change:
+
+```bash
+dotnet watch test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj
+```
+
+`dotnet watch` reruns this command automatically each time it detects a
+change in a tracked source file — the test project itself or the referenced
+starter project — so you get fresh pass/fail feedback on every save without
+leaving the terminal. Because `Starter` is the default, this always exercises
+your in-progress work; stop the watcher with `Ctrl+C` when you are done. Add
+`-p:CourseImplementation=Solution` only if you deliberately want to watch the
+reference solution instead.
 
 ## 🗺️ Exercise index
 

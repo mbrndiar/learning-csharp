@@ -9,7 +9,7 @@ dotnet --info
 dotnet File.cs
 dotnet restore LearningCSharp.slnx --locked-mode
 dotnet build LearningCSharp.slnx --configuration Release
-dotnet test --solution LearningCSharp.slnx --configuration Release
+dotnet test --solution LearningCSharp.slnx --configuration Release -p:CourseImplementation=Solution
 dotnet format LearningCSharp.slnx
 dotnet run --project path/to/App.csproj
 ```

@@ -90,7 +90,7 @@ Then widen the checks:
 ```console
 dotnet format LearningCSharp.slnx
 dotnet build LearningCSharp.slnx --configuration Release
-dotnet test --solution LearningCSharp.slnx --configuration Release
+dotnet test --solution LearningCSharp.slnx --configuration Release -p:CourseImplementation=Solution
 dotnet run --project tools/CourseVerifier -- verify
 dotnet run --project tools/CourseVerifier -- starters
 ```
@@ -108,15 +108,21 @@ dotnet clean LearningCSharp.slnx
 
 ## Run exercise starter feedback
 
-Exercise tests target the reference solution by default. Select the starter:
+Exercise tests target your starter work by default, so the shortest command
+exercises the code you are changing:
 
 ```console
-dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj \
-  -p:CourseImplementation=Starter
+dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj
 ```
 
 An untouched starter restores and compiles, then reports focused failures for
-behavior you must implement. Work on one failure at a time.
+behavior you must implement. Work on one failure at a time. To check the
+finished reference solution instead, select it explicitly:
+
+```console
+dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj \
+  -p:CourseImplementation=Solution
+```
 
 ## Platform notes
 
