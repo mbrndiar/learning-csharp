@@ -34,213 +34,213 @@
     <Project Path="capstones/idiomatic/tests/ReadingLog.Tests.csproj" />
   </Folder>
   <Folder Name="/exercises/" />
-  <Folder Name="/exercises/01_first_program/" />
-  <Folder Name="/exercises/01_first_program/solution/">
-    <Project Path="exercises/01_first_program/solution/FirstProgram.csproj" />
+  <Folder Name="/exercises/01-first-program/" />
+  <Folder Name="/exercises/01-first-program/solution/">
+    <Project Path="exercises/01-first-program/solution/FirstProgram.csproj" />
   </Folder>
-  <Folder Name="/exercises/01_first_program/starter/">
-    <Project Path="exercises/01_first_program/starter/FirstProgram.csproj" />
+  <Folder Name="/exercises/01-first-program/starter/">
+    <Project Path="exercises/01-first-program/starter/FirstProgram.csproj" />
   </Folder>
-  <Folder Name="/exercises/01_first_program/tests/">
-    <Project Path="exercises/01_first_program/tests/FirstProgram.Tests.csproj" />
+  <Folder Name="/exercises/01-first-program/tests/">
+    <Project Path="exercises/01-first-program/tests/FirstProgram.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/02_values_types_and_null/" />
-  <Folder Name="/exercises/02_values_types_and_null/solution/">
-    <Project Path="exercises/02_values_types_and_null/solution/ValuesTypesAndNull.csproj" />
+  <Folder Name="/exercises/02-values-types-and-null/" />
+  <Folder Name="/exercises/02-values-types-and-null/solution/">
+    <Project Path="exercises/02-values-types-and-null/solution/ValuesTypesAndNull.csproj" />
   </Folder>
-  <Folder Name="/exercises/02_values_types_and_null/starter/">
-    <Project Path="exercises/02_values_types_and_null/starter/ValuesTypesAndNull.csproj" />
+  <Folder Name="/exercises/02-values-types-and-null/starter/">
+    <Project Path="exercises/02-values-types-and-null/starter/ValuesTypesAndNull.csproj" />
   </Folder>
-  <Folder Name="/exercises/02_values_types_and_null/tests/">
-    <Project Path="exercises/02_values_types_and_null/tests/ValuesTypesAndNull.Tests.csproj" />
+  <Folder Name="/exercises/02-values-types-and-null/tests/">
+    <Project Path="exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/03_decisions_and_repetition/" />
-  <Folder Name="/exercises/03_decisions_and_repetition/solution/">
-    <Project Path="exercises/03_decisions_and_repetition/solution/DecisionsAndRepetition.csproj" />
+  <Folder Name="/exercises/03-decisions-and-repetition/" />
+  <Folder Name="/exercises/03-decisions-and-repetition/solution/">
+    <Project Path="exercises/03-decisions-and-repetition/solution/DecisionsAndRepetition.csproj" />
   </Folder>
-  <Folder Name="/exercises/03_decisions_and_repetition/starter/">
-    <Project Path="exercises/03_decisions_and_repetition/starter/DecisionsAndRepetition.csproj" />
+  <Folder Name="/exercises/03-decisions-and-repetition/starter/">
+    <Project Path="exercises/03-decisions-and-repetition/starter/DecisionsAndRepetition.csproj" />
   </Folder>
-  <Folder Name="/exercises/03_decisions_and_repetition/tests/">
-    <Project Path="exercises/03_decisions_and_repetition/tests/DecisionsAndRepetition.Tests.csproj" />
+  <Folder Name="/exercises/03-decisions-and-repetition/tests/">
+    <Project Path="exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/04_collections_and_iteration/" />
-  <Folder Name="/exercises/04_collections_and_iteration/solution/">
-    <Project Path="exercises/04_collections_and_iteration/solution/CollectionsAndIteration.csproj" />
+  <Folder Name="/exercises/04-collections-and-iteration/" />
+  <Folder Name="/exercises/04-collections-and-iteration/solution/">
+    <Project Path="exercises/04-collections-and-iteration/solution/CollectionsAndIteration.csproj" />
   </Folder>
-  <Folder Name="/exercises/04_collections_and_iteration/starter/">
-    <Project Path="exercises/04_collections_and_iteration/starter/CollectionsAndIteration.csproj" />
+  <Folder Name="/exercises/04-collections-and-iteration/starter/">
+    <Project Path="exercises/04-collections-and-iteration/starter/CollectionsAndIteration.csproj" />
   </Folder>
-  <Folder Name="/exercises/04_collections_and_iteration/tests/">
-    <Project Path="exercises/04_collections_and_iteration/tests/CollectionsAndIteration.Tests.csproj" />
+  <Folder Name="/exercises/04-collections-and-iteration/tests/">
+    <Project Path="exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/05_methods_errors_and_debugging/" />
-  <Folder Name="/exercises/05_methods_errors_and_debugging/solution/">
-    <Project Path="exercises/05_methods_errors_and_debugging/solution/MethodsErrorsAndDebugging.csproj" />
+  <Folder Name="/exercises/05-methods-errors-and-debugging/" />
+  <Folder Name="/exercises/05-methods-errors-and-debugging/solution/">
+    <Project Path="exercises/05-methods-errors-and-debugging/solution/MethodsErrorsAndDebugging.csproj" />
   </Folder>
-  <Folder Name="/exercises/05_methods_errors_and_debugging/starter/">
-    <Project Path="exercises/05_methods_errors_and_debugging/starter/MethodsErrorsAndDebugging.csproj" />
+  <Folder Name="/exercises/05-methods-errors-and-debugging/starter/">
+    <Project Path="exercises/05-methods-errors-and-debugging/starter/MethodsErrorsAndDebugging.csproj" />
   </Folder>
-  <Folder Name="/exercises/05_methods_errors_and_debugging/tests/">
-    <Project Path="exercises/05_methods_errors_and_debugging/tests/MethodsErrorsAndDebugging.Tests.csproj" />
+  <Folder Name="/exercises/05-methods-errors-and-debugging/tests/">
+    <Project Path="exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/06_projects_solutions_and_builds/" />
-  <Folder Name="/exercises/06_projects_solutions_and_builds/solution/">
-    <Project Path="exercises/06_projects_solutions_and_builds/solution/ProjectsSolutionsBuildsPractice.csproj" />
+  <Folder Name="/exercises/06-projects-solutions-and-builds/" />
+  <Folder Name="/exercises/06-projects-solutions-and-builds/solution/">
+    <Project Path="exercises/06-projects-solutions-and-builds/solution/ProjectsSolutionsBuildsPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/06_projects_solutions_and_builds/starter/">
-    <Project Path="exercises/06_projects_solutions_and_builds/starter/ProjectsSolutionsBuildsPractice.csproj" />
+  <Folder Name="/exercises/06-projects-solutions-and-builds/starter/">
+    <Project Path="exercises/06-projects-solutions-and-builds/starter/ProjectsSolutionsBuildsPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/06_projects_solutions_and_builds/tests/">
-    <Project Path="exercises/06_projects_solutions_and_builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj" />
+  <Folder Name="/exercises/06-projects-solutions-and-builds/tests/">
+    <Project Path="exercises/06-projects-solutions-and-builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/07_modeling_data_and_behavior/" />
-  <Folder Name="/exercises/07_modeling_data_and_behavior/solution/">
-    <Project Path="exercises/07_modeling_data_and_behavior/solution/ModelingDataBehaviorPractice.csproj" />
+  <Folder Name="/exercises/07-modeling-data-and-behavior/" />
+  <Folder Name="/exercises/07-modeling-data-and-behavior/solution/">
+    <Project Path="exercises/07-modeling-data-and-behavior/solution/ModelingDataBehaviorPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/07_modeling_data_and_behavior/starter/">
-    <Project Path="exercises/07_modeling_data_and_behavior/starter/ModelingDataBehaviorPractice.csproj" />
+  <Folder Name="/exercises/07-modeling-data-and-behavior/starter/">
+    <Project Path="exercises/07-modeling-data-and-behavior/starter/ModelingDataBehaviorPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/07_modeling_data_and_behavior/tests/">
-    <Project Path="exercises/07_modeling_data_and_behavior/tests/ModelingDataBehaviorPractice.Tests.csproj" />
+  <Folder Name="/exercises/07-modeling-data-and-behavior/tests/">
+    <Project Path="exercises/07-modeling-data-and-behavior/tests/ModelingDataBehaviorPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/08_abstractions_generics_and_delegates/" />
-  <Folder Name="/exercises/08_abstractions_generics_and_delegates/solution/">
-    <Project Path="exercises/08_abstractions_generics_and_delegates/solution/AbstractionsGenericsDelegatesPractice.csproj" />
+  <Folder Name="/exercises/08-abstractions-generics-and-delegates/" />
+  <Folder Name="/exercises/08-abstractions-generics-and-delegates/solution/">
+    <Project Path="exercises/08-abstractions-generics-and-delegates/solution/AbstractionsGenericsDelegatesPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/08_abstractions_generics_and_delegates/starter/">
-    <Project Path="exercises/08_abstractions_generics_and_delegates/starter/AbstractionsGenericsDelegatesPractice.csproj" />
+  <Folder Name="/exercises/08-abstractions-generics-and-delegates/starter/">
+    <Project Path="exercises/08-abstractions-generics-and-delegates/starter/AbstractionsGenericsDelegatesPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/08_abstractions_generics_and_delegates/tests/">
-    <Project Path="exercises/08_abstractions_generics_and_delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj" />
+  <Folder Name="/exercises/08-abstractions-generics-and-delegates/tests/">
+    <Project Path="exercises/08-abstractions-generics-and-delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/09_linq_and_transformations/" />
-  <Folder Name="/exercises/09_linq_and_transformations/solution/">
-    <Project Path="exercises/09_linq_and_transformations/solution/LinqTransformationsPractice.csproj" />
+  <Folder Name="/exercises/09-linq-and-transformations/" />
+  <Folder Name="/exercises/09-linq-and-transformations/solution/">
+    <Project Path="exercises/09-linq-and-transformations/solution/LinqTransformationsPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/09_linq_and_transformations/starter/">
-    <Project Path="exercises/09_linq_and_transformations/starter/LinqTransformationsPractice.csproj" />
+  <Folder Name="/exercises/09-linq-and-transformations/starter/">
+    <Project Path="exercises/09-linq-and-transformations/starter/LinqTransformationsPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/09_linq_and_transformations/tests/">
-    <Project Path="exercises/09_linq_and_transformations/tests/LinqTransformationsPractice.Tests.csproj" />
+  <Folder Name="/exercises/09-linq-and-transformations/tests/">
+    <Project Path="exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/10_testing_and_dependency_boundaries/" />
-  <Folder Name="/exercises/10_testing_and_dependency_boundaries/solution/">
-    <Project Path="exercises/10_testing_and_dependency_boundaries/solution/TestingDependencyBoundariesPractice.csproj" />
+  <Folder Name="/exercises/10-testing-and-dependency-boundaries/" />
+  <Folder Name="/exercises/10-testing-and-dependency-boundaries/solution/">
+    <Project Path="exercises/10-testing-and-dependency-boundaries/solution/TestingDependencyBoundariesPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/10_testing_and_dependency_boundaries/starter/">
-    <Project Path="exercises/10_testing_and_dependency_boundaries/starter/TestingDependencyBoundariesPractice.csproj" />
+  <Folder Name="/exercises/10-testing-and-dependency-boundaries/starter/">
+    <Project Path="exercises/10-testing-and-dependency-boundaries/starter/TestingDependencyBoundariesPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/10_testing_and_dependency_boundaries/tests/">
-    <Project Path="exercises/10_testing_and_dependency_boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj" />
+  <Folder Name="/exercises/10-testing-and-dependency-boundaries/tests/">
+    <Project Path="exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/11_files_streams_and_json/" />
-  <Folder Name="/exercises/11_files_streams_and_json/solution/">
-    <Project Path="exercises/11_files_streams_and_json/solution/RecipeStoragePractice/RecipeStoragePractice.csproj" />
+  <Folder Name="/exercises/11-files-streams-and-json/" />
+  <Folder Name="/exercises/11-files-streams-and-json/solution/">
+    <Project Path="exercises/11-files-streams-and-json/solution/RecipeStoragePractice/RecipeStoragePractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/11_files_streams_and_json/starter/">
-    <Project Path="exercises/11_files_streams_and_json/starter/RecipeStoragePractice/RecipeStoragePractice.csproj" />
+  <Folder Name="/exercises/11-files-streams-and-json/starter/">
+    <Project Path="exercises/11-files-streams-and-json/starter/RecipeStoragePractice/RecipeStoragePractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/11_files_streams_and_json/tests/">
-    <Project Path="exercises/11_files_streams_and_json/tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj" />
+  <Folder Name="/exercises/11-files-streams-and-json/tests/">
+    <Project Path="exercises/11-files-streams-and-json/tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/12_async_cancellation_and_concurrency/" />
-  <Folder Name="/exercises/12_async_cancellation_and_concurrency/solution/">
-    <Project Path="exercises/12_async_cancellation_and_concurrency/solution/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj" />
+  <Folder Name="/exercises/12-async-cancellation-and-concurrency/" />
+  <Folder Name="/exercises/12-async-cancellation-and-concurrency/solution/">
+    <Project Path="exercises/12-async-cancellation-and-concurrency/solution/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/12_async_cancellation_and_concurrency/starter/">
-    <Project Path="exercises/12_async_cancellation_and_concurrency/starter/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj" />
+  <Folder Name="/exercises/12-async-cancellation-and-concurrency/starter/">
+    <Project Path="exercises/12-async-cancellation-and-concurrency/starter/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/12_async_cancellation_and_concurrency/tests/">
-    <Project Path="exercises/12_async_cancellation_and_concurrency/tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj" />
+  <Folder Name="/exercises/12-async-cancellation-and-concurrency/tests/">
+    <Project Path="exercises/12-async-cancellation-and-concurrency/tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/13_sql_and_sqlite/" />
-  <Folder Name="/exercises/13_sql_and_sqlite/solution/">
-    <Project Path="exercises/13_sql_and_sqlite/solution/LibraryCatalogPractice/LibraryCatalogPractice.csproj" />
+  <Folder Name="/exercises/13-sql-and-sqlite/" />
+  <Folder Name="/exercises/13-sql-and-sqlite/solution/">
+    <Project Path="exercises/13-sql-and-sqlite/solution/LibraryCatalogPractice/LibraryCatalogPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/13_sql_and_sqlite/starter/">
-    <Project Path="exercises/13_sql_and_sqlite/starter/LibraryCatalogPractice/LibraryCatalogPractice.csproj" />
+  <Folder Name="/exercises/13-sql-and-sqlite/starter/">
+    <Project Path="exercises/13-sql-and-sqlite/starter/LibraryCatalogPractice/LibraryCatalogPractice.csproj" />
   </Folder>
-  <Folder Name="/exercises/13_sql_and_sqlite/tests/">
-    <Project Path="exercises/13_sql_and_sqlite/tests/LibraryCatalogPractice.Tests/LibraryCatalogPractice.Tests.csproj" />
+  <Folder Name="/exercises/13-sql-and-sqlite/tests/">
+    <Project Path="exercises/13-sql-and-sqlite/tests/LibraryCatalogPractice.Tests/LibraryCatalogPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/14_http_clients_and_minimal_apis/" />
-  <Folder Name="/exercises/14_http_clients_and_minimal_apis/solution/">
-    <Project Path="exercises/14_http_clients_and_minimal_apis/solution/ReadingListApi.Core/ReadingListApi.Core.csproj" />
-    <Project Path="exercises/14_http_clients_and_minimal_apis/solution/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj" />
-    <Project Path="exercises/14_http_clients_and_minimal_apis/solution/ReadingListApi/ReadingListApi.csproj" />
-    <Project Path="exercises/14_http_clients_and_minimal_apis/solution/ReadingListClient/ReadingListClient.csproj" />
+  <Folder Name="/exercises/14-http-clients-and-minimal-apis/" />
+  <Folder Name="/exercises/14-http-clients-and-minimal-apis/solution/">
+    <Project Path="exercises/14-http-clients-and-minimal-apis/solution/ReadingListApi.Core/ReadingListApi.Core.csproj" />
+    <Project Path="exercises/14-http-clients-and-minimal-apis/solution/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj" />
+    <Project Path="exercises/14-http-clients-and-minimal-apis/solution/ReadingListApi/ReadingListApi.csproj" />
+    <Project Path="exercises/14-http-clients-and-minimal-apis/solution/ReadingListClient/ReadingListClient.csproj" />
   </Folder>
-  <Folder Name="/exercises/14_http_clients_and_minimal_apis/starter/">
-    <Project Path="exercises/14_http_clients_and_minimal_apis/starter/ReadingListApi.Core/ReadingListApi.Core.csproj" />
-    <Project Path="exercises/14_http_clients_and_minimal_apis/starter/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj" />
-    <Project Path="exercises/14_http_clients_and_minimal_apis/starter/ReadingListApi/ReadingListApi.csproj" />
-    <Project Path="exercises/14_http_clients_and_minimal_apis/starter/ReadingListClient/ReadingListClient.csproj" />
+  <Folder Name="/exercises/14-http-clients-and-minimal-apis/starter/">
+    <Project Path="exercises/14-http-clients-and-minimal-apis/starter/ReadingListApi.Core/ReadingListApi.Core.csproj" />
+    <Project Path="exercises/14-http-clients-and-minimal-apis/starter/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj" />
+    <Project Path="exercises/14-http-clients-and-minimal-apis/starter/ReadingListApi/ReadingListApi.csproj" />
+    <Project Path="exercises/14-http-clients-and-minimal-apis/starter/ReadingListClient/ReadingListClient.csproj" />
   </Folder>
-  <Folder Name="/exercises/14_http_clients_and_minimal_apis/tests/">
-    <Project Path="exercises/14_http_clients_and_minimal_apis/tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj" />
+  <Folder Name="/exercises/14-http-clients-and-minimal-apis/tests/">
+    <Project Path="exercises/14-http-clients-and-minimal-apis/tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj" />
   </Folder>
-  <Folder Name="/exercises/15_application_composition/" />
-  <Folder Name="/exercises/15_application_composition/solution/">
-    <Project Path="exercises/15_application_composition/solution/ReadingLog.Application/ReadingLog.Application.csproj" />
-    <Project Path="exercises/15_application_composition/solution/ReadingLog.Cli/ReadingLog.Cli.csproj" />
-    <Project Path="exercises/15_application_composition/solution/ReadingLog.Domain/ReadingLog.Domain.csproj" />
+  <Folder Name="/exercises/15-application-composition/" />
+  <Folder Name="/exercises/15-application-composition/solution/">
+    <Project Path="exercises/15-application-composition/solution/ReadingLog.Application/ReadingLog.Application.csproj" />
+    <Project Path="exercises/15-application-composition/solution/ReadingLog.Cli/ReadingLog.Cli.csproj" />
+    <Project Path="exercises/15-application-composition/solution/ReadingLog.Domain/ReadingLog.Domain.csproj" />
   </Folder>
-  <Folder Name="/exercises/15_application_composition/starter/">
-    <Project Path="exercises/15_application_composition/starter/ReadingLog.Application/ReadingLog.Application.csproj" />
-    <Project Path="exercises/15_application_composition/starter/ReadingLog.Cli/ReadingLog.Cli.csproj" />
-    <Project Path="exercises/15_application_composition/starter/ReadingLog.Domain/ReadingLog.Domain.csproj" />
+  <Folder Name="/exercises/15-application-composition/starter/">
+    <Project Path="exercises/15-application-composition/starter/ReadingLog.Application/ReadingLog.Application.csproj" />
+    <Project Path="exercises/15-application-composition/starter/ReadingLog.Cli/ReadingLog.Cli.csproj" />
+    <Project Path="exercises/15-application-composition/starter/ReadingLog.Domain/ReadingLog.Domain.csproj" />
   </Folder>
-  <Folder Name="/exercises/15_application_composition/tests/">
-    <Project Path="exercises/15_application_composition/tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj" />
+  <Folder Name="/exercises/15-application-composition/tests/">
+    <Project Path="exercises/15-application-composition/tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj" />
   </Folder>
   <Folder Name="/lessons/" />
-  <Folder Name="/lessons/06_projects_solutions_and_builds/" />
-  <Folder Name="/lessons/06_projects_solutions_and_builds/project_workbench/">
-    <Project Path="lessons/06_projects_solutions_and_builds/project_workbench/ProjectWorkbench.App/ProjectWorkbench.App.csproj" />
-    <Project Path="lessons/06_projects_solutions_and_builds/project_workbench/ProjectWorkbench.Text/ProjectWorkbench.Text.csproj" />
+  <Folder Name="/lessons/06-projects-solutions-and-builds/" />
+  <Folder Name="/lessons/06-projects-solutions-and-builds/ProjectWorkbench/">
+    <Project Path="lessons/06-projects-solutions-and-builds/ProjectWorkbench/ProjectWorkbench.App/ProjectWorkbench.App.csproj" />
+    <Project Path="lessons/06-projects-solutions-and-builds/ProjectWorkbench/ProjectWorkbench.Text/ProjectWorkbench.Text.csproj" />
   </Folder>
-  <Folder Name="/lessons/07_modeling_data_and_behavior/" />
-  <Folder Name="/lessons/07_modeling_data_and_behavior/reservation_tracker/">
-    <Project Path="lessons/07_modeling_data_and_behavior/reservation_tracker/ReservationTracker.csproj" />
+  <Folder Name="/lessons/07-modeling-data-and-behavior/" />
+  <Folder Name="/lessons/07-modeling-data-and-behavior/ReservationTracker/">
+    <Project Path="lessons/07-modeling-data-and-behavior/ReservationTracker/ReservationTracker.csproj" />
   </Folder>
-  <Folder Name="/lessons/08_abstractions_generics_and_delegates/" />
-  <Folder Name="/lessons/08_abstractions_generics_and_delegates/curation_console/">
-    <Project Path="lessons/08_abstractions_generics_and_delegates/curation_console/CurationConsole.csproj" />
+  <Folder Name="/lessons/08-abstractions-generics-and-delegates/" />
+  <Folder Name="/lessons/08-abstractions-generics-and-delegates/CurationConsole/">
+    <Project Path="lessons/08-abstractions-generics-and-delegates/CurationConsole/CurationConsole.csproj" />
   </Folder>
-  <Folder Name="/lessons/09_linq_and_transformations/" />
-  <Folder Name="/lessons/09_linq_and_transformations/reading_progress_report/">
-    <Project Path="lessons/09_linq_and_transformations/reading_progress_report/ReadingProgressReport.csproj" />
+  <Folder Name="/lessons/09-linq-and-transformations/" />
+  <Folder Name="/lessons/09-linq-and-transformations/ReadingProgressReport/">
+    <Project Path="lessons/09-linq-and-transformations/ReadingProgressReport/ReadingProgressReport.csproj" />
   </Folder>
-  <Folder Name="/lessons/10_testing_and_dependency_boundaries/" />
-  <Folder Name="/lessons/10_testing_and_dependency_boundaries/reminder_boundary_demo/">
-    <Project Path="lessons/10_testing_and_dependency_boundaries/reminder_boundary_demo/ReminderBoundaryDemo.csproj" />
+  <Folder Name="/lessons/10-testing-and-dependency-boundaries/" />
+  <Folder Name="/lessons/10-testing-and-dependency-boundaries/ReminderBoundaryDemo/">
+    <Project Path="lessons/10-testing-and-dependency-boundaries/ReminderBoundaryDemo/ReminderBoundaryDemo.csproj" />
   </Folder>
-  <Folder Name="/lessons/10_testing_and_dependency_boundaries/reminder_boundary_demo_tests/">
-    <Project Path="lessons/10_testing_and_dependency_boundaries/reminder_boundary_demo_tests/ReminderBoundaryDemo.Tests.csproj" />
+  <Folder Name="/lessons/10-testing-and-dependency-boundaries/ReminderBoundaryDemo.Tests/">
+    <Project Path="lessons/10-testing-and-dependency-boundaries/ReminderBoundaryDemo.Tests/ReminderBoundaryDemo.Tests.csproj" />
   </Folder>
-  <Folder Name="/lessons/11_files_streams_and_json/" />
-  <Folder Name="/lessons/11_files_streams_and_json/recipe_journal/">
-    <Project Path="lessons/11_files_streams_and_json/recipe_journal/RecipeJournalSample.csproj" />
+  <Folder Name="/lessons/11-files-streams-and-json/" />
+  <Folder Name="/lessons/11-files-streams-and-json/RecipeJournalSample/">
+    <Project Path="lessons/11-files-streams-and-json/RecipeJournalSample/RecipeJournalSample.csproj" />
   </Folder>
-  <Folder Name="/lessons/12_async_cancellation_and_concurrency/" />
-  <Folder Name="/lessons/12_async_cancellation_and_concurrency/async_work_scheduler/">
-    <Project Path="lessons/12_async_cancellation_and_concurrency/async_work_scheduler/AsyncWorkSchedulerSample.csproj" />
+  <Folder Name="/lessons/12-async-cancellation-and-concurrency/" />
+  <Folder Name="/lessons/12-async-cancellation-and-concurrency/AsyncWorkSchedulerSample/">
+    <Project Path="lessons/12-async-cancellation-and-concurrency/AsyncWorkSchedulerSample/AsyncWorkSchedulerSample.csproj" />
   </Folder>
-  <Folder Name="/lessons/13_sql_and_sqlite/" />
-  <Folder Name="/lessons/13_sql_and_sqlite/library_catalog_sample/">
-    <Project Path="lessons/13_sql_and_sqlite/library_catalog_sample/LibraryCatalogSample.csproj" />
+  <Folder Name="/lessons/13-sql-and-sqlite/" />
+  <Folder Name="/lessons/13-sql-and-sqlite/LibraryCatalogSample/">
+    <Project Path="lessons/13-sql-and-sqlite/LibraryCatalogSample/LibraryCatalogSample.csproj" />
   </Folder>
-  <Folder Name="/lessons/14_http_clients_and_minimal_apis/" />
-  <Folder Name="/lessons/14_http_clients_and_minimal_apis/middleware_book_api/">
-    <Project Path="lessons/14_http_clients_and_minimal_apis/middleware_book_api/MiddlewareBookApiSample.csproj" />
+  <Folder Name="/lessons/14-http-clients-and-minimal-apis/" />
+  <Folder Name="/lessons/14-http-clients-and-minimal-apis/MiddlewareBookApiSample/">
+    <Project Path="lessons/14-http-clients-and-minimal-apis/MiddlewareBookApiSample/MiddlewareBookApiSample.csproj" />
   </Folder>
-  <Folder Name="/lessons/14_http_clients_and_minimal_apis/reading_list_api/">
-    <Project Path="lessons/14_http_clients_and_minimal_apis/reading_list_api/ReadingListApiSample.csproj" />
+  <Folder Name="/lessons/14-http-clients-and-minimal-apis/ReadingListApiSample/">
+    <Project Path="lessons/14-http-clients-and-minimal-apis/ReadingListApiSample/ReadingListApiSample.csproj" />
   </Folder>
-  <Folder Name="/lessons/15_application_composition/" />
-  <Folder Name="/lessons/15_application_composition/reading_log_cli/">
-    <Project Path="lessons/15_application_composition/reading_log_cli/ReadingLogCliSample.csproj" />
+  <Folder Name="/lessons/15-application-composition/" />
+  <Folder Name="/lessons/15-application-composition/ReadingLogCliSample/">
+    <Project Path="lessons/15-application-composition/ReadingLogCliSample/ReadingLogCliSample.csproj" />
   </Folder>
   <Folder Name="/projects/" />
   <Folder Name="/projects/tasks/" />

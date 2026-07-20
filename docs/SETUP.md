@@ -60,7 +60,7 @@ dotnet restore LearningCSharp.slnx --locked-mode
 ## 5. Run the first lesson
 
 ```console
-dotnet lessons/01_first_program/01_hello_first_program.cs
+dotnet lessons/01-first-program/01-HelloFirstProgram.cs
 ```
 
 File-based apps are compiled C# programs. .NET generates temporary project
@@ -82,7 +82,7 @@ hide required build or test steps.
 Run the smallest relevant lesson or test first. For example:
 
 ```console
-dotnet test --project exercises/07_modeling_data_and_behavior/tests/ModelingDataBehaviorPractice.Tests.csproj
+dotnet test --project exercises/07-modeling-data-and-behavior/tests/ModelingDataBehaviorPractice.Tests.csproj
 ```
 
 Then widen the checks:
@@ -111,7 +111,7 @@ dotnet clean LearningCSharp.slnx
 Exercise tests target the reference solution by default. Select the starter:
 
 ```console
-dotnet test --project exercises/09_linq_and_transformations/tests/LinqTransformationsPractice.Tests.csproj \
+dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj \
   -p:CourseImplementation=Starter
 ```
 

@@ -25,12 +25,12 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 | Authority and profile | Conforms | Root entry point; [setup](SETUP.md); [authoritative sources](SOURCES.md); .NET 10 selection in `global.json`; `net10.0`/C# 14 in `Directory.Build.props`; central stable package pins. |
 | Pedagogy and sequence | Conforms | Fifteen ordered `lessons/*/README.md` guides; [curriculum matrix](CURRICULUM_MATRIX.md); 21 manifest-run lesson artifacts; top-level test-driven exercises; SQL and low-level HTTP prerequisites before applied work. |
 | Repository roles | Conforms | Shared `lessons/`, `exercises/`, `projects/tasks/`, and `capstones/{comparative,idiomatic}` roles with indexes; [migration guide](STRUCTURE_MIGRATION.md); no legacy `course/`, `Practice/`, `Samples/`, singular `capstone/`, or top-level `examples/` role. |
-| Integrity and completeness | Conforms locally | `course-manifest.json` validates lesson/exercise/destination paths; CourseVerifier runs every declared lesson artifact, checks links/anchors and README presentation, rejects legacy roles, verifies 15 intentionally-red lesson starters, and runs three destination starter smokes. |
-| Idiomaticity and currency | Conforms | SDK-style projects and `.slnx`; nullable analysis/analyzers; central package management and locks; .NET packages at 10.0.10, Microsoft.OpenApi 3.9.0, patched SQLitePCLRaw 2.1.12, and xUnit v3/MTP v2; applied trees enforce one top-level type per matching file; Tasks separates Core, HTTP protocol, server infrastructure/adapters, client, and CLI. |
+| Integrity and completeness | Conforms locally | `course-manifest.json` validates lesson/exercise/destination paths; CourseVerifier runs every declared lesson artifact, checks links/anchors and README presentation, enforces the instructional naming boundary, rejects legacy roles, verifies 15 intentionally-red lesson starters, and runs three destination starter smokes. |
+| Idiomaticity and currency | Conforms | Ordered instructional slugs use `NN-kebab-case`; ordered file apps use `NN-PascalCase.cs`; buildable lesson directories match PascalCase project identities; SDK-style projects and `.slnx`; nullable analysis/analyzers; central package management and locks; .NET packages at 10.0.10, Microsoft.OpenApi 3.9.0, patched SQLitePCLRaw 2.1.12, and xUnit v3/MTP v2; applied trees enforce one top-level type per matching file; Tasks separates Core, HTTP protocol, server infrastructure/adapters, client, and CLI. |
 | Lifecycle and environments | Conforms locally; remote matrix deliberately deferred | Locked restore, format verification, Release build, 465 solution-selected tests, lesson execution, starter checks, three coverage gates, OpenAPI/spec checks, links, and audit configuration share the manual `.github/workflows/course.yml` commands. Per user instruction, the workflow remains manual-only and undispatched. |
 | Projects and capstones | Conforms locally | Tasks uses seven inward-pointing projects: Core + HTTP contract, shared server persistence/configuration, two leaf server adapters, reusable client, and CLI host. Comparative preserves frozen `comparative-kv` fixtures/processes. Idiomatic preserves Reading Log behavior. All three applied trees use one top-level type per file. |
-| Refinement and validation | Conforms locally | The role migration is evidence-backed across all sibling repositories, adapted to .NET rather than copied mechanically, and validated by change class. One final mixed read-only review remains required after the complete diff is staged. |
-| Git and delivery | Pending final delivery | Validated milestone commits use required trailers and push to `origin/main`. The final structural migration commit/range and remote manual workflow conclusion remain to be recorded. |
+| Refinement and validation | Conforms locally | The role and naming migrations are evidence-backed, adapted to .NET rather than copied mechanically, validated by change class, and independently reviewed once after the complete diff was staged. |
+| Git and delivery | Conforms | Validated milestone and naming-migration commits use required trailers and push to `origin/main`; the GitHub Actions workflow remains manual-only and undispatched. |
 | Evidence transfer | Conforms | Sibling repositories established the shared role invariant; C# paths, projects, packages, adapter comparison, SQLite APIs, test selection, and capstone implementations are target-specific and self-contained. |
 
 ## Local validation baseline
@@ -52,6 +52,10 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 
 - Complete runnable demonstrations stay with `lessons/`; incomplete learner work
   stays under `exercises/`. No top-level `examples/` role is invented.
+- Numeric order remains visible in `NN-kebab-case` lesson/exercise slugs and
+  `NN-PascalCase.cs` file apps. Buildable lesson project directories instead
+  match their PascalCase `.csproj` identity; lowercase role directories remain
+  structural rather than .NET identities.
 - Most exercises supply tests for production-code work. Lesson 10 also requires
   learner-authored Fact/Theory scenarios with non-leaking meta-feedback.
 - File-based C# apps reduce early ceremony and omit SDK/RID-specific virtual
@@ -81,11 +85,10 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 
 ## Final review and delivery gate
 
-Exactly one read-only mixed review inspected the staged Tasks/capstone
-architecture and type/file refactor. It found no blocker and independently
-confirmed inward project dependencies, starter/solution parity, unchanged
-observable contracts, capstone fixture integrity, the structural source gate,
-root wiring, and coverage scopes. Its one documentation suggestion is resolved
-by retaining concrete package-version evidence in the conformance summary.
-Affected documentation and link checks were repeated without a second review;
-the executable baseline above was unchanged.
+Exactly one final read-only mixed review inspected the complete staged naming
+migration. It found no blocker and independently confirmed the 15 lesson and 15
+exercise slugs, ten ordered file-app names, PascalCase lesson project identities,
+all 103 solution projects, manifest paths, project references, documentation,
+stale-name absence, naming verifier behavior, and the unchanged manual-only
+workflow. Affected documentation and link checks were repeated without a second
+review; the executable baseline above was unchanged.

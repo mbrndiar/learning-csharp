@@ -2,19 +2,19 @@
   "lessons": [
     {
       "order": 1,
-      "slug": "first_program",
-      "guide": "lessons/01_first_program/README.md",
-      "starterProjects": ["exercises/01_first_program/starter/FirstProgram.csproj"],
-      "solutionProjects": ["exercises/01_first_program/solution/FirstProgram.csproj"],
-      "testProjects": ["exercises/01_first_program/tests/FirstProgram.Tests.csproj"],
+      "slug": "first-program",
+      "guide": "lessons/01-first-program/README.md",
+      "starterProjects": ["exercises/01-first-program/starter/FirstProgram.csproj"],
+      "solutionProjects": ["exercises/01-first-program/solution/FirstProgram.csproj"],
+      "testProjects": ["exercises/01-first-program/tests/FirstProgram.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/01_first_program/01_hello_first_program.cs",
+          "path": "lessons/01-first-program/01-HelloFirstProgram.cs",
           "arguments": [],
           "expectedOutputContains": ["Hello from C#!"]
         },
         {
-          "path": "lessons/01_first_program/02_predict_run_modify.cs",
+          "path": "lessons/01-first-program/02-PredictRunModify.cs",
           "arguments": [],
           "expectedOutputContains": ["dotnet builds the file and runs it"]
         }
@@ -22,19 +22,19 @@
     },
     {
       "order": 2,
-      "slug": "values_types_and_null",
-      "guide": "lessons/02_values_types_and_null/README.md",
-      "starterProjects": ["exercises/02_values_types_and_null/starter/ValuesTypesAndNull.csproj"],
-      "solutionProjects": ["exercises/02_values_types_and_null/solution/ValuesTypesAndNull.csproj"],
-      "testProjects": ["exercises/02_values_types_and_null/tests/ValuesTypesAndNull.Tests.csproj"],
+      "slug": "values-types-and-null",
+      "guide": "lessons/02-values-types-and-null/README.md",
+      "starterProjects": ["exercises/02-values-types-and-null/starter/ValuesTypesAndNull.csproj"],
+      "solutionProjects": ["exercises/02-values-types-and-null/solution/ValuesTypesAndNull.csproj"],
+      "testProjects": ["exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/02_values_types_and_null/01_values_and_types.cs",
+          "path": "lessons/02-values-types-and-null/01-ValuesAndTypes.cs",
           "arguments": [],
           "expectedOutputContains": ["Café ☕", "Percent: 40.0%"]
         },
         {
-          "path": "lessons/02_values_types_and_null/02_nullable_values.cs",
+          "path": "lessons/02-values-types-and-null/02-NullableValues.cs",
           "arguments": [],
           "expectedOutputContains": ["(untitled): unrated", "Unicode 漢字"]
         }
@@ -42,19 +42,19 @@
     },
     {
       "order": 3,
-      "slug": "decisions_and_repetition",
-      "guide": "lessons/03_decisions_and_repetition/README.md",
-      "starterProjects": ["exercises/03_decisions_and_repetition/starter/DecisionsAndRepetition.csproj"],
-      "solutionProjects": ["exercises/03_decisions_and_repetition/solution/DecisionsAndRepetition.csproj"],
-      "testProjects": ["exercises/03_decisions_and_repetition/tests/DecisionsAndRepetition.Tests.csproj"],
+      "slug": "decisions-and-repetition",
+      "guide": "lessons/03-decisions-and-repetition/README.md",
+      "starterProjects": ["exercises/03-decisions-and-repetition/starter/DecisionsAndRepetition.csproj"],
+      "solutionProjects": ["exercises/03-decisions-and-repetition/solution/DecisionsAndRepetition.csproj"],
+      "testProjects": ["exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/03_decisions_and_repetition/01_decisions.cs",
+          "path": "lessons/03-decisions-and-repetition/01-Decisions.cs",
           "arguments": [],
           "expectedOutputContains": ["95: excellent", "44: needs work"]
         },
         {
-          "path": "lessons/03_decisions_and_repetition/02_repetition.cs",
+          "path": "lessons/03-decisions-and-repetition/02-Repetition.cs",
           "arguments": [],
           "expectedOutputContains": ["Lift off!"]
         }
@@ -62,19 +62,19 @@
     },
     {
       "order": 4,
-      "slug": "collections_and_iteration",
-      "guide": "lessons/04_collections_and_iteration/README.md",
-      "starterProjects": ["exercises/04_collections_and_iteration/starter/CollectionsAndIteration.csproj"],
-      "solutionProjects": ["exercises/04_collections_and_iteration/solution/CollectionsAndIteration.csproj"],
-      "testProjects": ["exercises/04_collections_and_iteration/tests/CollectionsAndIteration.Tests.csproj"],
+      "slug": "collections-and-iteration",
+      "guide": "lessons/04-collections-and-iteration/README.md",
+      "starterProjects": ["exercises/04-collections-and-iteration/starter/CollectionsAndIteration.csproj"],
+      "solutionProjects": ["exercises/04-collections-and-iteration/solution/CollectionsAndIteration.csproj"],
+      "testProjects": ["exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/04_collections_and_iteration/01_collections_overview.cs",
+          "path": "lessons/04-collections-and-iteration/01-CollectionsOverview.cs",
           "arguments": [],
           "expectedOutputContains": ["Array index 1:", "HashSet count after duplicates:"]
         },
         {
-          "path": "lessons/04_collections_and_iteration/02_mutation_vs_copying.cs",
+          "path": "lessons/04-collections-and-iteration/02-MutationVsCopying.cs",
           "arguments": [],
           "expectedOutputContains": ["Original array first item:", "Copied list first item:"]
         }
@@ -82,19 +82,19 @@
     },
     {
       "order": 5,
-      "slug": "methods_errors_and_debugging",
-      "guide": "lessons/05_methods_errors_and_debugging/README.md",
-      "starterProjects": ["exercises/05_methods_errors_and_debugging/starter/MethodsErrorsAndDebugging.csproj"],
-      "solutionProjects": ["exercises/05_methods_errors_and_debugging/solution/MethodsErrorsAndDebugging.csproj"],
-      "testProjects": ["exercises/05_methods_errors_and_debugging/tests/MethodsErrorsAndDebugging.Tests.csproj"],
+      "slug": "methods-errors-and-debugging",
+      "guide": "lessons/05-methods-errors-and-debugging/README.md",
+      "starterProjects": ["exercises/05-methods-errors-and-debugging/starter/MethodsErrorsAndDebugging.csproj"],
+      "solutionProjects": ["exercises/05-methods-errors-and-debugging/solution/MethodsErrorsAndDebugging.csproj"],
+      "testProjects": ["exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/05_methods_errors_and_debugging/01_methods_and_overloads.cs",
+          "path": "lessons/05-methods-errors-and-debugging/01-MethodsAndOverloads.cs",
           "arguments": [],
           "expectedOutputContains": ["Average of two scores:", "Average of three scores:"]
         },
         {
-          "path": "lessons/05_methods_errors_and_debugging/02_exceptions_and_debugging.cs",
+          "path": "lessons/05-methods-errors-and-debugging/02-ExceptionsAndDebugging.cs",
           "arguments": [],
           "expectedOutputContains": ["ArgumentException"]
         }
@@ -102,14 +102,14 @@
     },
     {
       "order": 6,
-      "slug": "projects_solutions_and_builds",
-      "guide": "lessons/06_projects_solutions_and_builds/README.md",
-      "starterProjects": ["exercises/06_projects_solutions_and_builds/starter/ProjectsSolutionsBuildsPractice.csproj"],
-      "solutionProjects": ["exercises/06_projects_solutions_and_builds/solution/ProjectsSolutionsBuildsPractice.csproj"],
-      "testProjects": ["exercises/06_projects_solutions_and_builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj"],
+      "slug": "projects-solutions-and-builds",
+      "guide": "lessons/06-projects-solutions-and-builds/README.md",
+      "starterProjects": ["exercises/06-projects-solutions-and-builds/starter/ProjectsSolutionsBuildsPractice.csproj"],
+      "solutionProjects": ["exercises/06-projects-solutions-and-builds/solution/ProjectsSolutionsBuildsPractice.csproj"],
+      "testProjects": ["exercises/06-projects-solutions-and-builds/tests/ProjectsSolutionsBuildsPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/06_projects_solutions_and_builds/project_workbench/ProjectWorkbench.App/ProjectWorkbench.App.csproj",
+          "path": "lessons/06-projects-solutions-and-builds/ProjectWorkbench/ProjectWorkbench.App/ProjectWorkbench.App.csproj",
           "arguments": [],
           "expectedOutputContains": ["Project: ProjectWorkbench.App", "Referenced assembly: ProjectWorkbench.Text"]
         }
@@ -117,14 +117,14 @@
     },
     {
       "order": 7,
-      "slug": "modeling_data_and_behavior",
-      "guide": "lessons/07_modeling_data_and_behavior/README.md",
-      "starterProjects": ["exercises/07_modeling_data_and_behavior/starter/ModelingDataBehaviorPractice.csproj"],
-      "solutionProjects": ["exercises/07_modeling_data_and_behavior/solution/ModelingDataBehaviorPractice.csproj"],
-      "testProjects": ["exercises/07_modeling_data_and_behavior/tests/ModelingDataBehaviorPractice.Tests.csproj"],
+      "slug": "modeling-data-and-behavior",
+      "guide": "lessons/07-modeling-data-and-behavior/README.md",
+      "starterProjects": ["exercises/07-modeling-data-and-behavior/starter/ModelingDataBehaviorPractice.csproj"],
+      "solutionProjects": ["exercises/07-modeling-data-and-behavior/solution/ModelingDataBehaviorPractice.csproj"],
+      "testProjects": ["exercises/07-modeling-data-and-behavior/tests/ModelingDataBehaviorPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/07_modeling_data_and_behavior/reservation_tracker/ReservationTracker.csproj",
+          "path": "lessons/07-modeling-data-and-behavior/ReservationTracker/ReservationTracker.csproj",
           "arguments": [],
           "expectedOutputContains": ["Party sizes equal by value: True", "Reservation status: Confirmed"]
         }
@@ -132,14 +132,14 @@
     },
     {
       "order": 8,
-      "slug": "abstractions_generics_and_delegates",
-      "guide": "lessons/08_abstractions_generics_and_delegates/README.md",
-      "starterProjects": ["exercises/08_abstractions_generics_and_delegates/starter/AbstractionsGenericsDelegatesPractice.csproj"],
-      "solutionProjects": ["exercises/08_abstractions_generics_and_delegates/solution/AbstractionsGenericsDelegatesPractice.csproj"],
-      "testProjects": ["exercises/08_abstractions_generics_and_delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj"],
+      "slug": "abstractions-generics-and-delegates",
+      "guide": "lessons/08-abstractions-generics-and-delegates/README.md",
+      "starterProjects": ["exercises/08-abstractions-generics-and-delegates/starter/AbstractionsGenericsDelegatesPractice.csproj"],
+      "solutionProjects": ["exercises/08-abstractions-generics-and-delegates/solution/AbstractionsGenericsDelegatesPractice.csproj"],
+      "testProjects": ["exercises/08-abstractions-generics-and-delegates/tests/AbstractionsGenericsDelegatesPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/08_abstractions_generics_and_delegates/curation_console/CurationConsole.csproj",
+          "path": "lessons/08-abstractions-generics-and-delegates/CurationConsole/CurationConsole.csproj",
           "arguments": [],
           "expectedOutputContains": ["Approved count: 2", "Keys: cs-basics, linq-lab"]
         }
@@ -147,14 +147,14 @@
     },
     {
       "order": 9,
-      "slug": "linq_and_transformations",
-      "guide": "lessons/09_linq_and_transformations/README.md",
-      "starterProjects": ["exercises/09_linq_and_transformations/starter/LinqTransformationsPractice.csproj"],
-      "solutionProjects": ["exercises/09_linq_and_transformations/solution/LinqTransformationsPractice.csproj"],
-      "testProjects": ["exercises/09_linq_and_transformations/tests/LinqTransformationsPractice.Tests.csproj"],
+      "slug": "linq-and-transformations",
+      "guide": "lessons/09-linq-and-transformations/README.md",
+      "starterProjects": ["exercises/09-linq-and-transformations/starter/LinqTransformationsPractice.csproj"],
+      "solutionProjects": ["exercises/09-linq-and-transformations/solution/LinqTransformationsPractice.csproj"],
+      "testProjects": ["exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/09_linq_and_transformations/reading_progress_report/ReadingProgressReport.csproj",
+          "path": "lessons/09-linq-and-transformations/ReadingProgressReport/ReadingProgressReport.csproj",
           "arguments": [],
           "expectedOutputContains": ["Completed learners: Ada, Grace, Linus", "Total completed minutes: 165"]
         }
@@ -162,14 +162,14 @@
     },
     {
       "order": 10,
-      "slug": "testing_and_dependency_boundaries",
-      "guide": "lessons/10_testing_and_dependency_boundaries/README.md",
-      "starterProjects": ["exercises/10_testing_and_dependency_boundaries/starter/TestingDependencyBoundariesPractice.csproj"],
-      "solutionProjects": ["exercises/10_testing_and_dependency_boundaries/solution/TestingDependencyBoundariesPractice.csproj"],
-      "testProjects": ["exercises/10_testing_and_dependency_boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj"],
+      "slug": "testing-and-dependency-boundaries",
+      "guide": "lessons/10-testing-and-dependency-boundaries/README.md",
+      "starterProjects": ["exercises/10-testing-and-dependency-boundaries/starter/TestingDependencyBoundariesPractice.csproj"],
+      "solutionProjects": ["exercises/10-testing-and-dependency-boundaries/solution/TestingDependencyBoundariesPractice.csproj"],
+      "testProjects": ["exercises/10-testing-and-dependency-boundaries/tests/TestingDependencyBoundariesPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/10_testing_and_dependency_boundaries/reminder_boundary_demo_tests/ReminderBoundaryDemo.Tests.csproj",
+          "path": "lessons/10-testing-and-dependency-boundaries/ReminderBoundaryDemo.Tests/ReminderBoundaryDemo.Tests.csproj",
           "arguments": [],
           "expectedOutputContains": ["total: 5"]
         }
@@ -177,14 +177,14 @@
     },
     {
       "order": 11,
-      "slug": "files_streams_and_json",
-      "guide": "lessons/11_files_streams_and_json/README.md",
-      "starterProjects": ["exercises/11_files_streams_and_json/starter/RecipeStoragePractice/RecipeStoragePractice.csproj"],
-      "solutionProjects": ["exercises/11_files_streams_and_json/solution/RecipeStoragePractice/RecipeStoragePractice.csproj"],
-      "testProjects": ["exercises/11_files_streams_and_json/tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj"],
+      "slug": "files-streams-and-json",
+      "guide": "lessons/11-files-streams-and-json/README.md",
+      "starterProjects": ["exercises/11-files-streams-and-json/starter/RecipeStoragePractice/RecipeStoragePractice.csproj"],
+      "solutionProjects": ["exercises/11-files-streams-and-json/solution/RecipeStoragePractice/RecipeStoragePractice.csproj"],
+      "testProjects": ["exercises/11-files-streams-and-json/tests/RecipeStoragePractice.Tests/RecipeStoragePractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/11_files_streams_and_json/recipe_journal/RecipeJournalSample.csproj",
+          "path": "lessons/11-files-streams-and-json/RecipeJournalSample/RecipeJournalSample.csproj",
           "arguments": [],
           "expectedOutputContains": ["Object -> JSON text", "Loaded 2 recipes"]
         }
@@ -192,14 +192,14 @@
     },
     {
       "order": 12,
-      "slug": "async_cancellation_and_concurrency",
-      "guide": "lessons/12_async_cancellation_and_concurrency/README.md",
-      "starterProjects": ["exercises/12_async_cancellation_and_concurrency/starter/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj"],
-      "solutionProjects": ["exercises/12_async_cancellation_and_concurrency/solution/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj"],
-      "testProjects": ["exercises/12_async_cancellation_and_concurrency/tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj"],
+      "slug": "async-cancellation-and-concurrency",
+      "guide": "lessons/12-async-cancellation-and-concurrency/README.md",
+      "starterProjects": ["exercises/12-async-cancellation-and-concurrency/starter/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj"],
+      "solutionProjects": ["exercises/12-async-cancellation-and-concurrency/solution/AsyncWorkSchedulerPractice/AsyncWorkSchedulerPractice.csproj"],
+      "testProjects": ["exercises/12-async-cancellation-and-concurrency/tests/AsyncWorkSchedulerPractice.Tests/AsyncWorkSchedulerPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/12_async_cancellation_and_concurrency/async_work_scheduler/AsyncWorkSchedulerSample.csproj",
+          "path": "lessons/12-async-cancellation-and-concurrency/AsyncWorkSchedulerSample/AsyncWorkSchedulerSample.csproj",
           "arguments": [],
           "expectedOutputContains": ["Completed: 3/3", "Total value: 15"]
         }
@@ -207,14 +207,14 @@
     },
     {
       "order": 13,
-      "slug": "sql_and_sqlite",
-      "guide": "lessons/13_sql_and_sqlite/README.md",
-      "starterProjects": ["exercises/13_sql_and_sqlite/starter/LibraryCatalogPractice/LibraryCatalogPractice.csproj"],
-      "solutionProjects": ["exercises/13_sql_and_sqlite/solution/LibraryCatalogPractice/LibraryCatalogPractice.csproj"],
-      "testProjects": ["exercises/13_sql_and_sqlite/tests/LibraryCatalogPractice.Tests/LibraryCatalogPractice.Tests.csproj"],
+      "slug": "sql-and-sqlite",
+      "guide": "lessons/13-sql-and-sqlite/README.md",
+      "starterProjects": ["exercises/13-sql-and-sqlite/starter/LibraryCatalogPractice/LibraryCatalogPractice.csproj"],
+      "solutionProjects": ["exercises/13-sql-and-sqlite/solution/LibraryCatalogPractice/LibraryCatalogPractice.csproj"],
+      "testProjects": ["exercises/13-sql-and-sqlite/tests/LibraryCatalogPractice.Tests/LibraryCatalogPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/13_sql_and_sqlite/library_catalog_sample/LibraryCatalogSample.csproj",
+          "path": "lessons/13-sql-and-sqlite/LibraryCatalogSample/LibraryCatalogSample.csproj",
           "arguments": [],
           "expectedOutputContains": ["Active loans", "Transaction rollback", "SEARCH Loans USING COVERING INDEX"]
         }
@@ -222,29 +222,29 @@
     },
     {
       "order": 14,
-      "slug": "http_clients_and_minimal_apis",
-      "guide": "lessons/14_http_clients_and_minimal_apis/README.md",
+      "slug": "http-clients-and-minimal-apis",
+      "guide": "lessons/14-http-clients-and-minimal-apis/README.md",
       "starterProjects": [
-        "exercises/14_http_clients_and_minimal_apis/starter/ReadingListApi.Core/ReadingListApi.Core.csproj",
-        "exercises/14_http_clients_and_minimal_apis/starter/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj",
-        "exercises/14_http_clients_and_minimal_apis/starter/ReadingListApi/ReadingListApi.csproj",
-        "exercises/14_http_clients_and_minimal_apis/starter/ReadingListClient/ReadingListClient.csproj"
+        "exercises/14-http-clients-and-minimal-apis/starter/ReadingListApi.Core/ReadingListApi.Core.csproj",
+        "exercises/14-http-clients-and-minimal-apis/starter/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj",
+        "exercises/14-http-clients-and-minimal-apis/starter/ReadingListApi/ReadingListApi.csproj",
+        "exercises/14-http-clients-and-minimal-apis/starter/ReadingListClient/ReadingListClient.csproj"
       ],
       "solutionProjects": [
-        "exercises/14_http_clients_and_minimal_apis/solution/ReadingListApi.Core/ReadingListApi.Core.csproj",
-        "exercises/14_http_clients_and_minimal_apis/solution/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj",
-        "exercises/14_http_clients_and_minimal_apis/solution/ReadingListApi/ReadingListApi.csproj",
-        "exercises/14_http_clients_and_minimal_apis/solution/ReadingListClient/ReadingListClient.csproj"
+        "exercises/14-http-clients-and-minimal-apis/solution/ReadingListApi.Core/ReadingListApi.Core.csproj",
+        "exercises/14-http-clients-and-minimal-apis/solution/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj",
+        "exercises/14-http-clients-and-minimal-apis/solution/ReadingListApi/ReadingListApi.csproj",
+        "exercises/14-http-clients-and-minimal-apis/solution/ReadingListClient/ReadingListClient.csproj"
       ],
-      "testProjects": ["exercises/14_http_clients_and_minimal_apis/tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj"],
+      "testProjects": ["exercises/14-http-clients-and-minimal-apis/tests/ReadingListPractice.Tests/ReadingListPractice.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/14_http_clients_and_minimal_apis/middleware_book_api/MiddlewareBookApiSample.csproj",
+          "path": "lessons/14-http-clients-and-minimal-apis/MiddlewareBookApiSample/MiddlewareBookApiSample.csproj",
           "arguments": ["--", "--smoke"],
           "expectedOutputContains": ["SMOKE TEST PASSED books=2 missing=404 badContentType=415 created=201"]
         },
         {
-          "path": "lessons/14_http_clients_and_minimal_apis/reading_list_api/ReadingListApiSample.csproj",
+          "path": "lessons/14-http-clients-and-minimal-apis/ReadingListApiSample/ReadingListApiSample.csproj",
           "arguments": ["--", "--smoke"],
           "expectedOutputContains": ["SMOKE TEST PASSED books=2 seeded=Clean Code missing=404 invalidPost=400 typedClientBooks=2"]
         }
@@ -252,22 +252,22 @@
     },
     {
       "order": 15,
-      "slug": "application_composition",
-      "guide": "lessons/15_application_composition/README.md",
+      "slug": "application-composition",
+      "guide": "lessons/15-application-composition/README.md",
       "starterProjects": [
-        "exercises/15_application_composition/starter/ReadingLog.Domain/ReadingLog.Domain.csproj",
-        "exercises/15_application_composition/starter/ReadingLog.Application/ReadingLog.Application.csproj",
-        "exercises/15_application_composition/starter/ReadingLog.Cli/ReadingLog.Cli.csproj"
+        "exercises/15-application-composition/starter/ReadingLog.Domain/ReadingLog.Domain.csproj",
+        "exercises/15-application-composition/starter/ReadingLog.Application/ReadingLog.Application.csproj",
+        "exercises/15-application-composition/starter/ReadingLog.Cli/ReadingLog.Cli.csproj"
       ],
       "solutionProjects": [
-        "exercises/15_application_composition/solution/ReadingLog.Domain/ReadingLog.Domain.csproj",
-        "exercises/15_application_composition/solution/ReadingLog.Application/ReadingLog.Application.csproj",
-        "exercises/15_application_composition/solution/ReadingLog.Cli/ReadingLog.Cli.csproj"
+        "exercises/15-application-composition/solution/ReadingLog.Domain/ReadingLog.Domain.csproj",
+        "exercises/15-application-composition/solution/ReadingLog.Application/ReadingLog.Application.csproj",
+        "exercises/15-application-composition/solution/ReadingLog.Cli/ReadingLog.Cli.csproj"
       ],
-      "testProjects": ["exercises/15_application_composition/tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj"],
+      "testProjects": ["exercises/15-application-composition/tests/ReadingLogComposition.Tests/ReadingLogComposition.Tests.csproj"],
       "runnables": [
         {
-          "path": "lessons/15_application_composition/reading_log_cli/ReadingLogCliSample.csproj",
+          "path": "lessons/15-application-composition/ReadingLogCliSample/ReadingLogCliSample.csproj",
           "arguments": [],
           "expectedOutputContains": ["--- File adapter ---", "--- HTTP adapter ---", "Exit code: 0"]
         }

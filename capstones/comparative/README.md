@@ -21,7 +21,7 @@ configuration store with exactly `set`, `get`, `delete`, and `list`.
 - the repository central package catalog must pin
   `Microsoft.Data.Sqlite` to `10.0.10` (the capstone's `PackageReference` has
   **no version**);
-- familiarity with [Lesson 13 — SQL and SQLite](../../lessons/13_sql_and_sqlite/):
+- familiarity with [Lesson 13 — SQL and SQLite](../../lessons/13-sql-and-sqlite/):
   tables, constraints, transactions, SQLite locking, and WAL.
 
 No server, network, HTTP, environment-variable configuration, or interactive

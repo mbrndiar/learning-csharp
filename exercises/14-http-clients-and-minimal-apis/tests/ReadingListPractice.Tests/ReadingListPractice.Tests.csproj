@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net10.0</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <UseMicrosoftTestingPlatformRunner>true</UseMicrosoftTestingPlatformRunner>
+    <CourseImplementation Condition="'$(CourseImplementation)' == ''">Solution</CourseImplementation>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="xunit.v3.mtp-v2" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.Testing" />
+    <!--
+      OpenAPI.NET's model/reader library: used for semantic parsing/validation
+      of the checked-in OpenAPI 3.1 contract (structure, required fields,
+      $ref resolution). It answers "is this document a well-formed OpenAPI
+      description?" - a distinct question from the live-behavior tests below,
+      which answer "does the running server actually behave this way?".
+    -->
+    <PackageReference Include="Microsoft.OpenApi" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Using Include="Xunit" />
+  </ItemGroup>
+
+  <!--
+    The lesson's checked-in OpenAPI 3.1 contract is the single source of truth;
+    it is linked here (not copied/duplicated) so the semantic-validation test
+    reads the same file a learner reads in the lesson.
+  -->
+  <ItemGroup>
+    <None Include="../../../../lessons/14-http-clients-and-minimal-apis/reading-list-api.openapi.json"
+          Link="TestData/reading-list-api.openapi.json"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+  <!--
+    ReadingListApi and ReadingListApi.Middleware each compile their own top-level
+    Program.cs into a public partial `Program` class in the global namespace.
+    Referencing both from one test project makes the unqualified name `Program`
+    ambiguous, so the middleware project is imported under the `MiddlewareApp`
+    extern alias and referenced as `MiddlewareApp::Program` in test code.
+  -->
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Starter'">
+    <ProjectReference Include="../../starter/ReadingListApi/ReadingListApi.csproj" />
+    <ProjectReference Include="../../starter/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj" Aliases="MiddlewareApp" />
+    <ProjectReference Include="../../starter/ReadingListApi.Core/ReadingListApi.Core.csproj" />
+    <ProjectReference Include="../../starter/ReadingListClient/ReadingListClient.csproj" />
+  </ItemGroup>
+
+  <ItemGroup Condition="'$(CourseImplementation)' == 'Solution'">
+    <ProjectReference Include="../../solution/ReadingListApi/ReadingListApi.csproj" />
+    <ProjectReference Include="../../solution/ReadingListApi.Middleware/ReadingListApi.Middleware.csproj" Aliases="MiddlewareApp" />
+    <ProjectReference Include="../../solution/ReadingListApi.Core/ReadingListApi.Core.csproj" />
+    <ProjectReference Include="../../solution/ReadingListClient/ReadingListClient.csproj" />
+  </ItemGroup>
+
+  <Target Name="ValidateCourseImplementation" BeforeTargets="ResolveReferences">
+    <Error
+      Condition="'$(CourseImplementation)' != 'Starter' and '$(CourseImplementation)' != 'Solution'"
+      Text="CourseImplementation must be exactly 'Starter' or 'Solution'. Received '$(CourseImplementation)'." />
+  </Target>
+</Project>

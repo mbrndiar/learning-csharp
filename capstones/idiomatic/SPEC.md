@@ -17,11 +17,11 @@ and frozen comparative capstone at
 [`../../projects/tasks/`](../../projects/tasks/) and
 [`../comparative/`](../comparative/).
 
-[Lesson 13](../../lessons/13_sql_and_sqlite/) supplies SQL persistence
+[Lesson 13](../../lessons/13-sql-and-sqlite/) supplies SQL persistence
 context, while this capstone deliberately requires JSON persistence rather than
 SQLite. Its HTTP and composition prerequisites are
-[Lesson 14](../../lessons/14_http_clients_and_minimal_apis/) and
-[Lesson 15](../../lessons/15_application_composition/).
+[Lesson 14](../../lessons/14-http-clients-and-minimal-apis/) and
+[Lesson 15](../../lessons/15-application-composition/).
 
 ## Required projects
 

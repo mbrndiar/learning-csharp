@@ -57,7 +57,7 @@ changed. Restore the required public shape, then change the method body.
 Pass the selector exactly:
 
 ```console
-dotnet test --project exercises/09_linq_and_transformations/tests/LinqTransformationsPractice.Tests.csproj \
+dotnet test --project exercises/09-linq-and-transformations/tests/LinqTransformationsPractice.Tests.csproj \
   -p:CourseImplementation=Starter
 ```
 

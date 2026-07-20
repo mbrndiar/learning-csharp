@@ -21,9 +21,9 @@ The supported platform is:
 - the editor-independent `dotnet` command-line interface.
 
 The manual CI workflow is configured to verify all three operating-system
-families; its final remote run for this migration is pending. Newer SDKs, older
-.NET versions, .NET Framework, and preview language features are outside the
-tested support boundary.
+families. Remote execution is deliberately deferred; the complete local gate is
+the current delivery evidence. Newer SDKs, older .NET versions, .NET Framework,
+and preview language features are outside the tested support boundary.
 
 ## 🎯 What you will learn
 
@@ -61,7 +61,7 @@ The command must report a compatible `10.0.x` SDK. Then, from the repository
 root:
 
 ```console
-dotnet lessons/01_first_program/01_hello_first_program.cs
+dotnet lessons/01-first-program/01-HelloFirstProgram.cs
 ```
 
 See [the setup guide](docs/SETUP.md) if the command is unavailable or selects
@@ -94,21 +94,21 @@ can scan the repository's learning surfaces the same way.
 
 | Module | Main outcome |
 | --- | --- |
-| [01 - First program](lessons/01_first_program/) | Run a file-based C# app and use the predict-run-modify loop. |
-| [02 - Values, types, and null](lessons/02_values_types_and_null/) | Choose and inspect values, conversions, text, numbers, and nullable types. |
-| [03 - Decisions and repetition](lessons/03_decisions_and_repetition/) | Express branches and repeat work while tracing changing state. |
-| [04 - Collections and iteration](lessons/04_collections_and_iteration/) | Store, find, and iterate values with safe boundary handling. |
-| [05 - Methods, errors, and debugging](lessons/05_methods_errors_and_debugging/) | Decompose behavior and diagnose or report failures precisely. |
-| [06 - Projects, solutions, and builds](lessons/06_projects_solutions_and_builds/) | Move from one file to the SDK project, dependency, and build model. |
-| [07 - Modeling data and behavior](lessons/07_modeling_data_and_behavior/) | Design small types with clear invariants and ownership, including calendar dates, UTC instants, and durations. |
-| [08 - Abstractions, generics, and delegates](lessons/08_abstractions_generics_and_delegates/) | Reuse and substitute behavior through explicit contracts. |
-| [09 - LINQ and transformations](lessons/09_linq_and_transformations/) | Build readable, deliberate data transformation pipelines. |
-| [10 - Testing and dependency boundaries](lessons/10_testing_and_dependency_boundaries/) | Write behavioral tests and control volatile dependencies. |
-| [11 - Files, streams, and JSON](lessons/11_files_streams_and_json/) | Cross representation and I/O boundaries safely. |
-| [12 - Async, cancellation, and concurrency](lessons/12_async_cancellation_and_concurrency/) | Coordinate asynchronous work with explicit ownership and cancellation. |
-| [13 - SQL and SQLite](lessons/13_sql_and_sqlite/) | Model relational data and use parameterized, transactional SQLite safely. |
-| [14 - HTTP clients and Minimal APIs](lessons/14_http_clients_and_minimal_apis/) | Understand middleware/HTTP mechanics and build Minimal API plus raw/typed clients. |
-| [15 - Application composition](lessons/15_application_composition/) | Compose selectable adapters, configuration, diagnostics, and delivery commands. |
+| [01 - First program](lessons/01-first-program/) | Run a file-based C# app and use the predict-run-modify loop. |
+| [02 - Values, types, and null](lessons/02-values-types-and-null/) | Choose and inspect values, conversions, text, numbers, and nullable types. |
+| [03 - Decisions and repetition](lessons/03-decisions-and-repetition/) | Express branches and repeat work while tracing changing state. |
+| [04 - Collections and iteration](lessons/04-collections-and-iteration/) | Store, find, and iterate values with safe boundary handling. |
+| [05 - Methods, errors, and debugging](lessons/05-methods-errors-and-debugging/) | Decompose behavior and diagnose or report failures precisely. |
+| [06 - Projects, solutions, and builds](lessons/06-projects-solutions-and-builds/) | Move from one file to the SDK project, dependency, and build model. |
+| [07 - Modeling data and behavior](lessons/07-modeling-data-and-behavior/) | Design small types with clear invariants and ownership, including calendar dates, UTC instants, and durations. |
+| [08 - Abstractions, generics, and delegates](lessons/08-abstractions-generics-and-delegates/) | Reuse and substitute behavior through explicit contracts. |
+| [09 - LINQ and transformations](lessons/09-linq-and-transformations/) | Build readable, deliberate data transformation pipelines. |
+| [10 - Testing and dependency boundaries](lessons/10-testing-and-dependency-boundaries/) | Write behavioral tests and control volatile dependencies. |
+| [11 - Files, streams, and JSON](lessons/11-files-streams-and-json/) | Cross representation and I/O boundaries safely. |
+| [12 - Async, cancellation, and concurrency](lessons/12-async-cancellation-and-concurrency/) | Coordinate asynchronous work with explicit ownership and cancellation. |
+| [13 - SQL and SQLite](lessons/13-sql-and-sqlite/) | Model relational data and use parameterized, transactional SQLite safely. |
+| [14 - HTTP clients and Minimal APIs](lessons/14-http-clients-and-minimal-apis/) | Understand middleware/HTTP mechanics and build Minimal API plus raw/typed clients. |
+| [15 - Application composition](lessons/15-application-composition/) | Compose selectable adapters, configuration, diagnostics, and delivery commands. |
 
 After all lessons, complete the required [Tasks applied
 project](projects/tasks/), then both [capstone tracks](capstones/).
@@ -128,13 +128,13 @@ exercises/<lesson>/
 Run a lesson's solution feedback from the repository root:
 
 ```console
-dotnet test --project exercises/04_collections_and_iteration/tests/CollectionsAndIteration.Tests.csproj
+dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj
 ```
 
 Select your starter explicitly while working:
 
 ```console
-dotnet test --project exercises/04_collections_and_iteration/tests/CollectionsAndIteration.Tests.csproj \
+dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj \
   -p:CourseImplementation=Starter
 ```
 
@@ -211,6 +211,11 @@ the lessons and Tasks bridge.
 - `...` means omitted context only when the text says so. It is not invented
   runnable syntax.
 - Examples use English identifiers and official C# naming conventions.
+- Numbered lesson/exercise taxonomy uses `NN-kebab-case`; ordered file-based
+  lesson apps use `NN-PascalCase.cs`; buildable lesson project directories use
+  the same PascalCase identity as their `.csproj`.
+- Repository role directories such as `lessons`, `exercises`, `starter`,
+  `solution`, and `tests` remain lowercase.
 - Nullable reference types and SDK analyzers are enabled.
 - Expected exceptions are labeled as observations; accidental crashes are not
   presented as successful examples.

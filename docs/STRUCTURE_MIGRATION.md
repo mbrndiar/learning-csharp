@@ -26,6 +26,13 @@ There is no top-level `examples/` directory. Runnable lesson programs are
 complete demonstrations and stay with the lesson that explains them. Incomplete
 test-driven work always lives under `exercises/`.
 
+Instructional slugs preserve their two-digit order and use kebab-case, for
+example `lessons/01-first-program/` and
+`exercises/14-http-clients-and-minimal-apis/`. Ordered file-based apps use names
+such as `01-HelloFirstProgram.cs`; buildable lesson directories match their
+PascalCase project identity. Lowercase `starter`, `solution`, and `tests`
+directories continue to describe repository roles rather than .NET projects.
+
 ## Numbering change
 
 The original HTTP and composition units move from 13 and 14 to lessons 14 and

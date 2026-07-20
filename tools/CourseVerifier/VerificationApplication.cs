@@ -75,6 +75,7 @@ internal static partial class VerificationApplication
         }
 
         VerifyRoleStructure(root);
+        VerifyInstructionalNaming(root, manifest);
 
         foreach (CourseLesson lesson in manifest.Lessons.OrderBy(lesson => lesson.Order))
         {
@@ -246,6 +247,123 @@ internal static partial class VerificationApplication
         {
             throw new InvalidDataException(
                 $"Legacy lesson role directories remain: {string.Join(", ", legacyRoleDirectories)}.");
+        }
+    }
+
+    private static void VerifyInstructionalNaming(string root, CourseManifest manifest)
+    {
+        string[] expectedDirectories = manifest.Lessons
+            .OrderBy(lesson => lesson.Order)
+            .Select(lesson =>
+            {
+                if (!InstructionalSlugPattern().IsMatch(lesson.Slug))
+                {
+                    throw new InvalidDataException(
+                        $"Lesson slug must use kebab-case: {lesson.Slug}.");
+                }
+
+                return $"{lesson.Order:00}-{lesson.Slug}";
+            })
+            .ToArray();
+
+        foreach (string role in InstructionalRoleRoots)
+        {
+            string[] actualDirectories = Directory
+                .EnumerateDirectories(Path.Combine(root, role), "*", SearchOption.TopDirectoryOnly)
+                .Select(Path.GetFileName)
+                .OrderBy(name => name, StringComparer.Ordinal)
+                .ToArray()!;
+            if (!expectedDirectories.SequenceEqual(actualDirectories, StringComparer.Ordinal))
+            {
+                throw new InvalidDataException(
+                    $"{role}/ must contain exactly these ordered lesson directories: "
+                    + string.Join(", ", expectedDirectories) + ".");
+            }
+        }
+
+        foreach (CourseLesson lesson in manifest.Lessons)
+        {
+            string directory = $"{lesson.Order:00}-{lesson.Slug}";
+            RequireExactManifestPath(
+                lesson.Guide,
+                $"lessons/{directory}/README.md",
+                $"Lesson {lesson.Order:00} guide");
+            RequireManifestPathPrefix(
+                lesson.StarterProjects,
+                $"exercises/{directory}/starter/",
+                $"Lesson {lesson.Order:00} starter project");
+            RequireManifestPathPrefix(
+                lesson.SolutionProjects,
+                $"exercises/{directory}/solution/",
+                $"Lesson {lesson.Order:00} solution project");
+            RequireManifestPathPrefix(
+                lesson.TestProjects,
+                $"exercises/{directory}/tests/",
+                $"Lesson {lesson.Order:00} test project");
+            RequireManifestPathPrefix(
+                lesson.Runnables.Select(runnable => runnable.Path),
+                $"lessons/{directory}/",
+                $"Lesson {lesson.Order:00} runnable");
+
+            foreach (CourseRunnable runnable in lesson.Runnables)
+            {
+                string fileName = Path.GetFileName(runnable.Path);
+                if (runnable.Path.EndsWith(".cs", StringComparison.OrdinalIgnoreCase)
+                    && !OrderedFileAppPattern().IsMatch(fileName))
+                {
+                    throw new InvalidDataException(
+                        $"File-based lesson app must use NN-PascalCase.cs: {runnable.Path}.");
+                }
+
+                if (runnable.Path.EndsWith(".csproj", StringComparison.OrdinalIgnoreCase))
+                {
+                    string projectName = Path.GetFileNameWithoutExtension(runnable.Path);
+                    string projectDirectory =
+                        Path.GetFileName(Path.GetDirectoryName(runnable.Path)) ?? string.Empty;
+                    if (!string.Equals(projectDirectory, projectName, StringComparison.Ordinal))
+                    {
+                        throw new InvalidDataException(
+                            $"Lesson project directory must match '{projectName}.csproj': "
+                            + $"{runnable.Path}.");
+                    }
+                }
+            }
+        }
+
+        string[] underscoredLessonDirectories = Directory
+            .EnumerateDirectories(Path.Combine(root, "lessons"), "*", SearchOption.AllDirectories)
+            .Where(path => !IsGeneratedPath(path))
+            .Where(path => Path.GetFileName(path).Contains('_', StringComparison.Ordinal))
+            .Select(path => Path.GetRelativePath(root, path))
+            .ToArray();
+        if (underscoredLessonDirectories.Length > 0)
+        {
+            throw new InvalidDataException(
+                "Lesson directories must use kebab-case taxonomy or PascalCase project names: "
+                + string.Join(", ", underscoredLessonDirectories) + ".");
+        }
+    }
+
+    private static void RequireExactManifestPath(string actual, string expected, string description)
+    {
+        if (!string.Equals(actual, expected, StringComparison.Ordinal))
+        {
+            throw new InvalidDataException(
+                $"{description} must be '{expected}', not '{actual}'.");
+        }
+    }
+
+    private static void RequireManifestPathPrefix(
+        IEnumerable<string> paths,
+        string expectedPrefix,
+        string description)
+    {
+        string? invalidPath = paths.FirstOrDefault(
+            path => !path.StartsWith(expectedPrefix, StringComparison.Ordinal));
+        if (invalidPath is not null)
+        {
+            throw new InvalidDataException(
+                $"{description} must start with '{expectedPrefix}', not '{invalidPath}'.");
         }
     }
 
@@ -799,6 +917,12 @@ internal static partial class VerificationApplication
 
     [GeneratedRegex(@"(?<!\()https?://[^\s)>]+")]
     private static partial Regex PlainUrlPattern();
+
+    [GeneratedRegex(@"^[a-z0-9]+(?:-[a-z0-9]+)*$")]
+    private static partial Regex InstructionalSlugPattern();
+
+    [GeneratedRegex(@"^[0-9]{2}-[A-Z][A-Za-z0-9]*\.cs$")]
+    private static partial Regex OrderedFileAppPattern();
 }
 
 internal sealed record CourseManifest(

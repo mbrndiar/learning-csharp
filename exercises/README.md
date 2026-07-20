@@ -33,18 +33,18 @@ implementation syntax.
 
 | Exercise | Focus |
 | --- | --- |
-| [01 · First program](01_first_program/) | Input validation and exact observable output |
-| [02 · Values, types, and null](02_values_types_and_null/) | Numeric/null representation and formatting |
-| [03 · Decisions and repetition](03_decisions_and_repetition/) | Branches, loops, and termination |
-| [04 · Collections and iteration](04_collections_and_iteration/) | Cleaning, counting, lookup, and duplicates |
-| [05 · Methods, errors, and debugging](05_methods_errors_and_debugging/) | Method contracts and specific exceptions |
-| [06 · Projects, solutions, and builds](06_projects_solutions_and_builds/) | Project/build metadata and deterministic commands |
-| [07 · Modeling data and behavior](07_modeling_data_and_behavior/) | Types, invariants, equality, and strict dates |
-| [08 · Abstractions, generics, and delegates](08_abstractions_generics_and_delegates/) | Interfaces, constraints, callbacks, and closures |
-| [09 · LINQ and transformations](09_linq_and_transformations/) | Deferred pipelines and materialized reports |
-| [10 · Testing and dependency boundaries](10_testing_and_dependency_boundaries/) | Production behavior plus learner-written tests |
-| [11 · Files, streams, and JSON](11_files_streams_and_json/) | Safe paths, encoding, malformed data, and atomic save |
-| [12 · Async, cancellation, and concurrency](12_async_cancellation_and_concurrency/) | Owned tasks, cancellation, and bounded work |
-| [13 · SQL and SQLite](13_sql_and_sqlite/) | Schema, parameters, row mapping, and transactions |
-| [14 · HTTP clients and Minimal APIs](14_http_clients_and_minimal_apis/) | Middleware/Minimal API and raw/typed client contracts |
-| [15 · Application composition](15_application_composition/) | Boundaries, configuration, CLI exits, and adapter wiring |
+| [01 · First program](01-first-program/) | Input validation and exact observable output |
+| [02 · Values, types, and null](02-values-types-and-null/) | Numeric/null representation and formatting |
+| [03 · Decisions and repetition](03-decisions-and-repetition/) | Branches, loops, and termination |
+| [04 · Collections and iteration](04-collections-and-iteration/) | Cleaning, counting, lookup, and duplicates |
+| [05 · Methods, errors, and debugging](05-methods-errors-and-debugging/) | Method contracts and specific exceptions |
+| [06 · Projects, solutions, and builds](06-projects-solutions-and-builds/) | Project/build metadata and deterministic commands |
+| [07 · Modeling data and behavior](07-modeling-data-and-behavior/) | Types, invariants, equality, and strict dates |
+| [08 · Abstractions, generics, and delegates](08-abstractions-generics-and-delegates/) | Interfaces, constraints, callbacks, and closures |
+| [09 · LINQ and transformations](09-linq-and-transformations/) | Deferred pipelines and materialized reports |
+| [10 · Testing and dependency boundaries](10-testing-and-dependency-boundaries/) | Production behavior plus learner-written tests |
+| [11 · Files, streams, and JSON](11-files-streams-and-json/) | Safe paths, encoding, malformed data, and atomic save |
+| [12 · Async, cancellation, and concurrency](12-async-cancellation-and-concurrency/) | Owned tasks, cancellation, and bounded work |
+| [13 · SQL and SQLite](13-sql-and-sqlite/) | Schema, parameters, row mapping, and transactions |
+| [14 · HTTP clients and Minimal APIs](14-http-clients-and-minimal-apis/) | Middleware/Minimal API and raw/typed client contracts |
+| [15 · Application composition](15-application-composition/) | Boundaries, configuration, CLI exits, and adapter wiring |

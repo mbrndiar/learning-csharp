@@ -27,10 +27,10 @@ through **Lesson 15** and is ready to combine:
 - automated testing
 
 It builds on
-[`../../lessons/13_sql_and_sqlite/`](../../lessons/13_sql_and_sqlite/),
-[`../../lessons/14_http_clients_and_minimal_apis/`](../../lessons/14_http_clients_and_minimal_apis/),
+[`../../lessons/13-sql-and-sqlite/`](../../lessons/13-sql-and-sqlite/),
+[`../../lessons/14-http-clients-and-minimal-apis/`](../../lessons/14-http-clients-and-minimal-apis/),
 and
-[`../../lessons/15_application_composition/`](../../lessons/15_application_composition/).
+[`../../lessons/15-application-composition/`](../../lessons/15-application-composition/).
 Lesson 13 provides useful SQL and persistence context, but this capstone
 deliberately keeps its JSON repository rather than requiring SQLite.
 
