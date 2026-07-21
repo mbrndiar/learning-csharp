@@ -105,6 +105,8 @@ Contract details:
 - **Edge cases:** empty input, all blanks, repeated values with different casing such as `Apple` and `apple`
 - **Invalid case:** `null` input throws `ArgumentNullException`
 
+See [exercises/04-collections-and-iteration/README.md](../../exercises/04-collections-and-iteration/README.md) for the complete task, edge cases, and Starter-first build/test/watch commands.
+
 ## 🔁 Feedback instructions
 - Build the starter project: `dotnet build exercises/04-collections-and-iteration/starter/CollectionsAndIteration.csproj`
 - Test your work: `dotnet test --project exercises/04-collections-and-iteration/tests/CollectionsAndIteration.Tests.csproj`

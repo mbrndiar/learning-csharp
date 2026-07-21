@@ -167,6 +167,9 @@ Try one change at a time:
 ## 🧪 Practice contract
 Implement `BuildLayout` in the practice library.
 
+The full assignment, organized by file and member, lives in
+[exercises/06-projects-solutions-and-builds/README.md](../../exercises/06-projects-solutions-and-builds/README.md).
+
 ### Required inputs and outputs
 - `GetOutputDirectory(configuration, targetFramework)` returns `bin/<Configuration>/<TargetFramework>/`.
 - `GetIntermediateDirectory(configuration, targetFramework)` returns `obj/<Configuration>/<TargetFramework>/`.

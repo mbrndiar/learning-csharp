@@ -10,13 +10,13 @@ namespace TestingDependencyBoundariesPractice.Tests;
 // focused on one observable OrderService behavior.
 public sealed class OrderServiceLearnerTests
 {
-    // Replace this scaffold with an enabled [Fact] that exercises one observable
+    // TODO: Replace AddFactScenario with an enabled [Fact] that exercises one observable
     // OrderService behavior. Choose the scenario and assertion yourself.
     public void AddFactScenario() =>
         throw new NotImplementedException("Replace this scaffold with an enabled [Fact] test.");
 
-    // Replace this scaffold with an enabled [Theory] covering at least two [InlineData]
-    // rows for a boundary or failure behavior. Choose the rows and assertion yourself.
+    // TODO: Replace AddTheoryScenarios with an enabled [Theory] covering at least two
+    // [InlineData] rows for a boundary or failure behavior. Choose the rows and assertion yourself.
     public void AddTheoryScenarios(int value) =>
         throw new NotImplementedException("Replace this scaffold with an enabled [Theory] test and multiple [InlineData] rows.");
 }

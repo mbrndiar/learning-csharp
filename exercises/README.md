@@ -9,6 +9,7 @@ boundary, and failure scenarios yourself.
 
 ```text
 exercises/<lesson>/
+├── README.md  # complete task and acceptance criteria
 ├── starter/   # learner-owned implementation
 ├── solution/  # one complete reference approach
 └── tests/     # shared behavioral feedback
@@ -20,38 +21,30 @@ failures are not accepted feedback. The solution passes the same public
 contract. Tests assert observable behavior rather than requiring identical
 implementation syntax.
 
-## 💬 Reading the inline guidance
+## 🎯 Reading the task
 
-This is a repository-wide convention: every intentionally incomplete member
-in every exercise starter (all fifteen lessons, not only Lesson 10) carries an
-adjacent guidance comment—normally a `// TODO:` directly above the member or
-inside its block body—describing that member's observable contract rather than
-its implementation. Concretely, the comment states what callers can rely on:
+Every exercise exposes the same assignment in two places:
 
-- expected inputs and the exact output shape, for example "read one book by
-  id, or return null when no row matches";
-- validation and boundary handling the member must enforce, for example
-  "reject null, empty, or whitespace-only learner names";
-- ownership or result shape for constructors and factories, for example
-  "store the injected boundaries" or "reserve inventory, save the receipt,
-  and return it".
+- `exercises/<lesson>/README.md` is the complete module task. Read it before
+  coding to see every file/member to complete, the required behavior, edge
+  cases, completion criteria, and feedback commands.
+- Adjacent `// TODO:` statements in `starter/` are local tasks. Read them while
+  coding to see what the nearby incomplete member or endpoint must do.
 
-The comment never spells out the algorithm, control flow, or exact statements
-to write — you still choose the implementation. Support members that are
-already complete in a starter are left without TODO guidance, so TODO comments
-tied to members consistently identify work that still remains.
+The README gives the whole assignment; each TODO covers only its nearby source
+member. Both state observable requirements rather than implementation steps.
+They never supply the finished algorithm, SQL, handler, fake, or assertion, so
+you still design the implementation.
 
-Some exercises (currently Lesson 10) also ask you to complete a
-learner-authored test scaffold, such as `OrderServiceLearnerTests.cs`. Those
-scaffold files apply the same principle at the class/method level: comments
-explain the *shape* of the tests you must add (for example, one enabled
-`[Fact]` plus one enabled `[Theory]` with several `[InlineData]` rows)
-without prescribing the exact scenario, fake implementation, or assertions —
-you choose those yourself.
+Completed support members have no TODO because they are not learner work.
+Lesson 10 also tasks you with replacing two test scaffolds: add one enabled
+`[Fact]` and one enabled `[Theory]` with at least two `[InlineData]` rows, using
+Arrange-Act-Assert and hand-written fakes while choosing the concrete scenarios
+and assertions yourself.
 
 ## 🔁 Working loop
 
-1. Read the matching lesson and exercise contract.
+1. Read the matching lesson and the module's `README.md` task.
 2. Build the starter.
 3. Run the shared tests. Each shared test project selects the `Starter`
    implementation by default, so no `-p:CourseImplementation` property is

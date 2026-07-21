@@ -121,6 +121,9 @@ Try one change at a time:
 ## 🧪 Practice contract
 Complete `OrderService` and the learner-owned `OrderServiceLearnerTests` in `TestingDependencyBoundariesPractice`.
 
+The full assignment, organized by file and member, lives in
+[exercises/10-testing-and-dependency-boundaries/README.md](../../exercises/10-testing-and-dependency-boundaries/README.md).
+
 ### Required types
 - `IInventoryGateway` with `GetAvailable(string sku)` and `Reserve(string sku, int quantity)`
 - `IReceiptStore` with `Save(OrderReceipt receipt)`

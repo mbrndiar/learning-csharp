@@ -71,6 +71,8 @@ Implement `FirstProgramExercise.BuildCelebrationMessage(string learnerName)`.
 - **Constraints:** trim the learner name; reject `null`, empty, or whitespace-only names
 - **Edge cases:** a one-letter name like `A` is valid; surrounding spaces should not appear in the final output
 
+See [exercises/01-first-program/README.md](../../exercises/01-first-program/README.md) for the complete task, edge cases, and Starter-first build/test/watch commands.
+
 ## 🔁 Feedback instructions
 - Build your starter project first: `dotnet build exercises/01-first-program/starter/FirstProgram.csproj`
 - Then run the shared tests against your work: `dotnet test --project exercises/01-first-program/tests/FirstProgram.Tests.csproj`

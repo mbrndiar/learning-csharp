@@ -4,8 +4,11 @@ public static class FirstProgramExercise
 {
     public static string BuildCelebrationMessage(string learnerName)
     {
-        // TODO: Reject null, empty, or whitespace-only learner names.
-        // TODO: Trim the name and return the exact three-line message the tests expect.
+        // TODO: Implement BuildCelebrationMessage to throw an ArgumentException when
+        // learnerName is null, empty, or made up only of whitespace.
+        // TODO: Implement BuildCelebrationMessage to trim learnerName and return exactly
+        // "Hello, <name>!", "You have a working C# program.", and
+        // "Change one line, run again, and observe the difference.", joined by Environment.NewLine.
         throw new NotImplementedException("TODO: build the celebration message.");
     }
 }

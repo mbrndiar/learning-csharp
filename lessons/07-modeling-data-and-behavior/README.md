@@ -218,6 +218,9 @@ Try one change at a time:
 ## 🧪 Practice contract
 Implement the reservation model in `ModelingDataBehaviorPractice`.
 
+The full assignment, organized by file and member, lives in
+[exercises/07-modeling-data-and-behavior/README.md](../../exercises/07-modeling-data-and-behavior/README.md).
+
 ### Required types
 - `ReservationState` enum with `Draft`, `Confirmed`, and `Cancelled`
 - `PartySize` readonly record struct with `Adults`, `Children`, and an overflow-safe `Total`

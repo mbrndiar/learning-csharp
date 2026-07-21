@@ -136,6 +136,9 @@ Try one change at a time:
 ## 🧪 Practice contract
 Implement `CuratedCatalog<T>` and its supporting abstractions in `AbstractionsGenericsDelegatesPractice`.
 
+The full assignment, organized by file and member, lives in
+[exercises/08-abstractions-generics-and-delegates/README.md](../../exercises/08-abstractions-generics-and-delegates/README.md).
+
 ### Required types
 - `IKeyedItem` with `Key`
 - `IRule<in T>` with `Accepts(T item)`

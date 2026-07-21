@@ -125,6 +125,9 @@ Expected behavior:
 
 ## 🧪 Practice contract
 
+The matching exercise lives in
+[`exercises/13-sql-and-sqlite/`](../../exercises/13-sql-and-sqlite/README.md).
+
 Starter feedback (the default):
 
 ```bash

@@ -2,7 +2,7 @@ namespace ModelingDataBehaviorPractice;
 
 public sealed record GuestProfile
 {
-    // TODO: Reject missing guest text, normalize it at the boundary, and keep the validated value immutable.
+    // TODO: Implement this constructor. Reject a missing name or email, then store the trimmed values as immutable, get-only properties.
     public GuestProfile(string name, string email) => throw new NotImplementedException("Trim and validate the guest profile.");
 
     public string Name { get; } = string.Empty;

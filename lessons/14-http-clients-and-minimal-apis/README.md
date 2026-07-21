@@ -323,7 +323,7 @@ against the samples' behavior.
 ## 🧪 Exercise
 
 The matching exercise lives in
-[`exercises/14-http-clients-and-minimal-apis/`](../../exercises/14-http-clients-and-minimal-apis/).
+[`exercises/14-http-clients-and-minimal-apis/`](../../exercises/14-http-clients-and-minimal-apis/README.md).
 It asks you to implement the same small Books contract across **four**
 surfaces - a low-level middleware app, a Minimal API app, a raw HTTP client,
 and a typed client + `IHttpClientFactory` - plus semantic validation against

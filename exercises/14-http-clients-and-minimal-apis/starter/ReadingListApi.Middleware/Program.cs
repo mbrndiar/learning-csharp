@@ -62,14 +62,14 @@ internal static class BookRequestPipeline
 
     public static Task HandleAsync(HttpContext context)
     {
-        // TODO: Dispatch on context.Request.Method and context.Request.Path to
-        // implement:
+        // TODO: Replace this placeholder so it dispatches on context.Request.Method
+        // and context.Request.Path to implement:
         //   GET  /books          -> 200 with the seeded/added books as JSON
         //   GET  /books/{id}     -> 400 for Guid.Empty, 404 for missing, 200 otherwise
-        //   POST /books          -> validate content-type/size/JSON, then 201 or 400
+        //   POST /books          -> 415 for non-JSON, 413 above 16 KiB, 400 for
+        //                           invalid JSON/contract data, or 201 with Location
         // Every branch must read/write through the HttpContext directly: no
-        // Minimal API routing helpers. See the lesson README for the boundary
-        // checks this handler must enforce (content-type, body size, cancellation).
+        // Minimal API routing helpers, and request cancellation must be honored.
         context.Response.StatusCode = StatusCodes.Status501NotImplemented;
         return Task.CompletedTask;
     }

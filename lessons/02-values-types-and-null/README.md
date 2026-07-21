@@ -100,6 +100,8 @@ Implement `ReadingProgressFormatter.DescribeProgress(string? title, int pagesRea
 - **Edge cases:** `pagesRead == 0`, `totalPages == 0`, Unicode titles, rating `null`
 - **Invalid cases:** negative page counts, `pagesRead > totalPages`, ratings outside `0.0` through `5.0`, or `rating == double.NaN` (`double.IsNaN(rating)` must be checked explicitly)
 
+See [exercises/02-values-types-and-null/README.md](../../exercises/02-values-types-and-null/README.md) for the complete task, edge cases, and Starter-first build/test/watch commands.
+
 ## 🔁 Feedback instructions
 - Build your starter project: `dotnet build exercises/02-values-types-and-null/starter/ValuesTypesAndNull.csproj`
 - Run the shared tests against starter code: `dotnet test --project exercises/02-values-types-and-null/tests/ValuesTypesAndNull.Tests.csproj`

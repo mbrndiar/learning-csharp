@@ -17,9 +17,9 @@ public static class RawBookHttpClient
     {
         ArgumentNullException.ThrowIfNull(baseAddress);
 
-        // TODO: Create a disposable HttpClient scoped to this call, issue GET
-        // /books (optionally filtered by author), check the status first, and
-        // deserialize the buffered JSON body.
+        // TODO: Implement GetBooksAsync so it creates a disposable HttpClient
+        // scoped to this call, issues GET /books (optionally filtered by author),
+        // checks the status first, and deserializes the buffered JSON body.
         throw new NotImplementedException("TODO: Issue a raw GET /books and dispose the HttpClient afterward.");
     }
 
@@ -27,8 +27,9 @@ public static class RawBookHttpClient
     {
         ArgumentNullException.ThrowIfNull(baseAddress);
 
-        // TODO: Create a disposable HttpClient scoped to this call. Return null
-        // for 404, otherwise ensure success and deserialize the book.
+        // TODO: Implement TryGetBookAsync so it creates a disposable HttpClient
+        // scoped to this call, returns null for 404, and otherwise ensures
+        // success and deserializes the book.
         throw new NotImplementedException("TODO: Return null for 404 and a book for 200 using a raw, disposed HttpClient.");
     }
 }

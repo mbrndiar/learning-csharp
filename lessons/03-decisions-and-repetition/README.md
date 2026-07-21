@@ -71,6 +71,8 @@ Contract details:
 - **Edge cases:** score boundaries `50`, `70`, `90`, `100`; countdown start `0` and `1`
 - **Invalid case:** negative countdown start throws `ArgumentOutOfRangeException`
 
+See [exercises/03-decisions-and-repetition/README.md](../../exercises/03-decisions-and-repetition/README.md) for the complete task, edge cases, and Starter-first build/test/watch commands.
+
 ## 🔁 Feedback instructions
 - Build the starter: `dotnet build exercises/03-decisions-and-repetition/starter/DecisionsAndRepetition.csproj`
 - Test your implementation: `dotnet test --project exercises/03-decisions-and-repetition/tests/DecisionsAndRepetition.Tests.csproj`

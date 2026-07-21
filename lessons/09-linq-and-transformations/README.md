@@ -129,6 +129,9 @@ Try one change at a time:
 ## 🧪 Practice contract
 Implement `CourseRunReports` in `LinqTransformationsPractice`.
 
+The full assignment, organized by file and member, lives in
+[exercises/09-linq-and-transformations/README.md](../../exercises/09-linq-and-transformations/README.md).
+
 ### Required types
 - `CourseRun` record with `Learner`, `Track`, `Score`, `Minutes`, and `Completed`
 - `TrackSummary` record with `Track`, `CompletedCount`, and `AverageScore`

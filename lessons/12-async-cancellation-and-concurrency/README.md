@@ -91,6 +91,9 @@ Expected behavior:
 
 ## 🧪 Practice contract
 
+The matching exercise lives in
+[`exercises/12-async-cancellation-and-concurrency/`](../../exercises/12-async-cancellation-and-concurrency/README.md).
+
 Starter feedback (the default):
 
 ```bash

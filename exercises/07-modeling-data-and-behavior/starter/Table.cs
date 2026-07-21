@@ -2,13 +2,13 @@ namespace ModelingDataBehaviorPractice;
 
 public sealed class Table
 {
-    // TODO: Reject invalid table details before storing the immutable capacity data.
+    // TODO: Implement this constructor. Reject a non-positive table number or seat count, then store the validated values.
     public Table(int number, int seats) => throw new NotImplementedException("Validate and store the table details.");
 
     public int Number { get; }
 
     public int Seats { get; }
 
-    // TODO: Decide whether the party's total fits this table without changing either object.
+    // TODO: Implement CanSeat. Return whether Seats can accommodate the party's Total guest count, without changing either object.
     public bool CanSeat(PartySize partySize) => throw new NotImplementedException("Return whether the table can seat the party.");
 }

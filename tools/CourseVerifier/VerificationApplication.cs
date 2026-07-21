@@ -116,6 +116,8 @@ internal static partial class VerificationApplication
         }
 
         VerifyLessonTestProjectDefaults(root, manifest);
+        (int exerciseTaskGuideCount, int starterTaskPlaceholderCount) =
+            VerifyExerciseTaskSurfaces(root, manifest);
 
         foreach (LearningDestination destination in manifest.Destinations)
         {
@@ -137,6 +139,8 @@ internal static partial class VerificationApplication
             + $"{manifest.Destinations.Count} applied destinations, "
             + $"{appliedSourceCount} applied source files, "
             + $"{readmeCount} formatted READMEs, "
+            + $"{exerciseTaskGuideCount} exercise task guides, "
+            + $"{starterTaskPlaceholderCount} starter task placeholders, "
             + $"and {linkCount} local Markdown links.");
         return 0;
     }
@@ -383,6 +387,108 @@ internal static partial class VerificationApplication
                     + $"'Starter'; found {found}.");
             }
         }
+    }
+
+    private static (int GuideCount, int PlaceholderCount) VerifyExerciseTaskSurfaces(
+        string root,
+        CourseManifest manifest)
+    {
+        int guideCount = 0;
+        int placeholderCount = 0;
+
+        foreach (CourseLesson lesson in manifest.Lessons.OrderBy(lesson => lesson.Order))
+        {
+            string directory = $"{lesson.Order:00}-{lesson.Slug}";
+            string guide = Path.Combine("exercises", directory, "README.md");
+            RequireFile(root, guide);
+            guideCount++;
+
+            string guideMarkdown = RemoveFencedCodeBlocks(File.ReadAllText(Path.Combine(root, guide)));
+            bool hasTaskSection = MarkdownHeadingPattern()
+                .Matches(guideMarkdown)
+                .Cast<Match>()
+                .Any(match => match.Groups["heading"].Value.Contains(
+                    "Your task",
+                    StringComparison.OrdinalIgnoreCase));
+            if (!hasTaskSection)
+            {
+                throw new InvalidDataException(
+                    $"{guide} must contain a clearly named 'Your task' section.");
+            }
+
+            string starterRoot = Path.Combine(root, "exercises", directory, "starter");
+            foreach (string sourcePath in Directory.EnumerateFiles(
+                         starterRoot,
+                         "*.cs",
+                         SearchOption.AllDirectories))
+            {
+                if (IsGeneratedPath(sourcePath))
+                {
+                    continue;
+                }
+
+                string[] lines = File.ReadAllLines(sourcePath);
+                for (int index = 0; index < lines.Length; index++)
+                {
+                    if (!IsRecognizedStarterPlaceholder(lines[index]))
+                    {
+                        continue;
+                    }
+
+                    placeholderCount++;
+                    if (!HasAdjacentDirectTask(lines, index))
+                    {
+                        throw new InvalidDataException(
+                            $"{Path.GetRelativePath(root, sourcePath)}:{index + 1} "
+                            + "must have an adjacent TODO that directly states the task.");
+                    }
+                }
+            }
+        }
+
+        return (guideCount, placeholderCount);
+    }
+
+    private static bool HasAdjacentDirectTask(string[] lines, int placeholderIndex)
+    {
+        for (int index = placeholderIndex; index >= 0 && placeholderIndex - index <= 12; index--)
+        {
+            if (index < placeholderIndex && string.IsNullOrWhiteSpace(lines[index]))
+            {
+                return false;
+            }
+
+            if (IsDirectTaskTodo(lines[index]))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private static bool IsRecognizedStarterPlaceholder(string line)
+    {
+        return line.Contains("throw new NotImplementedException", StringComparison.Ordinal)
+            || line.Contains("StatusCodes.Status501NotImplemented", StringComparison.Ordinal)
+            || (line.Contains("app.MapGet(\"/books/{id:guid}\"", StringComparison.Ordinal)
+                && line.Contains("Results.NotFound()", StringComparison.Ordinal))
+            || line.Contains(
+                "public sealed class InMemoryBookRepository : IBookRepository",
+                StringComparison.Ordinal)
+            || line.Contains("new BookDto(Guid.Empty", StringComparison.Ordinal)
+            || line.Contains("Task.FromResult<BookDto?>(null)", StringComparison.Ordinal)
+            || line.Contains(
+                "Task.FromResult<IReadOnlyList<BookDto>>(Array.Empty<BookDto>())",
+                StringComparison.Ordinal);
+    }
+
+    private static bool IsDirectTaskTodo(string line)
+    {
+        string trimmed = line.TrimStart();
+        return trimmed.StartsWith("// TODO: Implement ", StringComparison.Ordinal)
+            || trimmed.StartsWith("// TODO: Complete ", StringComparison.Ordinal)
+            || trimmed.StartsWith("// TODO: Replace ", StringComparison.Ordinal);
     }
 
     private static void RequireExactManifestPath(string actual, string expected, string description)

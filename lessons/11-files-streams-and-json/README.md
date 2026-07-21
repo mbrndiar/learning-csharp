@@ -112,6 +112,9 @@ Expected behavior:
 
 ## 🧪 Practice contract
 
+The matching exercise lives in
+[`exercises/11-files-streams-and-json/`](../../exercises/11-files-streams-and-json/README.md).
+
 Starter feedback (the default):
 
 ```bash

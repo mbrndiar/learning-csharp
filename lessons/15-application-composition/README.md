@@ -163,7 +163,7 @@ Expected behavior:
 ## 🧪 Exercise
 
 The matching exercise lives in
-[`exercises/15-application-composition/`](../../exercises/15-application-composition/).
+[`exercises/15-application-composition/`](../../exercises/15-application-composition/README.md).
 Run its tests from the repository root. The first command checks your starter
 work (the default); the second selects the finished reference solution:
 

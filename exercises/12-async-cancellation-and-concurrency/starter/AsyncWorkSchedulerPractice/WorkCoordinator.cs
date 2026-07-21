@@ -11,11 +11,12 @@ public sealed class WorkCoordinator
         CancellationToken cancellationToken = default)
     {
         _ = _gate;
-        // TODO: Reject null items or processor, and a non-positive concurrency limit (ArgumentOutOfRangeException).
-        // TODO: Bound how many items run at once to the requested limit.
-        // TODO: Guard the shared totals and completion order with the lock while aggregating each result.
-        // TODO: Let processor faults and cancellation propagate to the caller.
-        // TODO: Report started/completed counts, total value, and completion order.
+        // TODO: Implement RunAsync so it rejects null items or processor and a
+        // non-positive concurrency limit (ArgumentOutOfRangeException), bounds how
+        // many items run at once to the requested limit, guards the shared totals
+        // and completion order with the lock while aggregating each result, lets
+        // processor faults and cancellation propagate to the caller, and reports
+        // started/completed counts, total value, and completion order.
         throw new NotImplementedException("TODO: Coordinate bounded concurrent work and aggregate the results.");
     }
 }

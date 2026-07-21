@@ -22,43 +22,48 @@ public sealed class BookRepository : IDisposable
 
     public int Create(string title, string author, string isbn, int publicationYear, int? rating = null)
     {
-        // TODO: Run the insert inside its own transaction, passing every value as a parameter.
-        // TODO: Return the newly generated row id.
-        // TODO: Let constraint violations (duplicate ISBN, out-of-range year or rating) surface from the database.
+        // TODO: Implement Create so it runs the insert inside its own transaction,
+        // passing every value as a parameter, returns the newly generated row id,
+        // and lets constraint violations (duplicate ISBN, out-of-range year or
+        // rating) surface from the database.
         throw new NotImplementedException("TODO: Insert a book inside one transaction and return its generated id.");
     }
 
     public Book? GetById(int id)
     {
-        // TODO: Query by id with a parameter and map the columns by ordinal.
-        // TODO: Return null when no row matches.
+        // TODO: Implement GetById so it queries by id with a parameter, maps the
+        // columns by ordinal, and returns null when no row matches.
         throw new NotImplementedException("TODO: Read one book by id, or return null when no row matches.");
     }
 
     public IReadOnlyList<Book> List(int? minimumPublicationYear = null, int limit = 100)
     {
-        // TODO: Order results by title and apply the optional minimum-year filter and the row limit through parameters.
-        // TODO: Map each row explicitly and return the collection.
+        // TODO: Implement List so it orders results by title, applies the optional
+        // minimum-year filter and the row limit through parameters, maps each row
+        // explicitly, and returns the collection.
         throw new NotImplementedException("TODO: List books ordered by title, honoring the year filter and the limit.");
     }
 
     public bool UpdateRating(int id, int? rating)
     {
-        // TODO: Update the rating inside a transaction using parameters.
-        // TODO: Report whether a row actually matched, and let an invalid rating be rejected by the database.
+        // TODO: Implement UpdateRating so it updates the rating inside a
+        // transaction using parameters, reports whether a row actually matched,
+        // and lets an invalid rating be rejected by the database.
         throw new NotImplementedException("TODO: Update the rating inside one transaction and report whether a row matched.");
     }
 
     public void Dispose()
     {
-        // TODO: Dispose the owned connection, and make repeated Dispose calls safe (idempotent).
+        // TODO: Implement Dispose so it disposes the owned connection and makes
+        // repeated Dispose calls safe (idempotent).
         throw new NotImplementedException("TODO: Dispose the owned connection exactly once, even if Dispose is called twice.");
     }
 
     private void InitializeSchema()
     {
-        // TODO: Create the Books table with a generated primary key, NOT NULL columns, a UNIQUE ISBN,
-        // TODO: and CHECK constraints that bound the publication year and the rating range.
+        // TODO: Implement InitializeSchema so it creates the Books table with a
+        // generated primary key, NOT NULL columns, a UNIQUE ISBN, and CHECK
+        // constraints that bound the publication year and the rating range.
         throw new NotImplementedException("TODO: Create the Books table with its primary key, NOT NULL, UNIQUE, and CHECK constraints.");
     }
 }

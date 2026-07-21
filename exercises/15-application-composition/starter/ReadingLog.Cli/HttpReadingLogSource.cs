@@ -17,9 +17,9 @@ public sealed class HttpReadingLogSource(HttpClient httpClient) : IReadingLogSou
     {
         _ = httpClient;
 
-        // TODO: Issue a GET request against `location` using the injected
-        // HttpClient, check the status first, and deserialize a JSON array of
-        // reading entries from the response body.
+        // TODO: Implement LoadAsync so it issues a GET request against `location`
+        // using the injected HttpClient, checks the status first, and
+        // deserializes a JSON array of reading entries from the response body.
         throw new NotImplementedException("TODO: Fetch reading entries over HTTP and deserialize the response.");
     }
 }

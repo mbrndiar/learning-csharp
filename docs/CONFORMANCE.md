@@ -25,7 +25,7 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 | Authority and profile | Conforms | Root entry point; [setup](SETUP.md); [authoritative sources](SOURCES.md); .NET 10 selection in `global.json`; `net10.0`/C# 14 in `Directory.Build.props`; central stable package pins. |
 | Pedagogy and sequence | Conforms | Fifteen ordered `lessons/*/README.md` guides; [curriculum matrix](CURRICULUM_MATRIX.md); 21 manifest-run lesson artifacts; top-level test-driven exercises; SQL and low-level HTTP prerequisites before applied work. |
 | Repository roles | Conforms | Shared `lessons/`, `exercises/`, `projects/tasks/`, and `capstones/{comparative,idiomatic}` roles with indexes; [migration guide](STRUCTURE_MIGRATION.md); no legacy `course/`, `Practice/`, `Samples/`, singular `capstone/`, or top-level `examples/` role. |
-| Integrity and completeness | Conforms locally | `course-manifest.json` validates lesson/exercise/destination paths; CourseVerifier runs every declared lesson artifact, checks links/anchors and README presentation, enforces the instructional naming boundary, rejects legacy roles, verifies 15 intentionally-red lesson starters, and runs three destination starter smokes. Every intentionally incomplete member across all fifteen exercise starters carries an adjacent, manually inspectable comment describing its observable contract (inputs/outputs, validation and boundaries, ownership/result shape) without prescribing implementation; already-complete starter support members stay uncommented. This is not CourseVerifier-enforced. |
+| Integrity and completeness | Conforms locally | `course-manifest.json` validates lesson/exercise/destination paths; CourseVerifier runs every declared lesson artifact, checks links/anchors and README presentation, enforces the instructional naming boundary, requires a standalone task README for every exercise, checks direct TODO tasks beside recognizable starter placeholders, rejects legacy roles, verifies 15 intentionally-red lesson starters, and runs three destination starter smokes. Every intentionally incomplete member across all fifteen exercise starters is also manually cross-checked against its shared tests and module README; already-complete starter support members stay without TODOs. |
 | Idiomaticity and currency | Conforms | Ordered instructional slugs use `NN-kebab-case`; ordered file apps use `NN-PascalCase.cs`; buildable lesson directories match PascalCase project identities; SDK-style projects and `.slnx`; nullable analysis/analyzers; central package management and locks; .NET packages at 10.0.10, Microsoft.OpenApi 3.9.0, patched SQLitePCLRaw 2.1.12, and xUnit v3/MTP v2; applied trees enforce one top-level type per matching file; Tasks separates Core, HTTP protocol, server infrastructure/adapters, client, and CLI. |
 | Lifecycle and environments | Conforms locally; remote matrix deliberately deferred | Locked restore, format verification, Release build, 465 tests run with an explicit `-p:CourseImplementation=Solution` selector (exercise test projects default to the learner starter), lesson execution, starter checks, three coverage gates, OpenAPI/spec checks, links, and audit configuration share the manual `.github/workflows/course.yml` commands. Per user instruction, the workflow remains manual-only and undispatched. |
 | Projects and capstones | Conforms locally | Tasks uses seven inward-pointing projects: Core + HTTP contract, shared server persistence/configuration, two leaf server adapters, reusable client, and CLI host. Comparative preserves frozen `comparative-kv` fixtures/processes. Idiomatic preserves Reading Log behavior. All three applied trees use one top-level type per file. |
@@ -43,8 +43,9 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
 - 15 lesson starters compile and report focused intentional failures;
 - 3 project/capstone starter smoke suites pass;
 - 15 lessons, 21 independently executed runnables, 3 applied destinations,
-  251 structurally checked applied source files, 25 formatted READMEs,
-  133 local links/anchors, and 102 external links;
+  251 structurally checked applied source files, 40 formatted READMEs,
+  15 exercise task guides, 76 recognized starter task placeholders,
+  161 local links/anchors, and 102 external links;
 - Tasks: 182 tests and 87.2% branch coverage;
 - comparative capstone: 38 tests, frozen manifest/fixtures, real-process checks,
   and 91.2% branch coverage;
@@ -60,14 +61,13 @@ The learner-facing profile and non-goals are in [README.md](../README.md).
   structural rather than .NET identities.
 - Most exercises supply tests for production-code work. Lesson 10 also requires
   learner-authored Fact/Theory scenarios with non-leaking meta-feedback.
-- Every intentionally incomplete starter member, in every exercise (not only
-  Lesson 10), carries adjacent inline guidance describing its observable
-  contract — expected inputs/outputs, validation and boundary handling, and
-  ownership or result shape — without prescribing the implementation.
-  Completed starter support members are left without this guidance. Lesson
-  10's learner-authored Fact/Theory scaffold applies the same non-answer-shaped
-  principle one level up, at the test-shape level, and remains its own, more
-  specific guidance.
+- Every exercise has a module-local README containing its complete assignment
+  and acceptance criteria. Every intentionally incomplete starter member (not
+  only Lesson 10) also carries an adjacent direct TODO task for that local
+  member. Both surfaces state observable inputs/outputs, validation and boundary
+  handling, and ownership/result shape without prescribing the implementation.
+  Completed support members stay without TODOs. Lesson 10 applies the same
+  non-answer-shaped rule to its learner-authored Fact/Theory task.
 - Exercise test projects default `CourseImplementation` to `Starter` so the
   shortest no-property command exercises learner work; the reference solution,
   full-suite runs, and the manual workflow select it with an explicit

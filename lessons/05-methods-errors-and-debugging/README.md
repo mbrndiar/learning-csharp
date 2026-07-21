@@ -126,6 +126,8 @@ Contract details:
 - **Edge cases:** a single-item array, boundary scores `0` and `100`, repeated values
 - **Invalid cases:** `null` array, empty array, or out-of-range score values
 
+See [exercises/05-methods-errors-and-debugging/README.md](../../exercises/05-methods-errors-and-debugging/README.md) for the complete task, edge cases, and Starter-first build/test/watch commands.
+
 ## 🔁 Feedback instructions
 - Build the starter project: `dotnet build exercises/05-methods-errors-and-debugging/starter/MethodsErrorsAndDebugging.csproj`
 - Test your implementation: `dotnet test --project exercises/05-methods-errors-and-debugging/tests/MethodsErrorsAndDebugging.Tests.csproj`

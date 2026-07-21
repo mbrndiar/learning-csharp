@@ -6,9 +6,9 @@ public static class WorkPlanLoader
         string path,
         CancellationToken cancellationToken = default)
     {
-        // TODO: Reject a blank path.
-        // TODO: Read the file with async I/O and honor the cancellation token while deserializing.
-        // TODO: Surface malformed or missing content as InvalidDataException.
+        // TODO: Implement LoadAsync so it rejects a blank path, reads the file with
+        // async I/O while honoring the cancellation token during deserialization,
+        // and surfaces malformed or missing content as InvalidDataException.
         throw new NotImplementedException("TODO: Read the plan JSON asynchronously and return work items.");
     }
 }
