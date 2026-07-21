@@ -20,12 +20,34 @@ failures are not accepted feedback. The solution passes the same public
 contract. Tests assert observable behavior rather than requiring identical
 implementation syntax.
 
+## 💬 Reading the inline guidance
+
+This is a repository-wide convention: every intentionally incomplete member
+in every exercise starter (all fifteen lessons, not only Lesson 10) carries an
+adjacent guidance comment—normally a `// TODO:` directly above the member or
+inside its block body—describing that member's observable contract rather than
+its implementation. Concretely, the comment states what callers can rely on:
+
+- expected inputs and the exact output shape, for example "read one book by
+  id, or return null when no row matches";
+- validation and boundary handling the member must enforce, for example
+  "reject null, empty, or whitespace-only learner names";
+- ownership or result shape for constructors and factories, for example
+  "store the injected boundaries" or "reserve inventory, save the receipt,
+  and return it".
+
+The comment never spells out the algorithm, control flow, or exact statements
+to write — you still choose the implementation. Support members that are
+already complete in a starter are left without TODO guidance, so TODO comments
+tied to members consistently identify work that still remains.
+
 Some exercises (currently Lesson 10) also ask you to complete a
 learner-authored test scaffold, such as `OrderServiceLearnerTests.cs`. Those
-scaffold files use class/method comments to explain the *shape* of the tests
-you must add (for example, one enabled `[Fact]` plus one enabled `[Theory]`
-with several `[InlineData]` rows) without prescribing the exact scenario, fake
-implementation, or assertions — you choose those yourself.
+scaffold files apply the same principle at the class/method level: comments
+explain the *shape* of the tests you must add (for example, one enabled
+`[Fact]` plus one enabled `[Theory]` with several `[InlineData]` rows)
+without prescribing the exact scenario, fake implementation, or assertions —
+you choose those yourself.
 
 ## 🔁 Working loop
 

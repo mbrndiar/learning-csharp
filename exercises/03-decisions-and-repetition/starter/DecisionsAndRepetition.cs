@@ -4,7 +4,8 @@ public static class ControlFlowPractice
 {
     public static string DescribeScore(int score)
     {
-        // TODO: Return invalid, excellent, good, pass, or needs work.
+        // TODO: Return invalid when score is outside 0 through 100; otherwise return excellent,
+        // good, pass, or needs work based on the score.
         throw new NotImplementedException("TODO: describe the score.");
     }
 
